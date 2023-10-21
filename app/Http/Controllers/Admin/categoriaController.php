@@ -13,6 +13,7 @@ class categoriaController extends Controller
      */
     public function index()
     {
+        /** InDEXE PRUEBA GITHUB */
         $categorias = categoria::all();
         return view('admin.categorias.index', compact('categorias'));
     }
