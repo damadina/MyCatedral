@@ -21,7 +21,7 @@
                 </div>
                 <div class="mt-2">
                     <x-label value="Texto" class="text-blue-600 font-semibold text-left" ></x-label>
-                    <textarea type="text" class="form-control" rows="50" wire:model="elementoTextEditForm.html"8 ></textarea>
+                    <textarea type="text" class="form-control" rows="50" wire:model="elementoTextEditForm.html" ></textarea>
                     <x-input-error for="elementoTextEditForm.html" class="text-danger"></x-input-error>
                 </div>
 

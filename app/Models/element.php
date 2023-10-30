@@ -18,6 +18,13 @@ class element extends Model
         'categoria_id',
         'slug'
     ];
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
+
+
 
     public function getCategorianameAttribute() {
         $categoria = categoria::find($this->categoria_id);

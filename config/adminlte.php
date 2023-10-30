@@ -330,6 +330,20 @@ return [
             'icon'        => 'fas fa-fw fa-users',
             'active'    => ['admin/users*']
         ],
+        [
+            'text'        => 'Documentos Legales',
+            'route'         => 'admin.documentos.index',
+            'icon'        => 'fas fa-fw fa-balance-scale',
+            'active'    => ['admin/documentos*']
+        ],
+        [
+            'text'        => 'Autores Contenidos',
+            'route'         => 'admin.autores.index',
+            'icon'        => 'fas fa-fw fa-at',
+            'active'    => ['admin/autores*']
+        ],
+
+
         ['header' => 'CONTENIDOS'],
         [
             'text'        => 'Categorías',
@@ -502,7 +516,7 @@ return [
                 [
                     'type' => 'js',
                     'asset' => false,
-                    'location' => '//cdn.jsdelivr.net/npm/sweetalert2@8',
+                    'location' => '//cdn.jsdelivr.net/npm/sweetalert2@11',
                 ],
             ],
         ],

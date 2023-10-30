@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\Aplicacion\postController;
+use App\Http\Controllers\Aplicacion\homeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,10 +13,15 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-Route::get('/', function () {
+Route::get('/',[homeController::class,'index'])->name('home');
+/* Route::get('/', function () {
+    session()->flash('flash.banner', 'Yay for free components!');
+    session()->flash('flash.bannerStyle', 'success');
     return view('welcome');
-})->name('home');
+})->name('home'); */
+Route::get('/{elemento}',[postController::class,'index'])->name('elemento');
+
+
 
 Route::middleware([
     'auth:sanctum',

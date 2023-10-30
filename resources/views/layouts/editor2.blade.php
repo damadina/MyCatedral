@@ -6,7 +6,7 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <title>{{ config('app.name', 'Laravel') }}</title>
-
+        <meta name="robots" content="noindex">
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
@@ -27,12 +27,14 @@
                 <!-- Page Content -->
                 <div class="container py-8 grid grid-cols-5">
                     <aside>
-                        <h1 class="font-bold text-xl mb-4">Edicción Elemento</h1>
+
+                        <a href="{{ route('editor.home') }}" class="btn btn-blue">Volver</a>
+                        <h1 class="mt-4 font-bold text-xl mb-4">Edicción Elemento</h1>
                         <ul>
-                            <li class="leading-7 mb-1 border-l-4 border-indigo-400 pl-2">
+                            <li class="leading-7 mb-1 border-l-4 @routeIs('editor.edit.portadaResumen',$elemento)) border-indigo-400 @else border-transparent @endif  pl-2">
                                 <a href="{{route('editor.edit.portadaResumen',$elemento)}}">Foto portada y resumen</a>
                             </li>
-                            <li class="leading-7 mb-1 border-l-4 border-transparent pl-2">
+                            <li class="leading-7 mb-1 border-l-4 @routeIs('editor.edit.texto',$elemento)) border-indigo-400 @else border-transparent @endif  pl-2">
                                 <a href="{{route('editor.edit.texto',$elemento)}}">Texto</a>
                             </li>
                         </ul>

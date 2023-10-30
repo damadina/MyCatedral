@@ -16,6 +16,17 @@ export default {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
+            colors: {
+                'catedral': '#941431',
+                'catedralfin': '#C91C45',
+                'catedralbar': "#ec9372"
+            },
+            backgroundColor: {
+                'catedral': '#941431',
+            },
+            height: {
+                '128': '32rem',
+            },
         },
 
 

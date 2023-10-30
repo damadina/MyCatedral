@@ -10,13 +10,18 @@
                     </a>
                 </div>
 
+
                 <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                {{-- <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
-                </div>
+                </div> --}}
             </div>
+            <div class="flex flex-1 items-center justify-center">
+                <p class="text-center text-catedral tracking-wide text-base md:text-2xl font font-semibold">Catedral de Santiago de Compostela</p>
+            </div>
+
 
             <div class="hidden sm:flex sm:items-center sm:ml-6">
                 <!-- Teams Dropdown -->

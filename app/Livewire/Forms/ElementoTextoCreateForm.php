@@ -29,9 +29,6 @@ class ElementoTextoCreateForm extends Form
             $this->only('orden','titulo','html','element_id')
         );
 
-
-
-
-        $this->reset();
+        $this->reset(['titulo','html','orden']);
     }
 }

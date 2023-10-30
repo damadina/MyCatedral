@@ -11,6 +11,17 @@
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
+        @isset($analitycs)
+            {{$analitycs}}
+        @endisset
+        @isset($seo)
+            {{$seo}}
+        @endisset
+        @isset($social)
+            {{$social}}
+        @endisset
+
+
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
 
@@ -22,9 +33,14 @@
 
         <div class="min-h-screen bg-gray-100">
             @livewire('navigation-menu')
-
-
-
+            <!-- Page Heading -->
+            @if (isset($header))
+                <p class="bg-red-400 my-0 shadown">
+                    {{-- <div class=" bg-red-300 max-w-7xl mx-auto py-1 px-4 sm:px-6 lg:px-8"> --}}
+                        {{ $header }}
+                    {{-- </div> --}}
+                </p>
+            @endif
             <!-- Page Content -->
             <main>
                 {{ $slot }}
@@ -34,5 +50,6 @@
         @stack('modals')
 
         @livewireScripts
+        <script src="https://kit.fontawesome.com/839c82ee0b.js" crossorigin="anonymous"></script>
     </body>
 </html>
