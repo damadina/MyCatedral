@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('autors', function (Blueprint $table) {
             $table->id();
+            $table->string('contenido')->default('catedral');
             $table->string('fotoUrl')->nullable();
             $table->string('name');
             $table->string('departamento')->nullable();

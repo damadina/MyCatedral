@@ -19,7 +19,7 @@
                 </div> --}}
             </div>
             <div class="flex flex-1 items-center justify-center">
-                <p class="text-center text-catedral tracking-wide text-base md:text-2xl font font-semibold">Catedral de Santiago de Compostela</p>
+                <p class="text-center text-catedral tracking-wide text-base md:text-2xl font font-semibold">{{__('Catedral de Santiago de Compostela')}}</p>
             </div>
 
 
@@ -76,6 +76,9 @@
                     </div>
                 @endif
 
+
+
+
                 <!-- Settings Dropdown -->
                 <div class="ml-3 relative">
                     @auth
@@ -116,6 +119,11 @@
                                 @if(Auth::user()->hasRole('Editor'))
                                     <x-dropdown-link href="{{ route('editor.home') }}">
                                         Editor
+                                    </x-dropdown-link>
+                                @endif
+                                @if(Auth::user()->hasRole('Editor'))
+                                    <x-dropdown-link href="{{ route('editor.searchFoto') }}">
+                                        Fotografías
                                     </x-dropdown-link>
                                 @endif
 
@@ -205,6 +213,11 @@
                         </x-dropdown-link>
                     @endif
 
+                    @if(Auth::user()->hasRole('Editor'))
+                        <x-dropdown-link href="{{ route('editor.searchFoto') }}">
+                            Fotografías
+                        </x-dropdown-link>
+                    @endif
 
 
                     @if (Laravel\Jetstream\Jetstream::hasApiFeatures())

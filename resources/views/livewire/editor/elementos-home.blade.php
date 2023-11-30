@@ -8,7 +8,7 @@
 
 
             <x-select class="ml-2" wire:model.live="categoriaSelected">
-                <option value="" disabled>
+                <option value="" >
                     Seleccione una Categoría
                 </option>
                 @foreach ($categorias as $item )

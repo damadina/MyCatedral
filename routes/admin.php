@@ -9,6 +9,8 @@ use App\Http\Controllers\Admin\categoriaController;
 use App\Http\Controllers\Admin\ElementController;
 use App\Http\Controllers\Admin\fotoController;
 use App\Http\Controllers\Admin\DocumentController;
+use App\Http\Controllers\Admin\Idiomas;
+use App\Http\Controllers\Admin\InformacionController;
 
 
 
@@ -23,4 +25,6 @@ Route::resource('admin/autors',AutorController::class)->names('admin.autores');
 Route::get('admin/elementos',[ElementController::class,'index'])->name('admin.elementos.index');
 Route::get('admin/fotos',[fotoController::class,'index'])->name('admin.fotos.index');
 
+Route::get('admin/idiomas',[Idiomas::class,'index'])->name('admin.idiomas');
+Route::get('admin/informaciones',[InformacionController::class,'index'])->name('admin.informacion');
 

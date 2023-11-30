@@ -24,7 +24,7 @@ class ElementCreateForm extends Form
             'orden' =>'required',
             'title' => 'required|unique:elements,title',
             'seoTitle' => 'required|min:8',
-            'seoMeta' => 'required|min:8',
+            'seoMeta' => 'required|min:8|max:160',
             'isPublic' => 'required',
             'categoria_id' => 'required'
         ];

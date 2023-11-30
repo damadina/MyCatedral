@@ -18,4 +18,6 @@ class categoria extends Model
         return $this->hasMany(element::class);
     }
 
+
+
 }

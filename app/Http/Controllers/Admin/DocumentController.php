@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\document;
+use Illuminate\Support\Str;
 class DocumentController extends Controller
 {
     public function index()
@@ -36,6 +37,7 @@ class DocumentController extends Controller
         $documento->orden = $request->orden;
         $documento->html = $request->texto;
         $documento->grupo = "1";
+        $documento->slug = Str::slug($request->titulo);
         $documento->save();
         return redirect()->route('admin.documentos.index');
     }
@@ -60,6 +62,7 @@ class DocumentController extends Controller
         $documento->titulo = $request->titulo;
         $documento->orden = $request->orden;
         $documento->html = $request->texto;
+        $documento->slug = Str::slug($request->titulo);
         $documento->save();
         return redirect()->route('admin.documentos.index');
     }

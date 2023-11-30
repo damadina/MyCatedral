@@ -44,17 +44,24 @@
                     <hr class="mt-4">
                     <div>
                         <div>
-                            <div class="mt-2">
-                                <x-label value="Pertenece a:" class="text-primary"></x-label>
+                            <div class="mt-2 flex">
+                                <div class="flex-1">
+                                    <x-label value="Pertenece a:" class="text-primary"></x-label>
 
-                                <x-select class="w-100" wire:model="fotoCreate.element_id">
-                                    <option value="" disabled>Selecciona un elemento</option>
-                                    @foreach ($elementos as $item )
-                                        <option value="{{$item->id}}">{{$item->title}}</option>
-                                    @endforeach
-                                </x-select>
+                                    <x-select class="w-100" wire:model="fotoCreate.element_id">
+                                        <option value="" disabled>Selecciona un elemento</option>
+                                        @foreach ($elementos as $item )
+                                            <option value="{{$item->id}}">{{$item->title}}</option>
+                                        @endforeach
+                                    </x-select>
 
-                                <x-input-error for="fotoCreate.element_id" class="text-danger"></x-input-error>
+                                    <x-input-error for="fotoCreate.element_id" class="text-danger"></x-input-error>
+                                </div>
+                                <div class="w-20 ml-4">
+                                    <x-label value="Orden" class="text-primary"></x-label>
+                                    <x-input type="text" class="form-control" wire:model='fotoCreate.order'></x-input>
+                                    <x-input-error for="fotoCreate.order" class="text-danger"></x-input-error>
+                                </div>
                             </div>
 
                             <div class="mt-2">

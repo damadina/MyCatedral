@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{session('lang')}}">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
-
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        <link rel="icon" href="{{asset("storage/images/logo.png")}}">
+        <title>{{ config('app.name', 'catedraldeSantiago.online') }}</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -23,33 +23,65 @@
 
 
         <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
+        @vite(['resources/css/app.css', 'resources/css/aplicacion.css','resources/js/app.js'])
 
-        <!-- Styles -->
+
+
         @livewireStyles
     </head>
     <body class="font-sans antialiased">
+        <div itemscope itemtype="https://schema.org/WebSite">
+            <meta itemprop="name" content="{{__('Catedral de Santiago de Compostela')}}">
+            <meta itemprop="url" content="{{ URL::to('/') }}">
+        </div>
         <x-banner />
 
         <div class="min-h-screen bg-gray-100">
             @livewire('navigation-menu')
             <!-- Page Heading -->
             @if (isset($header))
-                <p class="bg-red-400 my-0 shadown">
-                    {{-- <div class=" bg-red-300 max-w-7xl mx-auto py-1 px-4 sm:px-6 lg:px-8"> --}}
-                        {{ $header }}
-                    {{-- </div> --}}
-                </p>
+                {{ $header }}
             @endif
             <!-- Page Content -->
             <main>
                 {{ $slot }}
             </main>
+
+            @isset($footer)
+                {{$footer}}
+            @endisset
+
         </div>
 
         @stack('modals')
 
         @livewireScripts
+
         <script src="https://kit.fontawesome.com/839c82ee0b.js" crossorigin="anonymous"></script>
+        <script>
+            // Get the 'to top' button element by ID
+            var toTopButton = document.getElementById("to-top-button");
+
+            // Check if the button exists
+            if (toTopButton) {
+
+                // On scroll event, toggle button visibility based on scroll position
+                window.onscroll = function() {
+                    if (document.body.scrollTop > 500 || document.documentElement.scrollTop > 500) {
+                        toTopButton.classList.remove("hidden");
+                    } else {
+                        toTopButton.classList.add("hidden");
+                    }
+                };
+
+                // Function to scroll to the top of the page smoothly
+                window.goToTop = function() {
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                };
+            }
+        </script>
     </body>
 </html>

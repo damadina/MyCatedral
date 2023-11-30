@@ -1,13 +1,28 @@
 <div>
-    <div>
+    <div class="mb-6">
         Total fotos= {{$fotos->total()}}
+        @livewire("admin.fotos-crea")
     </div>
     <div class="card">
         <div class="card-header flex align-items-end">
-            <div class="flex-1 mr-2">
+            {{-- <div class="flex-1 mr-2">
                 <input wire:keydown='limpiar_page'   wire:model="search" class="form-control" placeholder="¿que buscas?">
+            </div> --}}
+            <div>
+                <x-label value="Categoría" class="text-primary"></x-label>
+                <x-select class="w-100" wire:model.live="elementoSelected">
+                    <option value="">
+                        Seleccione un elemento
+                    </option>
+                    @foreach ($elementos as $item )
+                        <option value="{{$item->id}}">{{$item->title}}</option>
+                    @endforeach
+                </x-select>
+
             </div>
-            @livewire("admin.fotos-crea")
+
+
+
         </div>
 
         @if($fotos->count())
@@ -15,8 +30,8 @@
                 <table class="table table-striped">
                     <thead>
                         <td>Foto</td>
-                        <td>Piedefoto</td>
-
+                        <td>Piedefoto, keywords y title</td>
+                        <td>Orden</td>
                         <td></td>
                     </thead>
                     <tbody>
@@ -28,8 +43,10 @@
                                 </td>
                                 <td>
                                     {{$item->piedefoto}}<br>
+                                    {{$item->keywords}}<br>
+                                    {{$item->title}}
                                 </td>
-
+                                <td>{{$item->order}}</td>
                                 <td width="10px">
 
                                     <button class="btn btn-primary mb-4" wire:click="edit({{$item->id}})">Editar</button>
@@ -71,17 +88,28 @@
                     <hr class="mt-4">
                     <div>
                         <div>
-                            <div class="mt-2">
-                                <x-label value="Pertenece a:" class="text-primary"></x-label>
+                            <div class="mt-2 flex">
+                                <div class="flex-1">
+                                    <x-label value="Pertenece a:" class="text-primary"></x-label>
 
-                                <x-select class="w-100" wire:model="fotoEdit.element_id">
-                                    @foreach ($elementos as $item )
-                                        <option value="{{$item->id}}">{{$item->title}}</option>
-                                    @endforeach
-                                </x-select>
+                                    <x-select class="w-100" wire:model="fotoEdit.element_id">
+                                        @foreach ($elementos as $item )
+                                            <option value="{{$item->id}}">{{$item->title}}</option>
+                                        @endforeach
+                                    </x-select>
 
-                                <x-input-error for="fotoEdit.element_id" class="text-danger"></x-input-error>
+                                    <x-input-error for="fotoEdit.element_id" class="text-danger"></x-input-error>
+                                </div>
+                                <div class="w-20 ml-4">
+                                    <x-label value="Orden" class="text-primary"></x-label>
+                                    <x-input type="text" class="form-control" wire:model='fotoEdit.order'></x-input>
+                                    <x-input-error for="fotoEdit.order" class="text-danger"></x-input-error>
+                                </div>
                             </div>
+
+
+
+
 
                             <div class="mt-2">
                                 <x-label value="Descripción de la foto (piedefoto)" class="text-primary"></x-label>

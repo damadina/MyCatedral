@@ -12,6 +12,7 @@ use Intervention\Image\Facades\Image;
 class FotoCreateForm extends Form
 {
     public $image;
+    public $order;
     public $url;
     public $piedefoto;
     public $keywords;
@@ -28,7 +29,8 @@ class FotoCreateForm extends Form
             'keywords' => 'required|min:5',
             'alt' => 'required|min:20|max:125',
             'title' => 'required|min:6',
-            'element_id' => 'required'
+            'element_id' => 'required',
+            'order' => 'required'
         ];
     }
 
@@ -52,7 +54,7 @@ class FotoCreateForm extends Form
 
 
         foto::create(
-            $this->only('url','piedefoto','keywords','alt','title','element_id')
+            $this->only('url','piedefoto','keywords','alt','title','element_id','order')
         );
         $this->reset();
     }

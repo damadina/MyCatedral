@@ -48,8 +48,6 @@ class Elementos extends Component
 
     public function updated($property)
     {
-
-
         if ($property === 'categoriaSelected') {
             $this->resetPage();
         }

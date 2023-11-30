@@ -3,6 +3,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Aplicacion\postController;
 use App\Http\Controllers\Aplicacion\homeController;
+use App\Http\Controllers\Aplicacion\documentController;
+use App\Http\Controllers\Aplicacion\autorController;
+use App\Http\Controllers\pruebaController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,15 +16,26 @@ use App\Http\Controllers\Aplicacion\homeController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::get('/',[homeController::class,'index'])->name('home');
+Route::get('/',[postController::class,'index'])->name('home');
+Route::get('/localization', function() {
+    $lang = request()->lang;
+    session()->put('lang',$lang);
+    return back();
+})->name('localization');
+
 /* Route::get('/', function () {
     session()->flash('flash.banner', 'Yay for free components!');
     session()->flash('flash.bannerStyle', 'success');
     return view('welcome');
 })->name('home'); */
 Route::get('/{elemento}',[postController::class,'index'])->name('elemento');
+Route::get('/legal/{documento}',[documentController::class,'index'])->name('documento');
+Route::get('/autores/{contenido}',[autorController::class,'index'])->name('autores');
 
 
+
+
+Route::get('/test/deepl',[pruebaController::class,'index'])->name('prueba');
 
 Route::middleware([
     'auth:sanctum',

@@ -90,6 +90,7 @@
                                 <option value="{{$item->id}}">{{$item->title}}</option>
                             @endforeach
                         </x-select>
+
                         <x-input-error for="elementoEdit.categoria_id" class="text-danger"></x-input-error>
                     </div>
                     <div class="mt-2 col-sm-3">

@@ -4,11 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Traits\Mutators\ElementMutators;
+
 
 class element extends Model
 {
     use HasFactory;
-
+    use ElementMutators;
     protected $fillable = [
         'title',
         'orden',
@@ -48,5 +50,10 @@ class element extends Model
     public function textos() {
         return $this->hasMany(texto::class);
     }
+
+
+
+
+
 
 }

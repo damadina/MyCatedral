@@ -30,6 +30,8 @@ class ElementosEditPortadaResumen extends Component
             $this->portadaUrl = asset('storage/originales/'.$elemento->urlPortada);
             $foto = foto::where('url',$elemento->urlPortada)->first();
             $this->portadaResumen->piedefoto = $foto->piedefoto;
+            $this->portadaResumen->urlPortada = $elemento->urlPortada;
+
         } else {
             $this->portadaUrl = asset('storage/miniaturas/No_image_available.png');
         }
@@ -55,6 +57,7 @@ class ElementosEditPortadaResumen extends Component
 
 
     public function update() {
+
         $this->portadaResumen->update();
         redirect()->to(route('editor.home'));
     }

@@ -22,15 +22,6 @@ class permissionSeeder extends Seeder
         Permission::create([
             'name' => 'Traductor',
         ]);
-        Permission::create([
-            'name' => 'Traducir al Ingles',
-        ]);
-        Permission::create([
-            'name' => 'Traducir al Alemán',
-        ]);
-        Permission::create([
-            'name' => 'Traducir al Frances',
-        ]);
 
     }
 }

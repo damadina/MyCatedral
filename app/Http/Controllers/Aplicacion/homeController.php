@@ -18,7 +18,7 @@ class homeController extends Controller
         $capi = categoria::where('title',"capillas")->first();
         $capillas = $capi->elementos()->orderBy('orden')->get();
 
-        $muse = categoria::where('title',"capillas")->first();
+        $muse = categoria::where('title',"museo")->first();
         $museo = $muse->elementos()->orderBy('orden')->get();
 
 

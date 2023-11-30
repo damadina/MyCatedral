@@ -20,13 +20,16 @@ class ElementoPotadaResumenForm extends Form
         ];
     }
     public function update() {
+
         $this->validate();
+
         $this->elemento->urlPortada = $this->urlPortada;
         $this->elemento->resumen = $this->resumen;
 
         $this->elemento->update(
             $this->only('urlPortada','resumen')
         );
+
         $this->reset();
     }
 

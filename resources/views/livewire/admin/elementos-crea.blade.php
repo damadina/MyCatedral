@@ -38,6 +38,7 @@
                         </x-select>
                         <x-input-error for="elementoCreate.categoria_id" class="text-danger"></x-input-error>
                     </div>
+
                     <div class="mt-2 col-sm-3">
                         <x-label value="Orden" class="text-primary"></x-label>
                         <x-input  type="text" class="w-100 form-control" wire:model='elementoCreate.orden'></x-input>

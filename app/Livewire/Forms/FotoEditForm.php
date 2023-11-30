@@ -12,6 +12,7 @@ class FotoEditForm extends Form
     public $openModal;
 
     public $image;
+    public $order;
     public $url;
     public $piedefoto;
     public $keywords;
@@ -26,7 +27,8 @@ class FotoEditForm extends Form
             'keywords' => 'required|min:5',
             'alt' => 'required|min:20|max:125',
             'title' => 'required|min:6',
-            'element_id' => 'required'
+            'element_id' => 'required',
+            'order' => 'required'
         ];
     }
 
@@ -40,14 +42,16 @@ class FotoEditForm extends Form
         $this->alt = $foto->alt;
         $this->title = $foto->title;
         $this->element_id = $foto->element_id;
+        $this->order = $foto->order;
 
     }
 
     public function update() {
         $this->validate();
+
         $foto = foto::find($this->fotoId);
         $foto->update(
-            $this->only('piedefoto','keywords','alt','title','element_id')
+            $this->only('piedefoto','keywords','alt','title','element_id','order')
         );
         $this->reset();
     }

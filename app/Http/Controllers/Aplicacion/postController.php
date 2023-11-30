@@ -7,10 +7,24 @@ use Illuminate\Http\Request;
 use App\Models\element;
 use App\Models\categoria;
 use App\Models\foto;
+use App\Models\document;
+use App\Models\idioma;
+use App\Traits\TrataTexto;
+
 
 class postController extends Controller
 {
-    public function index($slug = null) {
+    use TrataTexto;
+
+
+    public function index( element $elemento = null) {
+        $isHome = false;
+        if($elemento == null) {
+            $elemento = element::where('categoria_id',1)->first();
+            $isHome = true;
+        }
+
+
         $exte = categoria::where('title',"exterior")->first();
         $exterior = $exte->elementos()->orderBy('orden')->get();
 
@@ -20,11 +34,15 @@ class postController extends Controller
         $capi = categoria::where('title',"capillas")->first();
         $capillas = $capi->elementos()->orderBy('orden')->get();
 
-        $muse = categoria::where('title',"capillas")->first();
+        $muse = categoria::where('title',"museo")->first();
         $museo = $muse->elementos()->orderBy('orden')->get();
+
+        /* $slug = "fachada-del-obradoiro";
         if ($slug) {
             $elemento = element::where('slug',$slug)->first();
-        }
+        } */
+
+
         if($elemento->urlPortada) {
             $fotoPortada = foto::where('url',$elemento->urlPortada)->first();
         } else {
@@ -38,28 +56,36 @@ class postController extends Controller
             $elemento->urlPortada = 'noPhoto.png';
         }
 
+        $a = $this->convierte($elemento->resumen);
 
 
-
-
-        $a = $this->text2paragraph($elemento->resumen);
+       /*  $a = $this->text2paragraph($elemento->resumen); */
         $a= str_replace( $elemento->title, '<strong>'.$elemento->title.'</strong>', $a);
         $elemento->resumen = $a;
 
+
         $textos = $elemento->textos;
         foreach($textos as $each) {
-
-            $each->html = $this->text2paragraph($each->html);
-
+            $each->html = $this->convierte($each->html);
         }
 
-        return view('aplicacion.post',compact('exterior','interior','capillas','museo','elemento','fotoPortada','textos'));
+
+        $textos = $elemento->textos;
+        $legal = document::all();
+        $idiomas = idioma::where('isPublic','1')->orderBy('orden')->get();
+
+
+        return view('aplicacion.post',compact('isHome','exterior','interior','capillas','museo','elemento','fotoPortada','textos','legal','idiomas'));
     }
 
-    function text2paragraph( $text ){
+    /* function text2paragraph( $text ){
         $array =  explode("\n", $text);
+        $array =  explode("<\p>", $text);
+        dd(count($array));
         $tagged = "";
+
         foreach($array as $element){
+
             if( strlen($element) > 1){
                 if (str_contains($element, '<IMAGE[')) {
                     $element = str_replace("<IMAGE", "", $element);
@@ -77,9 +103,9 @@ class postController extends Controller
             }
         }
         return $tagged;
-    }
+    } */
 
-    public function tagFigure($result,$piedeFoto) {
+    /* public function tagFigure($result,$piedeFoto) {
         list($width, $height) = getimagesize('storage/originales/'.$result);
 
         if ($width > $height) {
@@ -97,7 +123,7 @@ class postController extends Controller
         </figcaption>
         </figure>';
         return $tag;
-    }
+    } */
 
 
 }

@@ -302,15 +302,7 @@ return [
         ],
 
         // Sidebar items:
-        [
-            'type' => 'sidebar-menu-search',
-            'text' => 'search',
-        ],
-        [
-            'text' => 'blog',
-            'url'  => 'admin/blog',
-            'can'  => 'manage-blog',
-        ],
+
         [
             'text'        => 'Dashboard',
             'route'         => 'admin.home',
@@ -342,6 +334,22 @@ return [
             'icon'        => 'fas fa-fw fa-at',
             'active'    => ['admin/autores*']
         ],
+        [
+            'text'        => 'Idiomas',
+            'route'         => 'admin.idiomas',
+            'icon'        => 'fas fa-fw fa-language',
+            'active'    => ['admin/idiomas*']
+        ],
+        [
+            'text'        => 'Información Visitas',
+            'route'         => 'admin.informacion',
+            'icon'        => 'fas fa-fw fa-info',
+            'active'    => ['admin/informacion*']
+        ],
+
+
+
+
 
 
         ['header' => 'CONTENIDOS'],
