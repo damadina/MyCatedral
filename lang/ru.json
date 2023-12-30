@@ -194,6 +194,18 @@
     "Exterior": "Экстерьер",
     "Interior": "Интерьер",
     "Capillas": "Часовни",
-    "Museo": "Музей"
-
+    "Museo": "Музей",
+    "Todas las fotos": "Все фотографии",
+    "Exterior de la Catedral de Santiago de Compostela":"Внешний вид собора Сантьяго-де-Компостела",
+    "Interior de la Catedral de Santiago de Compostela":"Интерьер кафедрального собора Сантьяго-де-Компостела",
+    "Capillas de la Catedral de Santiago de Compostela":"Часовни кафедрального собора Сантьяго-де-Компостела",
+    "Museo de la Catedral de Santiago de Compostela":"Музей Кафедрального собора Сантьяго-де-Компостела",
+    "Mensaje a":"Сообщение для",
+    "Enviar":"Отправить",
+    "Cancelar":"Отмена",
+    "Vas a enviar un mail. ¿estás seguro?":"Вы собираетесь отправить электронное письмо, вы уверены?",
+    "Autores":"Авторы",
+    "Contactanos":"Свяжитесь с нами",
+    "Cerrar":"Закрыть",
+    "El mensaje ha sido enviado. Muchas gracias":"Сообщение отправлено. Большое спасибо"
 }

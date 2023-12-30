@@ -194,5 +194,18 @@
     "Exterior": "Exterior",
     "Interior": "Interior",
     "Capillas": "Capelas",
-    "Museo": "Museu"
+    "Museo": "Museu",
+    "Todas las fotos": "Todas as fotografias",
+    "Exterior de la Catedral de Santiago de Compostela":"Exterior da Catedral de Santiago de Compostela",
+    "Interior de la Catedral de Santiago de Compostela":"Interior da Catedral de Santiago de Compostela",
+    "Capillas de la Catedral de Santiago de Compostela":"Capelas da Catedral de Santiago de Compostela",
+    "Museo de la Catedral de Santiago de Compostela":"Museu da Catedral de Santiago de Compostela",
+    "Mensaje a":"Mensagem para",
+    "Enviar":"Enviar",
+    "Cancelar":"Cancelar",
+    "Vas a enviar un mail. ¿estás seguro?":"Vai enviar um e-mail, tem a certeza?",
+    "Autores":"Autores",
+    "Contactanos":"Contactar-nos",
+    "Cerrar":"Fechar",
+    "El mensaje ha sido enviado. Muchas gracias":"A mensagem foi enviada. Muito obrigado"
 }

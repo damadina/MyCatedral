@@ -13,8 +13,9 @@
                         <td>Titulo</td>
                         <td>Orden</td>
                         <td>Estado</td>
+                        <td><td>
                         <td></td>
-                        <td></td>
+
                     </thead>
                     <tbody>
                         @foreach ($informaciones as $item )
@@ -26,6 +27,7 @@
                                     {{$item->order}}
                                 </td>
                                 <td>{{$item->isPublic}}</td>
+
                                 <td width="10px">
                                     <button class="btn btn-primary" wire:click="edit({{$item->id}})">Editar</button>
                                 </td>

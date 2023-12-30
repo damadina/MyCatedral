@@ -12,6 +12,23 @@ class IdiomaCreateForm extends Form
     public $title;
     public $locale;
     public $isPublic;
+
+    public $elementsTraduccion;
+
+    public $textosTraduccion;
+
+    public $fotosTraduccion;
+
+    public $idiomasTraduccion;
+
+    public $documentsTraduccion;
+
+    public $autorsTraduccion;
+
+    public $informacionsTraduccion;
+    public $traducciones_Start=[];
+
+
     public function rules()
     {
         return [
@@ -24,8 +41,9 @@ class IdiomaCreateForm extends Form
     public function save() {
         $this->validate();
 
+
         idioma::create(
-            $this->only('orden','title','isPublic','locale')
+            $this->only('orden','title','isPublic','locale','traducciones_Start')
         );
 
         $this->reset();

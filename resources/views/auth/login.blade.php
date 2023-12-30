@@ -1,7 +1,14 @@
 <x-guest-layout>
     <x-authentication-card>
         <x-slot name="logo">
-            <x-authentication-card-logo />
+            {{-- <x-authentication-card-logo /> --}}
+            {{-- <img class="mx-auto" src="{{ asset('storage/images/logo.png') }}"  loading="lazy"  alt="catedraldesantiago.online home" width="30" height="42"> --}}
+            @php
+            $locale = session()->get('lang');
+            @endphp
+            <a href="{{ route('elementoXX',['locale' => $locale]) }}">
+                <x-application-mark class="block h-9 w-auto" />
+            </a>
         </x-slot>
 
         <x-validation-errors class="mb-4" />
@@ -43,6 +50,15 @@
                     {{ __('Log in') }}
                 </x-button>
             </div>
+            <div class="flex items-center justify-end mt-4">
+
+                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('register') }}">
+                    {{ __('Registrarse') }}
+                </a>
+            </div>
+
+
+
         </form>
     </x-authentication-card>
 </x-guest-layout>

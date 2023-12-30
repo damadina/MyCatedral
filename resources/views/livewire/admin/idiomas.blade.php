@@ -1,8 +1,29 @@
 <div>
+    <div wire:loading>
+        <div style="display: flex; justify-content:center; align-items: center; background-color:black;
+        position:fixed; top: 0px; left:0px; z-index:9999; width:100%; height:100%; opacity:.75;">
+            <div class="la-ball-spin la-2x">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+    </div>
     <div>
         <div class="card">
-            <div class="card-header">
+
+            <div class="pt-4 px-4 flex justify-between">
+                <div>
                 @livewire("admin.idiomas-crea")
+                </div>
+                <x-danger-button wire:click="GeneraHrflangs">
+                    Generar Hrflangs
+                </x-danger-button>
             </div>
 
             @if($idiomas->count())
@@ -16,22 +37,117 @@
                             <td>Locale</td>
                             <td></td>
                             <td></td>
+
+
                         </thead>
                         <tbody>
                             @foreach ($idiomas as $idioma )
                                 <tr>
-                                    <td>{{$idioma->id}}</td>
-                                    <td>{{$idioma->title}}</td>
-                                    <td>{{$idioma->orden}}</td>
-                                    <td>{{$idioma->estadoname}}</td>
-                                    <td>{{$idioma->locale}}</td>
-                                    <td>
-                                        <button class="btn btn-danger mb-4" wire:click="">Borrar traducción</button>
+                                    <td width="10px">{{$idioma->id}}</td>
+                                    <td width="10px">{{$idioma->title}}</td>
+                                    <td width="10px">{{$idioma->orden}}</td>
+                                    <td width="10px">{{$idioma->estadoname}}</td>
+                                    <td width="10px">{{$idioma->locale}}</td>
+                                    @if($idioma->locale !="es")
+                                    <td class="d-flex justify-content-between">
+                                        @php
+                                            if (in_array("elements", $idioma->traducciones_Start)) {
+                                                $isRed = true;
+                                            } else {
+                                                $isRed = false;
+                                            }
+                                        @endphp
+                                        <div>
+                                            <p @if($isRed) class="text-green-500" @endIf>elements</p>
+                                            <p>{{$idioma->elementsTraduccion}}</p>
+                                        </div>
+                                        @php
+                                            if (in_array("textos", $idioma->traducciones_Start)) {
+                                                $isRed = true;
+                                            } else {
+                                                $isRed = false;
+                                            }
+                                        @endphp
+                                        <div>
+                                            <p @if($isRed) class="text-green-500" @endIf>textos</p>
+                                            <p>{{$idioma->textosTraduccion}}</p>
+                                        </div>
+                                        @php
+                                            if (in_array("fotos", $idioma->traducciones_Start)) {
+                                                $isRed = true;
+                                            } else {
+                                                $isRed = false;
+                                            }
+                                        @endphp
+                                        <div>
+                                            <p @if($isRed) class="text-green-500" @endIf>fotos</p>
+                                            <p>{{$idioma->fotosTraduccion}}</p>
+                                        </div>
+                                        @php
+                                            if (in_array("idiomas", $idioma->traducciones_Start)) {
+                                                $isRed = true;
+                                            } else {
+                                                $isRed = false;
+                                            }
+                                        @endphp
+
+                                        <div>
+                                            <p @if($isRed) class="text-green-500" @endIf>idiomas</p>
+                                            <p>{{$idioma->idiomasTraduccion}}</p>
+                                        </div>
+
+                                        @php
+                                            if (in_array("documents", $idioma->traducciones_Start)) {
+                                                $isRed = true;
+                                            } else {
+                                                $isRed = false;
+                                            }
+                                        @endphp
+                                        <div>
+                                            <p @if($isRed) class="text-green-500" @endIf>documents</p>
+                                            <p>{{$idioma->documentsTraduccion}}</p>
+                                        </div>
+
+                                        @php
+                                            if (in_array("autors", $idioma->traducciones_Start)) {
+                                                $isRed = true;
+                                            } else {
+                                                $isRed = false;
+                                            }
+                                        @endphp
+
+                                        <div>
+                                            <p @if($isRed) class="text-green-500" @endIf>autors</p>
+                                            <p>{{$idioma->autorsTraduccion}}</p>
+                                        </div>
+
+                                        @php
+                                        if (in_array("informacions", $idioma->traducciones_Start)) {
+                                            $isRed = true;
+                                        } else {
+                                            $isRed = false;
+                                        }
+                                    @endphp
+                                        <div>
+                                            <p @if($isRed) class="text-green-500" @endIf>informacions</p>
+                                            <p>{{$idioma->informacionsTraduccion}}</p>
+                                        </div>
+
+
+
                                     </td>
-                                    <td width="10px">
-                                        <button class="btn btn-primary mb-4" wire:click="edit({{$idioma->id}})">Editar</button>
+                                    @endIf
+
+
+                                    <td  class="d-flex flex-row-reverse">
+                                        @if($idioma->locale != "es")
+                                            <button   class="btn btn-danger " wire:click="traducir('{{$idioma->id}}')">Traducir</button>
+                                            <button   class="btn btn-danger mr-2" wire:click="limpiar('{{$idioma->id}}')"><i class="fas fa-eraser"></i></button>
+                                            @endif
+                                        <button class="btn btn-primary mr-2" wire:click="edit({{$idioma->id}})">Editar</button>
                                     </td>
                                 </tr>
+
                             @endforeach
                         </tbody>
                     </table>
@@ -81,53 +197,45 @@
 
                             <x-input-error for="idiomaEdit.isPublic" class="text-danger"></x-input-error>
                         </div>
-
-
                     </div>
 
-
-
-
-                    {{-- <div class="d-flex">
-                        <div class="mt-2 col-sm-5">
-                            <x-label value="Categoría" class="text-primary"></x-label>
-                            <x-select class="w-100" wire:model="idiomaEdit.categoria_id">
-                                <option value="" disabled>
-                                    Seleccione una Categoría
-                                </option>
-                                @foreach ($categorias as $item )
-                                    <option value="{{$item->id}}">{{$item->title}}</option>
-                                @endforeach
-                            </x-select>
-                            <x-input-error for="idiomaEdit.categoria_id" class="text-danger"></x-input-error>
-                        </div>
-                        <div class="mt-2 col-sm-3">
-                            <x-label value="Orden" class="text-primary"></x-label>
-                            <x-input  type="text" class="w-100 form-control" wire:model='idiomaEdit.orden'></x-input>
-                            <x-input-error for="idiomaEdit.orden" class="text-danger"></x-input-error>
-                        </div>
-                        <div class="mt-2 col-sm-4">
-                            <x-label value="Estado" class="text-primary"></x-label>
-                            <x-select class="w-100" wire:model="idiomaEdit.isPublic">
-                                <option value="" disabled>Seleccione un estado</option>
-                                <option value="0">Borrador</option>
-                                <option value="1">Publicado</option>
-                            </x-select>
-                            <x-input-error for="idiomaEdit.isPublic" class="text-danger"></x-input-error>
-                        </div>
+                    <div>
+                        <label>
+                            <input wire:model="idiomaEdit.traducciones_Start" value="elements" type="checkbox"/>
+                            elements
+                        </label>
+                        <br>
+                        <label>
+                            <input wire:model="idiomaEdit.traducciones_Start" value="textos" type="checkbox"/>
+                            textos
+                        </label>
+                        <br>
+                        <label>
+                            <input wire:model="idiomaEdit.traducciones_Start" value="fotos" type="checkbox"/>
+                            fotos
+                        </label>
+                        <br>
+                        <label>
+                            <input wire:model="idiomaEdit.traducciones_Start" value="idiomas" type="checkbox"/>
+                            idiomas
+                        </label>
+                        <br>
+                        <label>
+                            <input wire:model="idiomaEdit.traducciones_Start" value="documents" type="checkbox"/>
+                            documents
+                        </label>
+                        <br>
+                        <label>
+                            <input wire:model="idiomaEdit.traducciones_Start" value="autors" type="checkbox"/>
+                            autors
+                        </label>
+                        <br>
+                        <label>
+                            <input wire:model="idiomaEdit.traducciones_Start" value="informacions" type="checkbox"/>
+                            informacions
+                        </label>
 
                     </div>
-                    <div class="mt-2 ml-2">
-                        <x-label value="Seo Titulo" class="text-primary"></x-label>
-                        <x-input type="text" class="w-100 form-control" wire:model='idiomaEdit.seoTitle'></x-input>
-                        <x-input-error for="idiomaEdit.seoTitle" class="text-danger"></x-input-error>
-                    </div>
-                    <div class="mt-2 ml-2">
-                        <x-label value="Seo Meta" class="text-primary"></x-label>
-                        <x-input type="text" class="w-100 form-control" wire:model='idiomaEdit.seoMeta'></x-input>
-                        <x-input-error for="idiomaEdit.seoMeta" class="text-danger"></x-input-error>
-                    </div> --}}
-
 
 
 

@@ -194,5 +194,18 @@
     "Exterior": "Outside",
     "Interior": "Inside",
     "Capillas": "Chapels",
-    "Museo": "Museum"
+    "Museo": "Museum",
+    "Todas las fotos":"All photos",
+    "Exterior de la Catedral de Santiago de Compostela":"Exterior of the Santiago de Compostela Cathedral",
+    "Interior de la Catedral de Santiago de Compostela":"Interior of the Santiago de Compostela Cathedral",
+    "Capillas de la Catedral de Santiago de Compostela":"Chapels of the Santiago de Compostela Cathedral",
+    "Museo de la Catedral de Santiago de Compostela":"Museum of the Cathedral of Santiago de Compostela",
+    "Mensaje a":"Message to",
+    "Enviar":"Send",
+    "Cancelar":"Cancel",
+    "Vas a enviar un mail. ¿estás seguro?":"You are going to send an email, are you sure?",
+    "Autores":"Authors",
+    "Contactanos":"Contact us at",
+    "Cerrar":"Close",
+    "El mensaje ha sido enviado. Muchas gracias":"The message has been sent. Thank you very much"
 }

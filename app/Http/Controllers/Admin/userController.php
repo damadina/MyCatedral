@@ -24,6 +24,8 @@ class userController extends Controller
     public function edit(User $user)
     {
         $roles = Role::all();
+        $user->load("roles");
+
         return view('admin.users.edit',compact('user','roles'));
     }
 

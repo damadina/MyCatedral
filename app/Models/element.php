@@ -41,6 +41,7 @@ class element extends Model
 
     }
 
+
     public function categoria() {
         return $this->belongsTo(categoria::class);
     }
@@ -50,9 +51,6 @@ class element extends Model
     public function textos() {
         return $this->hasMany(texto::class);
     }
-
-
-
 
 
 

@@ -1,4 +1,4 @@
 <title>{{$elemento->seoTitle}}</title>
-{{--  <meta name="description" content="{{$elemento->seoDescription}}"> --}}
-<meta name="description" content="{{$elemento->seoMeta}}">
-<link rel="icon" href="{{ asset('images/logo.png') }}">
+<meta name="description" content="{{Str::limit($elemento->seoMeta,150)}}">
+<link rel="icon" href="{{ asset('storage/images/logo.png') }}">
+<link rel="canonical" href="{{url()->current();}}" />

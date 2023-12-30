@@ -15,7 +15,7 @@
                     @if($isHome)
                     <p class="text-center flex-1">
                         <x-select class="w-100" wire:model.live="elementoSelected">
-                            <option value="" >Todas la fotos</option>
+                            <option value="" >{{__('Todas las fotos')}}</option>
                             @foreach ($elementos as $item )
                                 <option value="{{$item->id}}">{{$item->title}}</option>
                             @endforeach

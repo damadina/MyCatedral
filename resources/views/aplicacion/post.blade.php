@@ -4,7 +4,9 @@
     @endslot
 
     @slot('seo')
+        @include('aplicacion.partials.seoHrflang')
         @include('aplicacion.partials.seo')
+
     @endslot
 
     @slot('social')
@@ -13,7 +15,11 @@
 
 
     @slot('header')
-        @include('aplicacion.partials.navigate')
+        @if($locale == "es")
+            @include('aplicacion.partials.navigateES')
+        @else
+            @include('aplicacion.partials.navigateXX')
+        @endif
     @endslot
 
     <article itemscope itemtype="https://schema.org/Article" >
@@ -22,9 +28,11 @@
         <meta itemprop="thumbnailUrl" content="{{asset('/storage/miniaturas/' . $elemento->urlPortada)}}" />
 
         <header>
+
             <meta itemprop="name" content="{{$elemento->title}}" />
             <meta itemprop="abstract" content="{{$elemento->title}}" />
             <div>
+
                 <div class="relative">
                     <figure>
                         <img  alt="{{$fotoPortada->alt}}" title="{{$fotoPortada->title}}" class="h-3/4 w-full object-cover object-center"
@@ -36,6 +44,7 @@
                     <h1 class="[text-shadow:_0_1px_0_var(--tw-shadow-color)] absolute text-base md:text-6xl tracking-wide text-white  top-6 right-10">{{$elemento->title}}</h1>
                 </div>
             </div>
+
             <div class="container">
 
                 <div class="border-l-4 border-b-4 pl-2 border-catedral text-justify indent-8 text-gray-600 italic text-base mt-6 sm:text-xl tracking-wide">

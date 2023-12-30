@@ -194,5 +194,18 @@
     "Exterior": "외관",
     "Interior": "내부",
     "Capillas": "채플",
-    "Museo": "박물관"
+    "Museo": "박물관",
+    "Todas las fotos":"모든 사진",
+    "Exterior de la Catedral de Santiago de Compostela":"산티아고 데 콤포스텔라 대성당 외관",
+    "Interior de la Catedral de Santiago de Compostela":"산티아고 데 콤포스텔라 대성당 내부",
+    "Capillas de la Catedral de Santiago de Compostela":"산티아고 데 콤포스텔라 대성당 예배당",
+    "Museo de la Catedral de Santiago de Compostela":"산티아고 데 콤포스텔라 대성당 박물관",
+    "Mensaje a":"받는 사람 메시지",
+    "Enviar":"보내기",
+    "Cancelar":"취소",
+    "Vas a enviar un mail. ¿estás seguro?":"정말 이메일을 보내실 건가요?",
+    "Autores":"작성자",
+    "Contactanos":"문의하기",
+    "Cerrar":"닫기",
+    "El mensaje ha sido enviado. Muchas gracias":"메시지가 전송되었습니다. 감사합니다."
 }

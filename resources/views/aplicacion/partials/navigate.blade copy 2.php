@@ -1,9 +1,13 @@
 <div>
 
     <div class="py-4 bg-white flex justify-center items-center space-x-4 flex-wrap shadow">
+        {{-- @php
+            $locale = Session::get('lang');
+        @endphp --}}
 
 
         <div class="flex">
+
             <x-dropdown  align="left" >
 
                 <x-slot name="trigger">
@@ -18,15 +22,19 @@
                 </x-slot>
 
                 <x-slot name="content">
+                    @php
+                        $locale = "";
+                    @endphp
                     <ol itemscope itemtype="https://schema.org/BreadcrumbList"class="overflow-auto " >
                         <meta itemprop="description" content="Exterior de la Catedral de Santiago de Compostela">
-
                         @foreach ($exterior as $each )
+
+                        {{$locale}} -- {{$each->slug}}
+
+
                             <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-
-                                <x-dropdown-link  itemprop="item" href="{{URL(route('elemento',$each))}}"   class="hover:font-semibold hover:text-black">
-
-                                    <span itemprop="name" >{{$each->title}}</span>
+                                <x-dropdown-link  itemprop="item" href="{{route('elemento',['slug' => $each->slug])}}"   class="hover:font-semibold hover:text-black">
+                                    <span itemprop="name" >888{{$each->title}}</span>
                                 </x-dropdown-link>
                                 <meta itemprop="position" content="1" />
                             </li>
@@ -49,6 +57,8 @@
         <div class="flex">
             <x-dropdown  align="left" >
 
+
+
                 <x-slot name="trigger">
                     <span class="inline-flex rounded-md">
                         <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition ease-in-out duration-150">
@@ -66,7 +76,7 @@
 
                         @foreach ($interior as $each )
                             <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-                                <x-dropdown-link  itemprop="item" href="{{URL($each->slug)}}"   class="hover:text-catedral focus:bg-gray-200">
+                                <x-dropdown-link  itemprop="item" href="{{URL(route('elemento',$each))}}"   class="hover:text-catedral focus:bg-gray-200">
                                     <span itemprop="name" >{{$each->title}}</span>
                                 </x-dropdown-link>
                                 <meta itemprop="position" content="1" />
@@ -105,7 +115,7 @@
 
                         @foreach ($capillas as $each )
                             <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-                                <x-dropdown-link  itemprop="item" href="{{URL($each->slug)}}"   class="hover:bg-catedral hover:text-white">
+                                <x-dropdown-link  itemprop="item" href="{{URL(route('elemento',$each))}}"   class="hover:bg-catedral hover:text-white">
                                     <span itemprop="name" >{{$each->title}}</span>
                                 </x-dropdown-link>
                                 <meta itemprop="position" content="1" />
@@ -145,7 +155,7 @@
                         @foreach ($museo as $each )
 
                             <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-                                <x-dropdown-link  itemprop="item" href="{{URL($each->slug)}}"   class="hover:bg-catedral hover:text-white">
+                                <x-dropdown-link  itemprop="item" href="{{URL(route('elemento',$each))}}"   class="hover:bg-catedral hover:text-white">
                                     <span itemprop="name" >{{$each->title}}</span>
                                 </x-dropdown-link>
                                 <meta itemprop="position" content="1" />

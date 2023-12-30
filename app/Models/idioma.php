@@ -15,7 +15,25 @@ class idioma extends Model
         'orden',
         'isPublic',
         'locale',
+        'elements',
+        'textos',
+        'fotos',
+        'idiomas',
+        'documents',
+        'autors',
+        'informacions',
+        'elementsTraduccion',
+        'textosTraduccion',
+        'fotosTraduccion',
+        'idiomasTraduccion',
+        'documentsTraduccion',
+        'autorsTraduccion',
+        'informacionsTraduccion',
+        'traducciones_Start',
+
     ];
+
+
     public function getEstadonameAttribute() {
         if($this->isPublic == 0) {
             return "Borrador";
@@ -24,6 +42,8 @@ class idioma extends Model
         }
 
     }
-
+    protected $casts = [
+        'traducciones_Start' => 'array'
+    ];
 
 }

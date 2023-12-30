@@ -194,5 +194,18 @@
     "Exterior": "外観",
     "Interior": "内部",
     "Capillas": "礼拝堂",
-    "Museo": "博物館"
+    "Museo": "博物館",
+    "Todas las fotos":"すべての写真",
+    "Exterior de la Catedral de Santiago de Compostela":"サンティアゴ・デ・コンポステーラ大聖堂外観",
+    "Interior de la Catedral de Santiago de Compostela":"サンティアゴ・デ・コンポステーラ大聖堂内部",
+    "Capillas de la Catedral de Santiago de Compostela":"サンティアゴ・デ・コンポステーラ大聖堂の礼拝堂",
+    "Museo de la Catedral de Santiago de Compostela":"サンティアゴ・デ・コンポステーラ大聖堂博物館",
+    "Mensaje a":"メッセージ",
+    "Enviar":"送信",
+    "Cancelar":"キャンセル",
+    "Vas a enviar un mail. ¿estás seguro?":"メールを送ろうとしていますが、本当にいいのですか？",
+    "Autores":"著者紹介",
+    "Contactanos":"お問い合わせ",
+    "Cerrar":"閉じる",
+    "El mensaje ha sido enviado. Muchas gracias":"メッセージが送信されました。ありがとうございました。"
 }

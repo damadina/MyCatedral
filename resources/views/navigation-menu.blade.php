@@ -1,11 +1,32 @@
 <nav x-data="{ open: false }" class="bg-white border-b border-gray-100 shadow">
+    @php
+        use Illuminate\Support\Facades\Auth;
+        use App\Models\idioma;
+        $user = auth::user();
+
+        if($user && $user->isAdmin) {
+            $idiomas = idioma::orderBy('orden')->get();
+        } else {
+            $idiomas = idioma::where('isPublic','1')->orderBy('orden')->get();
+        };
+
+    @endphp
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Logo -->
+                @php
+                    $locale = Session::get('lang');
+                    if($locale=="es") {
+                        $locale = "";
+                    }
+                @endphp
+
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('home') }}">
+
+
+                    <a href="{{ route('elementoXX',['locale' => $locale]) }}">
                         <x-application-mark class="block h-9 w-auto" />
                     </a>
                 </div>
@@ -21,6 +42,13 @@
             <div class="flex flex-1 items-center justify-center">
                 <p class="text-center text-catedral tracking-wide text-base md:text-2xl font font-semibold">{{__('Catedral de Santiago de Compostela')}}</p>
             </div>
+
+
+
+
+
+
+
 
 
             <div class="hidden sm:flex sm:items-center sm:ml-6">
@@ -75,6 +103,28 @@
                         </x-dropdown>
                     </div>
                 @endif
+
+                @if(Session::get('idiomas'))
+                    @php
+                    $slug = request()->segment(count(request()->segments()));
+                    @endphp
+                    <div class=" px-3 py-2 ">
+                        <form action="{{route('localization',['slug' => $slug])}}" id="formlocalization">
+                            <select  class="text-xs text-black/70 bg-white px-3 transition-all cursor-pointer hover:border-blue-600/30 border border-gray-200 rounded-lg outline-blue-600/50 appearance-none invalid:text-black/30 w-32"
+                            name="lang" onchange="
+                                document.getElementById('formlocalization').submit();
+                                ">
+                                @foreach ($idiomas as $idioma )
+                                    <option  value="{{$idioma->locale}}" @selected(session('lang') == $idioma->locale)>{{$idioma->title}}</option>
+                                @endforeach
+                            </select>
+                        </form>
+                    </div>
+
+                @endif
+
+
+
 
 
 
@@ -174,9 +224,40 @@
 
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
+        @php
+            $locale = Session::get('lang');
+            if($locale=="es") {
+                $locale = "";
+            }
+        @endphp
+
+        @php
+        $slug = request()->segment(count(request()->segments()));
+        @endphp
+        <div class=" px-3 py-2 ">
+            <form action="{{route('localization',['slug' => $slug])}}" id="formlocalizationMovile">
+                <select  class="text-xs text-black/70 bg-white px-3 transition-all cursor-pointer hover:border-blue-600/30 border border-gray-200 rounded-lg outline-blue-600/50 appearance-none invalid:text-black/30 w-32"
+                name="lang" onchange="
+                    document.getElementById('formlocalizationMovile').submit();
+                    ">
+                    @foreach ($idiomas as $idioma )
+                        <option  value="{{$idioma->locale}}" @selected(session('lang') == $idioma->locale)>{{$idioma->title}}</option>
+                    @endforeach
+                </select>
+            </form>
+        </div>
+
+
+
+
+
+
+
+
+
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
+            <x-responsive-nav-link href="{{ route('elementoXX',['locale' => $locale]) }}" :active="request()->routeIs('dashboard')">
+                {{__('Catedral de Santiago de Compostela')}}
             </x-responsive-nav-link>
         </div>
 
@@ -279,6 +360,7 @@
                     {{ __('register') }}
                 </x-responsive-nav-link>
             </div>
+
         @endauth
     </div>
 </nav>

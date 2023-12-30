@@ -1,7 +1,15 @@
 <x-guest-layout>
     <x-authentication-card>
         <x-slot name="logo">
-            <x-authentication-card-logo />
+            {{-- <x-authentication-card-logo /> --}}
+            @php
+            $locale = session()->get('lang');
+            @endphp
+            <a href="{{ route('elementoXX',['locale' => $locale]) }}">
+                <x-application-mark class="block h-9 w-auto" />
+            </a>
+
+
         </x-slot>
 
         <x-validation-errors class="mb-4" />

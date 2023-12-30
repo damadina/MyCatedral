@@ -17,6 +17,14 @@ return new class extends Migration
             $table->string('locale');
             $table->integer('orden')->nullable();
             $table->boolean('isPublic')->default(false);
+            $table->string('elementsTraduccion')->nullable();
+            $table->string('textosTraduccion')->nullable();
+            $table->string('fotosTraduccion')->nullable();
+            $table->string('idiomasTraduccion')->nullable();
+            $table->string('documentsTraduccion')->nullable();
+            $table->string('autorsTraduccion')->nullable();
+            $table->string('informacionsTraduccion')->nullable();
+            $table->json('traducciones_Start')->nullable();
             $table->timestamps();
         });
     }

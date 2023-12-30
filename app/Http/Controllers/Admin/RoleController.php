@@ -33,6 +33,7 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
+
         $request->validate([
             'name' => 'required',
             'permissions' => 'required'
@@ -64,7 +65,11 @@ class RoleController extends Controller
      */
     public function edit(Role $role)
     {
+
+
+
         $permissions = permission::all();
+        $role->load("permissions");
         return view('admin.roles.edit', compact('role','permissions'));
     }
 
@@ -73,6 +78,7 @@ class RoleController extends Controller
      */
     public function update(Request $request, Role $role)
     {
+
         $request->validate([
             'name' => 'required',
             'permissions' => 'required'

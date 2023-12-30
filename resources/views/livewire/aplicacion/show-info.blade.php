@@ -21,7 +21,7 @@
 
 
             <x-button type="button" wire:click="$set('openModal',false)" class="mr-4">
-                Cerrar
+                {{__('Cerrar')}}
             </x-button>
 
         </x-slot>

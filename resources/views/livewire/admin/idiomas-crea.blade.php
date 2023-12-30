@@ -43,6 +43,44 @@
 
                 </div>
 
+                <div>
+                    <label>
+                        <input wire:model="idiomaCreate.traducciones_Start" value="elements" type="checkbox"/>
+                        elements
+                    </label>
+                    <br>
+                    <label>
+                        <input wire:model="idiomaCreate.traducciones_Start" value="textos" type="checkbox"/>
+                        textos
+                    </label>
+                    <br>
+                    <label>
+                        <input wire:model="idiomaCreate.traducciones_Start" value="fotos" type="checkbox"/>
+                        fotos
+                    </label>
+                    <br>
+                    <label>
+                        <input wire:model="idiomaCreate.traducciones_Start" value="idiomas" type="checkbox"/>
+                        idiomas
+                    </label>
+                    <br>
+                    <label>
+                        <input wire:model="idiomaCreate.traducciones_Start" value="documents" type="checkbox"/>
+                        documents
+                    </label>
+                    <br>
+                    <label>
+                        <input wire:model="idiomaCreate.traducciones_Start" value="autors" type="checkbox"/>
+                        autors
+                    </label>
+                    <br>
+                    <label>
+                        <input wire:model="idiomaCreate.traducciones_Start" value="informacions" type="checkbox"/>
+                        informacions
+                    </label>
+
+                </div>
+
 
             </x-slot>
             <x-slot name="footer">

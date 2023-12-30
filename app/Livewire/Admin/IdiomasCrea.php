@@ -8,6 +8,7 @@ use App\Livewire\Forms\IdiomaCreateForm;
 class IdiomasCrea extends Component
 {
     public $openModal = false;
+
     public IdiomaCreateForm $idiomaCreate;
 
     public function mount() {

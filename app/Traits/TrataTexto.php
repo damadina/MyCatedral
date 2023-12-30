@@ -4,6 +4,7 @@ use App\Models\foto;
 trait TrataTexto {
 
     function convierte( $text ){
+
         $order   = array("<p>",);
         $replace = '<p class="p-2">';
         $text = str_replace($order, $replace, $text);
@@ -11,6 +12,7 @@ trait TrataTexto {
         $array =  explode("\n", $text);
 
         $tagged = "";
+
 
         foreach($array as $element){
             if( strlen($element) > 1){
@@ -24,7 +26,9 @@ trait TrataTexto {
                     );
 
                     $foto = foto::where('url',$result)->first();
+
                     $element = $this->tagFigure($foto->url,$foto->piedefoto);
+
                 }
 
 
@@ -32,9 +36,11 @@ trait TrataTexto {
                 $str = str_replace("</p>", "", "", $str);
 
                 $tagged .= '<p class="p-2">'.$str.'</p>'; */
+
                 $tagged .= $element;
             }
         }
+
         return $tagged;
     }
     public function tagFigure($result,$piedeFoto) {
@@ -49,14 +55,25 @@ trait TrataTexto {
             $tagW = 'w-1/2';
         }
 
+        $urlImage=asset('storage/originales/'.$result);
+
 
         $tag = '<figure class="mx-auto '.$tagW.'">
-        <img class="mx-auto pb-2 " src="storage/originales/'.$result.'"'. 'loading="lazy"  >
+        <img class="mx-auto pb-2 " src="'.$urlImage.'"'. ' loading="lazy"  >
         <figcaption class="text-center pb-2 italic text-gray-600 bg-gray-200">
         <span>'.$piedeFoto.'</span>
         </figcaption>
         </figure>';
+
+
+
         return $tag;
     }
 
 }
+/* $tag = '<figure class="mx-auto '.$tagW.'">
+        <img class="mx-auto pb-2 " src="storage/originales/'.$result.'"'. ' loading="lazy"  >
+        <figcaption class="text-center pb-2 italic text-gray-600 bg-gray-200">
+        <span>'.$piedeFoto.'</span>
+        </figcaption>
+        </figure>'; */

@@ -61,6 +61,7 @@
 
                 <x-danger-button type="submit">
                     Actualizar autor
+
                 </x-danger-button>
             </div>
 

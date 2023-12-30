@@ -12,6 +12,7 @@ class ShowInfo extends Component
     public $informacionSelected = 1;
     public $informacion;
     public function mount() {
+
         $this->informaciones = informacion::where('isPublic',true)->get();
         $this->informacion = $this->informaciones[$this->informacionSelected-1]->informacion;
 

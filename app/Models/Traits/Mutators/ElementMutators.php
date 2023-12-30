@@ -19,6 +19,8 @@ trait ElementMutators {
     public function getSeoMetaAttribute($value) {
         return $this->translation('seoMeta',$value);
     }
-
+    public function getSlugAttribute($value) {
+        return $this->translation('slug',$value);
+    }
 
 }

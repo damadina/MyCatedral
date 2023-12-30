@@ -14,6 +14,16 @@ class IdiomaEditForm extends Form
     public $title;
     public $locale;
     public $isPublic;
+
+    public $elementsTraduccion;
+    public $textosTraduccion;
+    public $fotosTraduccion;
+    public $idiomasTraduccion;
+    public $documentsTraduccion;
+    public $autorsTraduccion;
+    public $informacionsTraduccion;
+    public $traducciones_Start =[];
+
     public function rules()
     {
         return [
@@ -32,13 +42,21 @@ class IdiomaEditForm extends Form
         $this->title = $idioma->title;
         $this->isPublic = $idioma->isPublic;
         $this->locale = $idioma->locale;
+        $this->elementsTraduccion = $idioma->elementsTraduccion;
+        $this->textosTraduccion = $idioma->textosTraduccion;
+        $this->fotosTraduccion = $idioma->fotosTraduccion;
+        $this->idiomasTraduccion = $idioma->idiomasTraduccion;
+        $this->documentsTraduccion = $idioma->documentsTraduccion;
+        $this->autorsTraduccion = $idioma->autorsTraduccion;
+        $this->informacionsTraduccion = $idioma->informacionsTraduccion;
+        $this->traducciones_Start = $idioma->traducciones_Start;
     }
 
     public function update() {
         $this->validate();
         $idioma = idioma::find($this->idiomaId);
         $idioma->update(
-            $this->only('orden','title','isPublic','locale')
+            $this->only('orden','title','isPublic','locale','traducciones_Start')
         );
         $this->reset();
     }

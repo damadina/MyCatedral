@@ -20,6 +20,7 @@ return new class extends Migration
             $table->longText('translation');
             $table->string('traductor');
             $table->index(['table', 'row_id', 'column', 'locale']);
+            $table->timestamps();
         });
     }
 

@@ -8,5 +8,5 @@
     gtag('config', 'G-ZJDWZKPEHZ');
     </script>
 @else
-    <meta name="robots" content="noindex">
+    <meta name="robots" content="index">
 @endif
