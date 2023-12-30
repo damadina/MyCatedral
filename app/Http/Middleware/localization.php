@@ -76,41 +76,7 @@ class localization
             }
         }
 
-
-
-
-        /* $idiomas= $this->getLocales();
-        $segmentUrl= request()->segment(1);
-
-        if (in_array($segmentUrl, $idiomas)) {
-            session()->put('lang',$segmentUrl);
-        } */ /* else {
-            return abort(404);
-        } */
-
-
-
-
-        /* dd(request()->url()); */
         App::setlocale(session('lang'));
-
-        /* if (str_contains($request->getRequestUri(), '/es/')) {
-
-            //Remove .php from the request url
-            $url = str_replace('es/', '', $request->url());
-
-            foreach ($request->input() as $key => $value) {
-
-                $url .= "/{$key}/{$value}";
-            }
-            return redirect($url);
-        }
- */
-        /* if ($request->route()->named('elementoXX')) {
-            dd("elementoXX");
-        }
- */
-
 
         return $next($request);
 
