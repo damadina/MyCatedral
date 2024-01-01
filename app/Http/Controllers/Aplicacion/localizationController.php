@@ -16,6 +16,7 @@ class localizationController extends Controller
         $antLoc = session()->get('lang');
 
         $lang = request()->lang;
+
         session()->put('lang',$lang);
         App::setlocale(session('lang'));
 
@@ -50,6 +51,7 @@ class localizationController extends Controller
     }
 
     public function newSlug($slug, $antLoc) {
+
         $locale = session()->get('lang');
 
         if($locale == "es") {

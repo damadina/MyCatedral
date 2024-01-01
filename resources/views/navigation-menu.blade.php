@@ -1,5 +1,5 @@
 <nav x-data="{ open: false }" class="bg-white border-b border-gray-100 shadow">
-    @php
+    {{-- @php
         use Illuminate\Support\Facades\Auth;
         use App\Models\idioma;
         $user = auth::user();
@@ -10,18 +10,18 @@
             $idiomas = idioma::where('isPublic','1')->orderBy('orden')->get();
         };
 
-    @endphp
+    @endphp --}}
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Logo -->
-                @php
+                {{-- @php
                     $locale = Session::get('lang');
                     if($locale=="es") {
                         $locale = "";
                     }
-                @endphp
+                @endphp --}}
 
                 <div class="shrink-0 flex items-center">
 
@@ -53,7 +53,7 @@
 
             <div class="hidden sm:flex sm:items-center sm:ml-6">
                 <!-- Teams Dropdown -->
-                @if (Laravel\Jetstream\Jetstream::hasTeamFeatures())
+                {{-- @if (Laravel\Jetstream\Jetstream::hasTeamFeatures())
                     <div class="ml-3 relative">
                         <x-dropdown align="right" width="60">
                             <x-slot name="trigger">
@@ -102,12 +102,13 @@
                             </x-slot>
                         </x-dropdown>
                     </div>
-                @endif
+                @endif --}}
 
-                @if(Session::get('idiomas'))
-                    @php
+                @if (env('SWOW_IDIOMAS') == true)
+
+                    {{-- @php
                     $slug = request()->segment(count(request()->segments()));
-                    @endphp
+                    @endphp --}}
                     <div class=" px-3 py-2 ">
                         <form action="{{route('localization',['slug' => $slug])}}" id="formlocalization">
                             <select  class="text-xs text-black/70 bg-white px-3 transition-all cursor-pointer hover:border-blue-600/30 border border-gray-200 rounded-lg outline-blue-600/50 appearance-none invalid:text-black/30 w-32"
@@ -210,6 +211,7 @@
                 </div>
             </div>
 
+
             <!-- Hamburger -->
             <div class="-mr-2 flex items-center sm:hidden">
                 <button @click="open = ! open" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
@@ -220,23 +222,188 @@
                 </button>
             </div>
         </div>
+        <div class=" hidden py-4 bg-white sm:flex justify-center items-center space-x-4 flex-wrap shadow">
+
+            <div class="flex">
+
+                <x-dropdown  align="left" >
+
+                    <x-slot name="trigger">
+                        <span class="inline-flex rounded-md">
+                            <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition ease-in-out duration-150">
+                              {{__('Exterior')}}
+                                <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                                </svg>
+                            </button>
+                        </span>
+                    </x-slot>
+
+                    <x-slot name="content">
+                        <ol itemscope itemtype="https://schema.org/BreadcrumbList"class="overflow-auto " >
+                            <meta itemprop="description" content={{__('Exterior de la Catedral de Santiago de Compostela')}}>
+                            @foreach ($exterior as $each )
+                                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                                    @if($locale=="es")
+                                        <x-dropdown-link  itemprop="item" href="{{route('elementoXX',['slug' => $each->slug])}}"   class="hover:font-semibold hover:text-catedral">
+                                            <span itemprop="name" >{{$each->title}}</span>
+                                        </x-dropdown-link>
+                                    @else
+                                        <x-dropdown-link  itemprop="item" href="{{route('elementoXX',['locale' => $locale,'slug' => $each->slug])}}"   class="hover:font-semibold hover:text-catedral">
+                                            <span itemprop="name" >{{$each->title}}</span>
+                                        </x-dropdown-link>
+                                    @endif
+                                    <meta itemprop="position" content="1" />
+                                </li>
+                            @endforeach
+
+                        </ol>
+                    </x-slot>
+                </x-dropdown>
+
+
+
+            </div>
+            <div class="flex">
+                <x-dropdown  align="left" >
+
+
+
+                    <x-slot name="trigger">
+                        <span class="inline-flex rounded-md">
+                            <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition ease-in-out duration-150">
+                                {{__('Interior')}}
+                                <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                                </svg>
+                            </button>
+                        </span>
+                    </x-slot>
+
+                    <x-slot name="content">
+                        <ol itemscope itemtype="https://schema.org/BreadcrumbList"class="overflow-auto " >
+                            <meta itemprop="description" content="Interior de la Catedral de Santiago de Compostela">
+
+                            @foreach ($interior as $each )
+                                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                                    @if($locale=="es")
+                                        <x-dropdown-link  itemprop="item" href="{{route('elementoXX',['slug' => $each->slug])}}"   class="hover:font-semibold hover:text-catedral">
+                                            <span itemprop="name" >{{$each->title}}</span>
+                                        </x-dropdown-link>
+                                    @else
+                                        <x-dropdown-link  itemprop="item" href="{{route('elementoXX',['locale' => $locale,'slug' => $each->slug])}}"   class="hover:font-semibold hover:text-catedral">
+                                            <span itemprop="name" >{{$each->title}}</span>
+                                        </x-dropdown-link>
+                                        <meta itemprop="position" content="1" />
+                                    @endif
+                                </li>
+                            @endforeach
+
+                        </ol>
+
+                    </x-slot>
+                </x-dropdown>
+            </div>
+            <div class="flex">
+                <x-dropdown  align="left" >
+
+                    <x-slot name="trigger">
+                        <span class="inline-flex rounded-md">
+                            <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition ease-in-out duration-150">
+                                {{__('Capillas')}}
+                                <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                                </svg>
+                            </button>
+                        </span>
+                    </x-slot>
+
+                    <x-slot name="content">
+                        <ol itemscope itemtype="https://schema.org/BreadcrumbList"class="overflow-auto " >
+                            <meta itemprop="description" content="Capillas de la Catedral de Santiago de Compostela">
+
+                            @foreach ($capillas as $each )
+                                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                                    @if($locale=="es")
+                                        <x-dropdown-link  itemprop="item" href="{{route('elementoXX',['slug' => $each->slug])}}"   class="hover:font-semibold hover:text-catedral">
+                                            <span itemprop="name" >{{$each->title}}</span>
+                                        </x-dropdown-link>
+                                    @else
+                                        <x-dropdown-link  itemprop="item" href="{{route('elementoXX',['locale' => $locale,'slug' => $each->slug])}}"   class="hover:font-semibold hover:text-catedral">
+                                            <span itemprop="name" >{{$each->title}}</span>
+                                        </x-dropdown-link>
+                                    @endif
+                                    <meta itemprop="position" content="1" />
+                                </li>
+                            @endforeach
+
+                        </ol>
+
+                    </x-slot>
+                </x-dropdown>
+            </div>
+            <div class="flex">
+                <x-dropdown  align="left" >
+
+                    <x-slot name="trigger">
+                        <span class="inline-flex rounded-md">
+                            <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition ease-in-out duration-150">
+                                {{__('Museo')}}
+                                <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                                </svg>
+                            </button>
+                        </span>
+                    </x-slot>
+
+                    <x-slot name="content">
+                        <ol itemscope itemtype="https://schema.org/BreadcrumbList" class="overflow-auto" >
+                            <meta itemprop="description" content="Museo de la Catedral de Santiago de Compostela">
+
+                            @foreach ($museo as $each )
+
+                                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                                    @if($locale=="es")
+                                        <x-dropdown-link  itemprop="item" href="{{route('elementoXX',['slug' => $each->slug])}}"   class="hover:font-semibold hover:text-catedral">
+                                            <span itemprop="name" >{{$each->title}}</span>
+                                        </x-dropdown-link>
+                                    @else
+                                        <x-dropdown-link  itemprop="item" href="{{route('elementoXX',['locale' => $locale,'slug' => $each->slug])}}"   class="hover:font-semibold hover:text-catedral">
+                                            <span itemprop="name" >{{$each->title}}</span>
+                                        </x-dropdown-link>
+                                    @endif
+
+                                    <meta itemprop="position" content="1" />
+                                </li>
+
+
+
+
+                            @endforeach
+
+                        </ol>
+
+                    </x-slot>
+                </x-dropdown>
+            </div>
+
+        </div>
+
     </div>
+
+
+
+
+
+
 
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
-        @php
-            $locale = Session::get('lang');
-            if($locale=="es") {
-                $locale = "";
-            }
-        @endphp
 
-        @php
-        $slug = request()->segment(count(request()->segments()));
-        @endphp
+
         <div class=" px-3 py-2 ">
             <form action="{{route('localization',['slug' => $slug])}}" id="formlocalizationMovile">
-                <select  class="text-xs text-black/70 bg-white px-3 transition-all cursor-pointer hover:border-blue-600/30 border border-gray-200 rounded-lg outline-blue-600/50 appearance-none invalid:text-black/30 w-32"
+                <select  class="text-xs text-black/70 bg-white px-3 transition-all cursor-pointer  outline-blue-600/50 appearance-none invalid:text-black/30 w-32"
                 name="lang" onchange="
                     document.getElementById('formlocalizationMovile').submit();
                     ">
@@ -247,6 +414,157 @@
             </form>
         </div>
 
+        <x-dropdown  align="left" >
+
+            <x-slot name="trigger">
+                <span class="inline-flex rounded-md">
+                    <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition ease-in-out duration-150">
+                      {{__('Exterior')}}
+                        <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                        </svg>
+                    </button>
+                </span>
+            </x-slot>
+
+            <x-slot name="content">
+                <ol itemscope itemtype="https://schema.org/BreadcrumbList"class="overflow-auto " >
+                    <meta itemprop="description" content={{__('Exterior de la Catedral de Santiago de Compostela')}}>
+                    @foreach ($exterior as $each )
+                        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                            @if($locale=="es")
+                                <x-dropdown-link  itemprop="item" href="{{route('elementoXX',['slug' => $each->slug])}}"   class="hover:font-semibold hover:text-catedral">
+                                    <span itemprop="name" >{{$each->title}}</span>
+                                </x-dropdown-link>
+                            @else
+                                <x-dropdown-link  itemprop="item" href="{{route('elementoXX',['locale' => $locale,'slug' => $each->slug])}}"   class="hover:font-semibold hover:text-catedral">
+                                    <span itemprop="name" >{{$each->title}}</span>
+                                </x-dropdown-link>
+                            @endif
+                            <meta itemprop="position" content="1" />
+                        </li>
+                    @endforeach
+
+                </ol>
+            </x-slot>
+        </x-dropdown>
+        <x-dropdown  align="left" >
+
+
+
+            <x-slot name="trigger">
+                <span class="inline-flex rounded-md">
+                    <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition ease-in-out duration-150">
+                        {{__('Interior')}}
+                        <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                        </svg>
+                    </button>
+                </span>
+            </x-slot>
+
+            <x-slot name="content">
+                <ol itemscope itemtype="https://schema.org/BreadcrumbList"class="overflow-auto " >
+                    <meta itemprop="description" content="Interior de la Catedral de Santiago de Compostela">
+
+                    @foreach ($interior as $each )
+                        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                            @if($locale=="es")
+                                <x-dropdown-link  itemprop="item" href="{{route('elementoXX',['slug' => $each->slug])}}"   class="hover:font-semibold hover:text-catedral">
+                                    <span itemprop="name" >{{$each->title}}</span>
+                                </x-dropdown-link>
+                            @else
+                                <x-dropdown-link  itemprop="item" href="{{route('elementoXX',['locale' => $locale,'slug' => $each->slug])}}"   class="hover:font-semibold hover:text-catedral">
+                                    <span itemprop="name" >{{$each->title}}</span>
+                                </x-dropdown-link>
+                                <meta itemprop="position" content="1" />
+                            @endif
+                        </li>
+                    @endforeach
+
+                </ol>
+
+            </x-slot>
+        </x-dropdown>
+        <x-dropdown  align="left" >
+
+            <x-slot name="trigger">
+                <span class="inline-flex rounded-md">
+                    <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition ease-in-out duration-150">
+                        {{__('Capillas')}}
+                        <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                        </svg>
+                    </button>
+                </span>
+            </x-slot>
+
+            <x-slot name="content">
+                <ol itemscope itemtype="https://schema.org/BreadcrumbList"class="overflow-auto " >
+                    <meta itemprop="description" content="Capillas de la Catedral de Santiago de Compostela">
+
+                    @foreach ($capillas as $each )
+                        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                            @if($locale=="es")
+                                <x-dropdown-link  itemprop="item" href="{{route('elementoXX',['slug' => $each->slug])}}"   class="hover:font-semibold hover:text-catedral">
+                                    <span itemprop="name" >{{$each->title}}</span>
+                                </x-dropdown-link>
+                            @else
+                                <x-dropdown-link  itemprop="item" href="{{route('elementoXX',['locale' => $locale,'slug' => $each->slug])}}"   class="hover:font-semibold hover:text-catedral">
+                                    <span itemprop="name" >{{$each->title}}</span>
+                                </x-dropdown-link>
+                            @endif
+                            <meta itemprop="position" content="1" />
+                        </li>
+                    @endforeach
+
+                </ol>
+
+            </x-slot>
+        </x-dropdown>
+
+        <x-dropdown  align="left" >
+
+            <x-slot name="trigger">
+                <span class="inline-flex rounded-md">
+                    <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition ease-in-out duration-150">
+                        {{__('Museo')}}
+                        <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                        </svg>
+                    </button>
+                </span>
+            </x-slot>
+
+            <x-slot name="content">
+                <ol itemscope itemtype="https://schema.org/BreadcrumbList" class="overflow-auto" >
+                    <meta itemprop="description" content="Museo de la Catedral de Santiago de Compostela">
+
+                    @foreach ($museo as $each )
+
+                        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                            @if($locale=="es")
+                                <x-dropdown-link  itemprop="item" href="{{route('elementoXX',['slug' => $each->slug])}}"   class="hover:font-semibold hover:text-catedral">
+                                    <span itemprop="name" >{{$each->title}}</span>
+                                </x-dropdown-link>
+                            @else
+                                <x-dropdown-link  itemprop="item" href="{{route('elementoXX',['locale' => $locale,'slug' => $each->slug])}}"   class="hover:font-semibold hover:text-catedral">
+                                    <span itemprop="name" >{{$each->title}}</span>
+                                </x-dropdown-link>
+                            @endif
+
+                            <meta itemprop="position" content="1" />
+                        </li>
+
+
+
+
+                    @endforeach
+
+                </ol>
+
+            </x-slot>
+        </x-dropdown>
 
 
 
@@ -255,11 +573,18 @@
 
 
 
-        <div class="pt-2 pb-3 space-y-1">
+
+
+
+
+
+
+
+        {{-- <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link href="{{ route('elementoXX',['locale' => $locale]) }}" :active="request()->routeIs('dashboard')">
                 {{__('Catedral de Santiago de Compostela')}}
             </x-responsive-nav-link>
-        </div>
+        </div> --}}
 
         <!-- Responsive Settings Options -->
         @auth

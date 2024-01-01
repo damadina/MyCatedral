@@ -1,6 +1,6 @@
 <div>
     <button wire:click="clickShow">
-        <i class="fas fa-info text-white"></i>
+        <i class="fas fa-info text-xs text-white"></i>
     </button>
 
     <x-dialog-modal wire:model='openModal'>

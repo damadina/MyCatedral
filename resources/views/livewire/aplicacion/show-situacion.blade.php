@@ -2,9 +2,9 @@
     @if(count($planos))
         <button wire:click="clickShow">
             @if($isPlano)
-                <i class="mx-auto fas fa-map-marker-alt text-white" ></i>
+                <i class="mx-auto text-xs fas fa-map-marker-alt text-white" ></i>
             @else
-                    <i class="mx-auto far fa-images text-white"></i>
+                <i class="mx-auto text-xs far fa-images text-white"></i>
             @endif
         </button>
 
