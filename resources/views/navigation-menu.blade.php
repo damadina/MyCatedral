@@ -39,9 +39,7 @@
                     </x-nav-link>
                 </div> --}}
             </div>
-            <div class="flex flex-1 items-center justify-center">
-                <p class="text-center text-catedral tracking-wide text-base md:text-2xl font font-semibold">{{__('Catedral de Santiago de Compostela')}}</p>
-            </div>
+
 
 
 
@@ -222,6 +220,11 @@
                 </button>
             </div>
         </div>
+        <div class="flex flex-1 items-center justify-center">
+            <p class="text-center text-catedral tracking-wide text-xs md:text-2xl font font-semibold">{{__('Catedral de Santiago de Compostela')}}</p>
+        </div>
+
+
         <div class=" hidden py-4 bg-white sm:flex justify-center items-center space-x-4 flex-wrap shadow">
 
             <div class="flex">

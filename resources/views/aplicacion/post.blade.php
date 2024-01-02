@@ -73,7 +73,7 @@
         <i class="fas fa-arrow-up"></i>
         <span class="sr-only">Ir al inicio</span>
     </button>
-    <div class="mx-auto w-7 h-20 fixed inset-y-1/2  right-2 md:right-4 text-center opacity-70 hover:opacity-100" >
+    <div class="mx-auto w-7 h-20 fixed inset-y-1/2  right-4 text-center opacity-70 hover:opacity-100" >
         <div class="bg-catedral py-4 my-4 rounded-md text-lg items-center w-full">
             {{-- <i class="mx-auto fas fa-map-marker-alt text-white"></i> --}}
             @if($isHome)
