@@ -19,9 +19,10 @@ trait generaHref {
             $lineas = [];
             foreach($idiomas as $idioma) {
                 $url = $this->generateURL($key,$idioma,$elemento);
-                array_push($lineas,'<link rel="alternate" hreflang="'.$idioma.'" href="'.$url.'" />');
+                array_push($lineas,'<link rel="alternate" href="'.$url.'" hreflang="'.$idioma.'" />');
+
                 if($idioma=="es") {
-                    array_push($lineas,'<link rel="alternate" hreflang="x-default" href="'.$url.'" />');
+                    array_push($lineas,'<link rel="alternate" href="'.$url.'" hreflang="x-default" />');
                 }
             }
 
@@ -70,3 +71,8 @@ trait generaHref {
     }
 
 }
+/* array_push($lineas,'<link rel="alternate" hreflang="'.$idioma.'" href="'.$url.'" />');
+
+                if($idioma=="es") {
+                    array_push($lineas,'<link rel="alternate" hreflang="x-default" href="'.$url.'" />');
+                } */
