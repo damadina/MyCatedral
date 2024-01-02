@@ -285,7 +285,7 @@
 
                     <x-slot name="content">
                         <ol itemscope itemtype="https://schema.org/BreadcrumbList"class="overflow-auto " >
-                            <meta itemprop="description" content="Interior de la Catedral de Santiago de Compostela">
+                            <meta itemprop="description" content={{__('Interior de la Catedral de Santiago de Compostela')}}>
 
                             @foreach ($interior as $each )
                                 <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
@@ -323,7 +323,7 @@
 
                     <x-slot name="content">
                         <ol itemscope itemtype="https://schema.org/BreadcrumbList"class="overflow-auto " >
-                            <meta itemprop="description" content="Capillas de la Catedral de Santiago de Compostela">
+                            <meta itemprop="description" content={{__('Capillas de la Catedral de Santiago de Compostela')}}>
 
                             @foreach ($capillas as $each )
                                 <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
@@ -361,7 +361,7 @@
 
                     <x-slot name="content">
                         <ol itemscope itemtype="https://schema.org/BreadcrumbList" class="overflow-auto" >
-                            <meta itemprop="description" content="Museo de la Catedral de Santiago de Compostela">
+                            <meta itemprop="description" content={{__('Museo de la Catedral de Santiago de Compostela')}}>
 
                             @foreach ($museo as $each )
 
