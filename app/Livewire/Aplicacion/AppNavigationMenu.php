@@ -10,6 +10,7 @@ use App\Models\categoria;
 class AppNavigationMenu extends \Laravel\Jetstream\Http\Livewire\NavigationMenu
 {
     public $idiomas;
+    public $showIdiomas;
     public $locale;
     public $slug;
     public $exterior;
@@ -44,7 +45,19 @@ class AppNavigationMenu extends \Laravel\Jetstream\Http\Livewire\NavigationMenu
 
         $muse = categoria::where('title',"museo")->first();
         $this->museo = $muse->elementos()->orderBy('orden')->get();
+        if (env('SWOW_IDIOMAS') == true) {
+            $this->showIdiomas = true;
+        } else {
+            $this->showIdiomas = false;
+        }
+        $temp = session()->get('noIdiomas');
+        if($temp) {
+            $this->showIdiomas = false;
+        }
 
+        if(session()->has('noIdiomas')){
+            session()->forget('noIdiomas');
+        }
 
 
     }

@@ -102,7 +102,7 @@
                     </div>
                 @endif --}}
 
-                @if (env('SWOW_IDIOMAS') == true)
+                @if ($showIdiomas)
 
                     {{-- @php
                     $slug = request()->segment(count(request()->segments()));

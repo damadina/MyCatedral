@@ -12,7 +12,7 @@ class documentController extends Controller
     public function index(document $documento = null) {
         $idiomas = idioma::orderBy('orden')->get();
         $legal = document::all();
-
+        session()->put('noIdiomas','true');
         return view('aplicacion.document',compact('documento','legal','idiomas'));
     }
 }

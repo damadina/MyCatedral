@@ -13,6 +13,7 @@ class autorController extends Controller
         $legal = document::all();
         $autores = autor::where('contenido',$contenido)->get();
         $idiomas = idioma::orderBy('orden')->get();
+        session()->put('noIdiomas','true');
         return view('aplicacion.autor',compact('autores','legal','idiomas'));
     }
 }
