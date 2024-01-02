@@ -60,7 +60,7 @@ trait TrataTexto {
 
         $tag = '<figure class="mx-auto '.$tagW.'">
         <img class="mx-auto pb-2 " src="'.$urlImage.'"'. ' loading="lazy"  >
-        <figcaption class="text-center pb-2 italic text-gray-600 bg-gray-200">
+        <figcaption class="text-center text-xs md:text-xl pb-2 italic text-gray-600 bg-gray-200">
         <span>'.$piedeFoto.'</span>
         </figcaption>
         </figure>';
