@@ -1,5 +1,8 @@
 
-<x-documento-layout>
+<x-app-layout>
+    @slot('head')
+    <meta name="robots" content="noindex">
+    @endslot
     <section class="container">
         <h1 class="text-4xl font-semibold my-6 text-catedral text-center">AUTORES</h1>
         @foreach ($autores as $autor)
@@ -28,4 +31,4 @@
 
 
     </section>
-</x-documento-layout>
+</x-app-layout>
