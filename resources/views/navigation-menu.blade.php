@@ -244,7 +244,7 @@
 
                     <x-slot name="content">
                         <ol itemscope itemtype="https://schema.org/BreadcrumbList"class="overflow-auto " >
-                            <meta itemprop="description" content={{__('Exterior de la Catedral de Santiago de Compostela')}}>
+                            <meta itemprop="description" content="{{__('Exterior de la Catedral de Santiago de Compostela')}}">
                             @foreach ($exterior as $each )
                                 <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
                                     @if($locale=="es")
@@ -256,7 +256,7 @@
                                             <span itemprop="name" >{{$each->title}}</span>
                                         </x-dropdown-link>
                                     @endif
-                                    <meta itemprop="position" content="1" />
+                                    <meta itemprop="position" content="{{$loop->index+1}}" />
                                 </li>
                             @endforeach
 
@@ -285,7 +285,7 @@
 
                     <x-slot name="content">
                         <ol itemscope itemtype="https://schema.org/BreadcrumbList"class="overflow-auto " >
-                            <meta itemprop="description" content={{__('Interior de la Catedral de Santiago de Compostela')}}>
+                            <meta itemprop="description" content="{{__('Interior de la Catedral de Santiago de Compostela')}}">
 
                             @foreach ($interior as $each )
                                 <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
@@ -297,7 +297,7 @@
                                         <x-dropdown-link  itemprop="item" href="{{route('elementoXX',['locale' => $locale,'slug' => $each->slug])}}"   class="hover:font-semibold hover:text-catedral">
                                             <span itemprop="name" >{{$each->title}}</span>
                                         </x-dropdown-link>
-                                        <meta itemprop="position" content="1" />
+                                        <meta itemprop="position" content="{{$loop->index+1}}" />
                                     @endif
                                 </li>
                             @endforeach
@@ -323,7 +323,7 @@
 
                     <x-slot name="content">
                         <ol itemscope itemtype="https://schema.org/BreadcrumbList"class="overflow-auto " >
-                            <meta itemprop="description" content={{__('Capillas de la Catedral de Santiago de Compostela')}}>
+                            <meta itemprop="description" content="{{__('Capillas de la Catedral de Santiago de Compostela')}}">
 
                             @foreach ($capillas as $each )
                                 <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
@@ -336,7 +336,7 @@
                                             <span itemprop="name" >{{$each->title}}</span>
                                         </x-dropdown-link>
                                     @endif
-                                    <meta itemprop="position" content="1" />
+                                    <meta itemprop="position" content="{{$loop->index+1}}" />
                                 </li>
                             @endforeach
 
@@ -361,7 +361,7 @@
 
                     <x-slot name="content">
                         <ol itemscope itemtype="https://schema.org/BreadcrumbList" class="overflow-auto" >
-                            <meta itemprop="description" content={{__('Museo de la Catedral de Santiago de Compostela')}}>
+                            <meta itemprop="description" content="{{__('Museo de la Catedral de Santiago de Compostela')}}"">
 
                             @foreach ($museo as $each )
 
@@ -376,7 +376,7 @@
                                         </x-dropdown-link>
                                     @endif
 
-                                    <meta itemprop="position" content="1" />
+                                    <meta itemprop="position" content="{{$loop->index+1}}" />
                                 </li>
 
 
@@ -431,20 +431,20 @@
             </x-slot>
 
             <x-slot name="content">
-                <ol itemscope itemtype="https://schema.org/BreadcrumbList"class="overflow-auto " >
-                    <meta itemprop="description" content={{__('Exterior de la Catedral de Santiago de Compostela')}}>
+                <ol class="overflow-auto " >
+                    {{-- <meta itemprop="description" content="{{__('Exterior de la Catedral de Santiago de Compostela')}}"> --}}
                     @foreach ($exterior as $each )
-                        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                        <li>
                             @if($locale=="es")
-                                <x-dropdown-link  itemprop="item" href="{{route('elementoXX',['slug' => $each->slug])}}"   class="hover:font-semibold hover:text-catedral">
-                                    <span itemprop="name" >{{$each->title}}</span>
+                                <x-dropdown-link  href="{{route('elementoXX',['slug' => $each->slug])}}"   class="hover:font-semibold hover:text-catedral">
+                                    <span>{{$each->title}}</span>
                                 </x-dropdown-link>
                             @else
-                                <x-dropdown-link  itemprop="item" href="{{route('elementoXX',['locale' => $locale,'slug' => $each->slug])}}"   class="hover:font-semibold hover:text-catedral">
-                                    <span itemprop="name" >{{$each->title}}</span>
+                                <x-dropdown-link  href="{{route('elementoXX',['locale' => $locale,'slug' => $each->slug])}}"   class="hover:font-semibold hover:text-catedral">
+                                    <span>{{$each->title}}</span>
                                 </x-dropdown-link>
                             @endif
-                            <meta itemprop="position" content="1" />
+
                         </li>
                     @endforeach
 
@@ -467,20 +467,19 @@
             </x-slot>
 
             <x-slot name="content">
-                <ol itemscope itemtype="https://schema.org/BreadcrumbList"class="overflow-auto " >
-                    <meta itemprop="description" content="Interior de la Catedral de Santiago de Compostela">
+                <ol class="overflow-auto " >
+
 
                     @foreach ($interior as $each )
-                        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                        <li>
                             @if($locale=="es")
-                                <x-dropdown-link  itemprop="item" href="{{route('elementoXX',['slug' => $each->slug])}}"   class="hover:font-semibold hover:text-catedral">
-                                    <span itemprop="name" >{{$each->title}}</span>
+                                <x-dropdown-link   href="{{route('elementoXX',['slug' => $each->slug])}}"   class="hover:font-semibold hover:text-catedral">
+                                    <span  >{{$each->title}}</span>
                                 </x-dropdown-link>
                             @else
-                                <x-dropdown-link  itemprop="item" href="{{route('elementoXX',['locale' => $locale,'slug' => $each->slug])}}"   class="hover:font-semibold hover:text-catedral">
-                                    <span itemprop="name" >{{$each->title}}</span>
+                                <x-dropdown-link  href="{{route('elementoXX',['locale' => $locale,'slug' => $each->slug])}}"   class="hover:font-semibold hover:text-catedral">
+                                    <span >{{$each->title}}</span>
                                 </x-dropdown-link>
-                                <meta itemprop="position" content="1" />
                             @endif
                         </li>
                     @endforeach
@@ -503,21 +502,21 @@
             </x-slot>
 
             <x-slot name="content">
-                <ol itemscope itemtype="https://schema.org/BreadcrumbList"class="overflow-auto " >
-                    <meta itemprop="description" content="Capillas de la Catedral de Santiago de Compostela">
+                <ol class="overflow-auto " >
+
 
                     @foreach ($capillas as $each )
-                        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                        <li>
                             @if($locale=="es")
-                                <x-dropdown-link  itemprop="item" href="{{route('elementoXX',['slug' => $each->slug])}}"   class="hover:font-semibold hover:text-catedral">
-                                    <span itemprop="name" >{{$each->title}}</span>
+                                <x-dropdown-link  href="{{route('elementoXX',['slug' => $each->slug])}}"   class="hover:font-semibold hover:text-catedral">
+                                    <span>{{$each->title}}</span>
                                 </x-dropdown-link>
                             @else
-                                <x-dropdown-link  itemprop="item" href="{{route('elementoXX',['locale' => $locale,'slug' => $each->slug])}}"   class="hover:font-semibold hover:text-catedral">
-                                    <span itemprop="name" >{{$each->title}}</span>
+                                <x-dropdown-link  href="{{route('elementoXX',['locale' => $locale,'slug' => $each->slug])}}"   class="hover:font-semibold hover:text-catedral">
+                                    <span  >{{$each->title}}</span>
                                 </x-dropdown-link>
                             @endif
-                            <meta itemprop="position" content="1" />
+
                         </li>
                     @endforeach
 
@@ -540,23 +539,23 @@
             </x-slot>
 
             <x-slot name="content">
-                <ol itemscope itemtype="https://schema.org/BreadcrumbList" class="overflow-auto" >
-                    <meta itemprop="description" content="Museo de la Catedral de Santiago de Compostela">
+                <ol class="overflow-auto" >
+
 
                     @foreach ($museo as $each )
 
-                        <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                        <li >
                             @if($locale=="es")
-                                <x-dropdown-link  itemprop="item" href="{{route('elementoXX',['slug' => $each->slug])}}"   class="hover:font-semibold hover:text-catedral">
-                                    <span itemprop="name" >{{$each->title}}</span>
+                                <x-dropdown-link  href="{{route('elementoXX',['slug' => $each->slug])}}"   class="hover:font-semibold hover:text-catedral">
+                                    <span >{{$each->title}}</span>
                                 </x-dropdown-link>
                             @else
-                                <x-dropdown-link  itemprop="item" href="{{route('elementoXX',['locale' => $locale,'slug' => $each->slug])}}"   class="hover:font-semibold hover:text-catedral">
-                                    <span itemprop="name" >{{$each->title}}</span>
+                                <x-dropdown-link   href="{{route('elementoXX',['locale' => $locale,'slug' => $each->slug])}}"   class="hover:font-semibold hover:text-catedral">
+                                    <span >{{$each->title}}</span>
                                 </x-dropdown-link>
                             @endif
 
-                            <meta itemprop="position" content="1" />
+
                         </li>
 
 
