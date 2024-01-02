@@ -41,7 +41,7 @@
 
             <div class="container">
 
-                <div class="border-l-4 border-b-4 pl-2 border-catedral text-justify indent-8 text-gray-600 italic text-base mt-6 sm:text-xl tracking-wide">
+                <div class="border-l-2 border-b-2 pl-1 md:pl-2 md:border-l-4 md:border-b-4  border-catedral text-justify indent-8 text-gray-600 italic text-xs mt-6 md:text-xl tracking-wide">
                     {!! $elemento->resumen !!}
                 </div>
 
@@ -53,7 +53,7 @@
             @foreach ($textos as $each )
                 <meta itemprop="headline" content="{{$each->titulo}}" />
                 <h2 class="mt-4 text-base md:text-2xl font-semibold text-catedral">{{$each->titulo}}</h2>
-                <div class=" mt-3 indent-8 text-base md:text-xl text-black" itemprop="articleBody">
+                <div class=" mt-3 indent-8 text-xs md:text-xl text-black" itemprop="articleBody">
                     {!! $each->html !!}
                 </div>
             @endforeach

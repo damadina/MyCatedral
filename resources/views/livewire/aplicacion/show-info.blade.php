@@ -6,16 +6,15 @@
     <x-dialog-modal wire:model='openModal'>
         <x-slot name="title">
             <p class="text-center flex-1">
-                <x-select class="w-100" wire:model.live="informacionSelected">
+                <x-select class="w-100 text-xs" wire:model.live="informacionSelected">
                     @foreach ($informaciones as $item )
-                        <option value="{{$item->id}}">{{$item->titulo}}</option>
+                        <option class="text-xs" value="{{$item->id}}">{{$item->titulo}}</option>
                     @endforeach
                 </x-select>
             </p>
         </x-slot>
         <x-slot name="content">
             {!!$informacion!!}
-
         </x-slot>
         <x-slot name="footer">
 
