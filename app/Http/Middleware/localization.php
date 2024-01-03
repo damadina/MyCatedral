@@ -31,7 +31,7 @@ class localization
         } else {
             $lang = request()->get('lang');
         }
-
+        App::setlocale(session('lang'));
 
         if ($request->route()->named('elementoXX')) {
             $idiomasValidos= $this->getLocales();

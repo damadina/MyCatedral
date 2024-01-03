@@ -17,9 +17,12 @@ class AppNavigationMenu extends \Laravel\Jetstream\Http\Livewire\NavigationMenu
     public $interior;
     public $capillas;
     public $museo;
+    public $isHome;
 
 
     public function mount() {
+        $this->isHome = session()->get('isHome');
+
         $user = auth::user();
         if($user && $user->isAdmin) {
             $this->idiomas = idioma::orderBy('orden')->get();

@@ -202,8 +202,8 @@
                             </x-slot>
                         </x-dropdown>
                     @else
-                        <a href="{{ route('login') }}" class="font-semibold text-gray-600 hover:text-gray-900 focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Log in</a>
-                        <a href="{{ route('register') }}" class="ml-4 font-semibold text-gray-600 hover:text-gray-900 focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Register</a>
+                        <a href="{{ route('login') }}" class="font-semibold text-gray-600 hover:text-gray-900 focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">{{__('Log in')}}</a>
+                        <a href="{{ route('register') }}" class="ml-4 font-semibold text-gray-600 hover:text-gray-900 focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">{{__('Register')}}</a>
 
                     @endauth
                 </div>
@@ -221,7 +221,13 @@
             </div>
         </div>
         <div class="flex flex-1 items-center justify-center">
+            @if($isHome)
+                <h1 class="text-center text-catedral tracking-wide text-xs md:text-2xl font font-semibold">{{__('Catedral de Santiago de Compostela')}}</h1>
+            @else
             <p class="text-center text-catedral tracking-wide text-xs md:text-2xl font font-semibold">{{__('Catedral de Santiago de Compostela')}}</p>
+            @endif
+
+
         </div>
 
 

@@ -4,6 +4,7 @@
             {{-- <x-authentication-card-logo /> --}}
             @php
             $locale = session()->get('lang');
+
             @endphp
             <a href="{{ route('elementoXX',['locale' => $locale]) }}">
                 <x-application-mark class="block h-9 w-auto" />

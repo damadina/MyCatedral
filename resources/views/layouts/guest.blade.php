@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{session('lang')}}">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -7,7 +7,9 @@
         <meta name="robots" content="noindex">
         <link rel="icon" href="{{asset("storage/images/logo.png")}}">
         <title>{{ config('app.name', 'Catedral de Santiago') }}</title>
-
+        @php
+            App::setlocale(session('lang'));
+        @endphp
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />

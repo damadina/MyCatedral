@@ -35,7 +35,9 @@
                         <span class="px-2">{{$fotoPortada->piedefoto}}</span>
                         </figcaption>
                     </figure>
-                    <h1 class="[text-shadow:_0_1px_0_var(--tw-shadow-color)] absolute text-base md:text-6xl tracking-wide text-white  top-6 right-10">{{$elemento->title}}</h1>
+                    @if(!$isHome)
+                        <h1 class="[text-shadow:_0_1px_0_var(--tw-shadow-color)] absolute text-base md:text-6xl tracking-wide text-white  top-6 right-10">{{$elemento->title}}</h1>
+                    @endif
                 </div>
             </div>
 
