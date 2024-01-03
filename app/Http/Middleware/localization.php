@@ -25,12 +25,16 @@ class localization
 
     {
 
+
+
         if(!session()->exists('lang')) {
             $lang = substr(request()->server('HTTP_ACCEPT_LANGUAGE'),0,2);
             session()->put('lang',$lang);
         } else {
             $lang = request()->get('lang');
         }
+
+
         App::setlocale(session('lang'));
 
         if ($request->route()->named('elementoXX')) {
