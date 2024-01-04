@@ -12,6 +12,8 @@ use App\Models\translation;
 use App\Models\element;
 use App\Models\idioma;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+
 
 class localization
 {
@@ -22,9 +24,7 @@ class localization
      */
 
     public function handle(Request $request, Closure $next): Response
-
     {
-
 
 
         if(!session()->exists('lang')) {
@@ -34,51 +34,52 @@ class localization
             $lang = request()->get('lang');
         }
 
-
         App::setlocale(session('lang'));
 
-        if ($request->route()->named('elementoXX')) {
-            $idiomasValidos= $this->getLocales();
-            $segmentosUrl = count(request()->segments());
 
-            switch($segmentosUrl) {
-                case 0:
-                    session()->put('lang',"es");
+        $idiomasValidos= $this->getLocales();
+        $segmentosUrl = count(request()->segments());
+
+        switch($segmentosUrl) {
+            case 0:
+                session()->put('lang',"es");
+                break;
+            case 1:
+                $valor = request()->segment(1);
+
+                /* if(strlen($valor)>5) {
                     break;
-                case 1:
-                    $valor = request()->segment(1);
-                    if(strlen($valor)>5) {
-                        break;
-                    }
-                    if($valor == "es") {
-                        session()->put('lang',$valor);
-                        App::setlocale(session('lang'));
-                        return redirect()->route('elementoXX');
-                        break;
-                    }
-                    if (in_array($valor, $idiomasValidos)) {
-                        session()->put('lang',$valor);
-                    } else {
-                        dd(request()->url());
-                        return abort(404);
-                    }
+                } */
+                if($valor == "es") {
+                    session()->put('lang',$valor);
+                    App::setlocale(session('lang'));
+                    return redirect()->route('elementoXX');
                     break;
-                case 2:
-                    $valor = request()->segment(1);
-                    if($valor =="es") {
-                        return redirect()->route('elementoXX',['slug' => request()->segment(2)]);
-                        break;
-                    }
-                    if (in_array($valor, $idiomasValidos)) {
-                        session()->put('lang',$valor);
-                    } else {
-                        return abort(404);
-                    }
+                }
+                if (in_array($valor, $idiomasValidos)) {
+                    session()->put('lang',$valor);
+                } else {
+                    return abort(404);
+                    return $next($request);
+                }
+                break;
+            case 2:
+
+                $valor = request()->segment(1);
+                if($valor =="es") {
+                    return redirect()->route('elementoXX',['slug' => request()->segment(2)]);
                     break;
-                default:
-                    dd("default");
-            }
+                }
+                if (in_array($valor, $idiomasValidos)) {
+                    session()->put('lang',$valor);
+                } else {
+                    return abort(404);
+                }
+                break;
+            default:
+                dd("default");
         }
+
 
         App::setlocale(session('lang'));
 

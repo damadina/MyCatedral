@@ -2,8 +2,11 @@
 
 namespace App\Exceptions;
 
+use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
+use Illuminate\Support\Facades\Route;
+use Symfony\Component\ErrorHandler\Exception\FlattenException;
 
 class Handler extends ExceptionHandler
 {
@@ -24,7 +27,40 @@ class Handler extends ExceptionHandler
     public function register(): void
     {
         $this->reportable(function (Throwable $e) {
-            //
+
         });
     }
+    public function render($request, Throwable $exception)
+    {
+
+        if($this->isHttpException($exception)) {
+            $code = FlattenException::create($exception)->getStatusCode($exception);
+            switch ($code):
+
+                case 404:
+                    if (env('APP_ENV') === 'production') {
+                        if(session()->exists('lang')) {
+                            $lo = session()->get('lang');
+                        } else {
+                            $lo = "es";
+                        }
+                        return redirect()->route('elementoXX',$lo) ;
+                    } else {
+                        return parent::render($request, $exception);
+                    }
+                break;
+
+                default:
+                    return parent::render($request, $exception);
+                break;
+            endswitch;
+        }
+
+        return parent::render($request, $exception);
+
+
+    }
+
+
+
 }
