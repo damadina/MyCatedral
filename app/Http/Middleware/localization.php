@@ -45,11 +45,12 @@ class localization
                 session()->put('lang',"es");
                 break;
             case 1:
+
                 $valor = request()->segment(1);
 
-                /* if(strlen($valor)>5) {
+                if(strlen($valor)>5) {
                     break;
-                } */
+                }
                 if($valor == "es") {
                     session()->put('lang',$valor);
                     App::setlocale(session('lang'));

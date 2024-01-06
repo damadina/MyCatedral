@@ -44,6 +44,7 @@ class Handler extends ExceptionHandler
                         } else {
                             $lo = "es";
                         }
+
                         return redirect()->route('elementoXX',$lo) ;
                     } else {
                         return parent::render($request, $exception);

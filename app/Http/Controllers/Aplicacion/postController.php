@@ -26,17 +26,7 @@ class postController extends Controller
     use HasRoles;
     use generaHref;
 
-    /* public function isES(?element $elemento = null) {
 
-        //Si elemento == null es Home
-        session()->put('isHome',false);
-        if(!$elemento) {
-            $elemento = element::where('categoria_id',1)->first();
-            session()->put('isHome',true);
-        }
-        return $this->showElemento($elemento);
-    }
- */
 
     public function isXX(?string $locale = null, ?string $slug = null) {
 
