@@ -1,8 +1,9 @@
 <div>
-    <x-danger-button wire:click='clickOpenModal'>
+    <button type="button" class="btn btn-primary mb-4" wire:click='clickOpenModal'>Crear nueva informacion</button>
+    {{-- <x-danger-button wire:click='clickOpenModal'>
        Crear nueva informacion
     </x-danger-button>
-
+ --}}
 
     <form wire:submit='save'>
         <x-dialog-modal wire:model='openModal'>

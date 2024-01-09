@@ -1,8 +1,9 @@
 <div>
-    <x-danger-button wire:click='clickOpenModal'>
+    <button type="button" class="btn btn-primary" wire:click='clickOpenModal'>Crear nuevo Idioma</button>
+    {{-- <x-danger-button wire:click='clickOpenModal'>
         Crear nuevo Idioma
     </x-danger-button>
-
+ --}}
 
     <form wire:submit='save'>
         <x-dialog-modal wire:model='openModal'>

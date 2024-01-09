@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Traits\Mutators\FotoMutators;
+use App\Models\element;
 
 
 class foto extends Model
@@ -22,7 +23,7 @@ class foto extends Model
         'order'
     ];
     public function elemento() {
-        return $this->belongsTo(elemento::class);
+        return $this->belongsTo(element::class);
     }
 
 

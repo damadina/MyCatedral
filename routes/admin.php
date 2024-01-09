@@ -25,6 +25,6 @@ Route::resource('admin/xxxxx/autors',AutorController::class)->names('admin.autor
 Route::get('admin/xxxxx/elementos',[ElementController::class,'index'])->name('admin.elementos.index');
 Route::get('admin/xxxxx/fotos',[fotoController::class,'index'])->name('admin.fotos.index');
 
-Route::get('admin/xxxxx/idiomas',[Idiomas::class,'index'])->name('admin.idiomas');
-Route::get('admin/xxxxx/informaciones',[InformacionController::class,'index'])->name('admin.informacion');
+Route::get('admin/idiomas',[Idiomas::class,'index'])->name('admin.idiomas');
+Route::get('admin/informaciones',[InformacionController::class,'index'])->name('admin.informacion');
 

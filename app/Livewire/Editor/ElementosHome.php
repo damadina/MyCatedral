@@ -14,9 +14,10 @@ class ElementosHome extends Component
     public $search, $categoriaSelected ="";
 
 
-    #[Layout('layouts.editorHome')]
+    #[Layout('layouts.app')]
     public function render()
     {
+
         if($this->categoriaSelected > 0) {
             $elementos = element::where('title','LIKE','%'.$this->search.'%')
             ->where('categoria_id',$this->categoriaSelected)

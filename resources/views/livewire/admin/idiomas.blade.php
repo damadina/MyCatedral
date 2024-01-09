@@ -17,13 +17,15 @@
     <div>
         <div class="card">
 
-            <div class="pt-4 px-4 flex justify-between">
+            {{-- <div class="pt-4 px-4 flex justify-between"> --}}
+            <div class="pt-4 px-4 d-flex d-flex justify-content-between">
                 <div>
                 @livewire("admin.idiomas-crea")
                 </div>
-                <x-danger-button wire:click="GeneraHrflangs">
+                <button type="button" class="btn btn-danger" wire:click="GeneraHrflangs">Generar Hrflangs</button>
+                {{-- <x-danger-button wire:click="GeneraHrflangs">
                     Generar Hrflangs
-                </x-danger-button>
+                </x-danger-button> --}}
             </div>
 
             @if($idiomas->count())
@@ -58,7 +60,7 @@
                                             }
                                         @endphp
                                         <div>
-                                            <p @if($isRed) class="text-green-500" @endIf>elements</p>
+                                            <p @if($isRed) class="text-success" @endIf>elements</p>
                                             <p>{{$idioma->elementsTraduccion}}</p>
                                         </div>
                                         @php
@@ -69,7 +71,7 @@
                                             }
                                         @endphp
                                         <div>
-                                            <p @if($isRed) class="text-green-500" @endIf>textos</p>
+                                            <p @if($isRed) class="text-success" @endIf>textos</p>
                                             <p>{{$idioma->textosTraduccion}}</p>
                                         </div>
                                         @php
@@ -80,7 +82,7 @@
                                             }
                                         @endphp
                                         <div>
-                                            <p @if($isRed) class="text-green-500" @endIf>fotos</p>
+                                            <p @if($isRed) class="text-success" @endIf>fotos</p>
                                             <p>{{$idioma->fotosTraduccion}}</p>
                                         </div>
                                         @php
@@ -92,7 +94,7 @@
                                         @endphp
 
                                         <div>
-                                            <p @if($isRed) class="text-green-500" @endIf>idiomas</p>
+                                            <p @if($isRed) class="text-success" @endIf>idiomas</p>
                                             <p>{{$idioma->idiomasTraduccion}}</p>
                                         </div>
 
@@ -104,7 +106,7 @@
                                             }
                                         @endphp
                                         <div>
-                                            <p @if($isRed) class="text-green-500" @endIf>documents</p>
+                                            <p @if($isRed) class="text-success" @endIf>documents</p>
                                             <p>{{$idioma->documentsTraduccion}}</p>
                                         </div>
 
@@ -117,7 +119,7 @@
                                         @endphp
 
                                         <div>
-                                            <p @if($isRed) class="text-green-500" @endIf>autors</p>
+                                            <p @if($isRed) class="text-success" @endIf>autors</p>
                                             <p>{{$idioma->autorsTraduccion}}</p>
                                         </div>
 
@@ -129,7 +131,7 @@
                                         }
                                     @endphp
                                         <div>
-                                            <p @if($isRed) class="text-green-500" @endIf>informacions</p>
+                                            <p @if($isRed) class="text-success" @endIf>informacions</p>
                                             <p>{{$idioma->informacionsTraduccion}}</p>
                                         </div>
 
@@ -242,15 +244,16 @@
                 </x-slot>
                 <x-slot name="footer">
 
-
-                    <x-button type="button" wire:click="$set('idiomaEdit.openModal',false)" class="mr-4">
+                    <button type="button"  class="btn btn-primary mr-2" wire:click="$set('idiomaEdit.openModal',false)">Cancelar</button>
+                    {{-- <x-button type="button" wire:click="$set('idiomaEdit.openModal',false)" class="mr-4">
                         Cancelar
-                    </x-button>
+                    </x-button> --}}
 
-                    <x-danger-button type="submit">
+                    <button type="submit"  class="btn btn-danger mr-2">Actualizar Idioma</button>
+                    {{-- <x-danger-button type="submit">
                         Actualizar idioma
                     </x-danger-button>
-
+ --}}
 
                 </x-slot>
             </x-dialog-modal>

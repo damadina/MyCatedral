@@ -1,6 +1,8 @@
 <?php
 namespace App\Traits;
 use App\Models\foto;
+use Exception;
+
 trait TrataTexto {
 
     function convierte( $text ){
@@ -25,9 +27,14 @@ trait TrataTexto {
                         $regExpr,"$1",$element
                     );
 
-                    $foto = foto::where('url',$result)->first();
 
-                    $element = $this->tagFigure($foto->url,$foto->piedefoto);
+                        $foto = foto::where('url',$result)->first();
+                        if(is_null($foto)) {
+                            dd($result);
+                        }
+
+
+                        $element = $this->tagFigure($foto->url,$foto->piedefoto);
 
                 }
 
