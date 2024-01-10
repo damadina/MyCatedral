@@ -159,8 +159,10 @@ class Idiomas extends Component
             $deepLocale = $locale;
         }
 
+        $authKey = env('DEEPL_KEY');
 
-        $authKey = "89786711-b707-a136-0673-8cc3b8839123";
+        /* dd($authKey); */
+        /* $authKey = "89786711-b707-a136-0673-8cc3b8839123"; */
         $translator = new \DeepL\Translator($authKey);
 
 
