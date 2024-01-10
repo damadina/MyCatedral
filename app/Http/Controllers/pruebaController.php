@@ -19,10 +19,9 @@ class pruebaController extends Controller
         $translator = new \DeepL\Translator($authKey);
 
         $traduccion = $translator->translateText('Adios Mundo', 'es', 'it' , ['tag_handling' => 'html'], );
-        dd($traduccion);
 
 
-        return view('aplicacion.prueba');
+        return view('aplicacion.prueba',compact('traduccion'));
     }
 
 

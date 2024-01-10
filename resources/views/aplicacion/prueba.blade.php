@@ -7,6 +7,6 @@
     <title>Document</title>
 </head>
 <body>
-    Hola amigo
+    {{$traduccion}}
 </body>
 </html>
