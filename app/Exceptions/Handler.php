@@ -50,6 +50,9 @@ class Handler extends ExceptionHandler
                         return parent::render($request, $exception);
                     }
                 break;
+                case 500:
+                    dd($request);
+                    break;
 
                 default:
                     return parent::render($request, $exception);
