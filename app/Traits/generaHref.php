@@ -16,6 +16,7 @@ trait generaHref {
 
 
         foreach($elementos as $key => $elemento) {
+
             $lineas = [];
             foreach($idiomas as $idioma) {
                 $url = $this->generateURL($key,$idioma,$elemento);
@@ -48,10 +49,15 @@ trait generaHref {
     }
 
     public function generateURL($id,$locale,$elemento) {
+
        if($locale == "es") {
             $url = asset($elemento);
             return $url;
        } else {
+            if($id == 45) {
+                $url = asset($locale);
+               return $url;
+            }
             $newSlug = $this->getTranslation($id,$locale);
             $url = (asset($locale)).'/'.$newSlug;
             return $url;

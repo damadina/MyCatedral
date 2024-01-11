@@ -40,6 +40,7 @@ Route::get('/comercial/mail/contactanos',Contactanos::class)->name('contactanos.
 
 
 
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
