@@ -9,11 +9,7 @@
             <a href="{{ route('elementoXX',['locale' => $locale]) }}">
                 <x-application-mark class="block h-9 w-auto" />
             </a>
-            @php
-            $localexx = App::getLocale();
 
-       @endphp
-       {{$localexx}}
 
         </x-slot>
 
