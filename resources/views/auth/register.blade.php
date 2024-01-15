@@ -3,13 +3,17 @@
         <x-slot name="logo">
             {{-- <x-authentication-card-logo /> --}}
             @php
-            $locale = session()->get('lang');
-
+                $locale = session()->get('lang');
+                App::setLocale($locale);
             @endphp
             <a href="{{ route('elementoXX',['locale' => $locale]) }}">
                 <x-application-mark class="block h-9 w-auto" />
             </a>
+            @php
+            $localexx = App::getLocale();
 
+       @endphp
+       {{$localexx}}
 
         </x-slot>
 

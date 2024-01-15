@@ -1,6 +1,10 @@
 <x-guest-layout>
     <x-authentication-card>
         <x-slot name="logo">
+            @php
+                $locale = session()->get('lang');
+                App::setLocale($locale);
+            @endphp
             <x-authentication-card-logo />
         </x-slot>
 

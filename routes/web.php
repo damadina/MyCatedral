@@ -13,6 +13,8 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use App\Http\Controllers\Aplicacion\contactanosController;
 use App\Livewire\Aplicacion\Contactanos;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Auth;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -45,10 +47,18 @@ Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified',
+]);
+
+
+
+
+
+/* Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
 ])->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
-});
-
-
+}); */

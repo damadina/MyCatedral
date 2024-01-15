@@ -4,8 +4,9 @@
             {{-- <x-authentication-card-logo /> --}}
             {{-- <img class="mx-auto" src="{{ asset('storage/images/logo.png') }}"  loading="lazy"  alt="catedraldesantiago.online home" width="30" height="42"> --}}
             @php
-            $locale = session()->get('lang');
-
+                $locale = session()->get('lang');
+                App::setLocale($locale);
+                session()->put('login',"si");
             @endphp
             <a href="{{ route('elementoXX',['locale' => $locale]) }}">
                 <x-application-mark class="block h-9 w-auto" />
@@ -54,7 +55,7 @@
             <div class="flex items-center justify-end mt-4">
 
                 <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('register') }}">
-                    {{ __('Registrarse') }}
+                    {{ __('Register') }}
                 </a>
             </div>
 

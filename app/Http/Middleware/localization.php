@@ -26,15 +26,23 @@ class localization
     public function handle(Request $request, Closure $next): Response
     {
 
-
+        if(session()->exists('authOn')) {
+            session()->forget('authOn');
+            $url = session()->get('urlCurrent');
+            return redirect($url);
+        }
         if(!session()->exists('lang')) {
             $lang = substr(request()->server('HTTP_ACCEPT_LANGUAGE'),0,2);
             session()->put('lang',$lang);
         } else {
             $lang = request()->get('lang');
         }
-
-        App::setlocale(session('lang'));
+        if(session()->has('lang')) {
+            app()->setLocale(session('lang'));
+        } else {
+            app()->setLocale(config('app.locale'));
+        }
+        /* App::setlocale(session('lang')); */
 
 
         $idiomasValidos= $this->getLocales();
@@ -53,19 +61,30 @@ class localization
                 }
                 if($valor == "es") {
                     session()->put('lang',$valor);
-                    App::setlocale(session('lang'));
+                    if(session()->has('lang')) {
+                        app()->setLocale(session('lang'));
+                    } else {
+                        app()->setLocale(config('app.locale'));
+                    }
+
+                    /* App::setlocale(session('lang')); */
                     return redirect()->route('elementoXX');
                     break;
                 }
                 if (in_array($valor, $idiomasValidos)) {
                     session()->put('lang',$valor);
+                    if(session()->has('lang')) {
+                        app()->setLocale(session('lang'));
+                    } else {
+                        app()->setLocale(config('app.locale'));
+                    }
+                    /* App::setlocale($valor); */
                 } else {
                     return abort(404);
                     return $next($request);
                 }
                 break;
             case 2:
-
                 $valor = request()->segment(1);
                 if($valor =="es") {
                     return redirect()->route('elementoXX',['slug' => request()->segment(2)]);
@@ -73,6 +92,12 @@ class localization
                 }
                 if (in_array($valor, $idiomasValidos)) {
                     session()->put('lang',$valor);
+                    if(session()->has('lang')) {
+                        app()->setLocale(session('lang'));
+                    } else {
+                        app()->setLocale(config('app.locale'));
+                    }
+                    /* App::setlocale($valor); */
                 } else {
                     return abort(404);
                 }
@@ -81,8 +106,12 @@ class localization
                 dd("default");
         }
 
-
-        App::setlocale(session('lang'));
+        if(session()->has('lang')) {
+            app()->setLocale(session('lang'));
+        } else {
+            app()->setLocale(config('app.locale'));
+        }
+        /* App::setlocale(session('lang')); */
 
         return $next($request);
 

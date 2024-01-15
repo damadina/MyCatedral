@@ -28,6 +28,11 @@ class Contactanos extends Component
     public function render()
     {
         session()->put('idiomas',false);
+        if(session()->has('lang')) {
+            app()->setLocale(session('lang'));
+        } else {
+            app()->setLocale(config('app.locale'));
+        }
         return view('livewire.aplicacion.contactanos');
     }
 

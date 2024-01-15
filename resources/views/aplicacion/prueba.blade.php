@@ -7,6 +7,6 @@
     <title>Document</title>
 </head>
 <body>
-    {{$traduccion}}
+    <a href="{{route('verification.verify')}}">Prueba verificacion</a>
 </body>
 </html>
