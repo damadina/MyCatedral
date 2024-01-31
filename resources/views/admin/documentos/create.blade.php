@@ -15,31 +15,39 @@
     <div class="card-body">
         <form action="{{route('admin.documentos.store')}}" method="POST">
             @csrf
-            <div class="flex">
-                <div class="flex-1">
-                    <x-label value="Título" class="text-blue-600 font-semibold text-left"></x-label>
-                    <x-input type="text" name="titulo" class="form-control"></x-input>
-                    <x-input-error for="titulo" class="text-danger"></x-input-error>
+            <div class="d-flex">
+                <div class="flex-grow-1">
+                    <label for="" class="text-primary">Título</label>
+                    <input type="text" name="titulo" value="{{ old('titulo') }}" class="form-control" placeholder="Nombre del documento">
+                    @error("titulo")
+                        <small class="text-danger">
+                            <strong>{{$message}}</strong>
+                        </small>
+                    @enderror
                 </div>
                 <div class="ml-2">
-                    <x-label value="Orden" class="text-blue-600 font-semibold text-left"></x-label>
-                    <x-input type="text" name="orden" class="form-control"></x-input>
-                    <x-input-error for="orden" class="text-danger"></x-input-error>
+                    <label for="" class="text-primary">Orden</label>
+                    <input type="text" name="orden" value="{{ old('orden') }}" class="form-control">
+                    @error("orden")
+                        <small class="text-danger">
+                            <strong>{{$message}}</strong>
+                        </small>
+                    @enderror
+
                 </div>
-
-
             </div>
             <x-label value="texto" class="text-blue-600 font-semibold text-left pt-4"></x-label>
-            <textarea type="text" name="texto" id="editor" class="form-control" rows="50" ></textarea>
-            <x-input-error for="texto" class="text-danger"></x-input-error>
-            <div class="mt-4 flex">
-                <x-button type="button"  class="mr-4">
-                    Cancelar
-                </x-button>
+            <textarea type="text" name="texto" id="editor" class="form-control" rows="50" >{{ old('texto') }}</textarea>
+            @error("texto")
+                <small class="text-danger">
+                    <strong>{{$message}}</strong>
+                </small>
+            @enderror
 
-                <x-danger-button type="submit">
-                    Crear documento
-                </x-danger-button>
+            <div class="mt-4 d-flex">
+                <a class="btn btn btn-primary" href="{{route('admin.documentos.index')}}">Cancelar</a>
+
+                <button type="submit" class="btn btn-danger ml-2">Crear Documento</button>
             </div>
 
         </form>
@@ -62,7 +70,7 @@
 @stop
 
 @section('js')
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+
     <script src="https://cdn.ckeditor.com/ckeditor5/32.0.0/classic/ckeditor.js"></script>
     <script>
         ClassicEditor

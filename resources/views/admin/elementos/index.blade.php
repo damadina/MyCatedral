@@ -14,5 +14,18 @@
 @stop
 
 @section('js')
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <script>
+        window.addEventListener('show-formElementoCreate', event =>{
+            $('#formElementoCreate').modal('show');
+        })
+        window.addEventListener('hide-formElementoCreate', event =>{
+            $('#formElementoCreate').modal('hide');
+        })
+        window.addEventListener('show-formElementoEdit', event =>{
+            $('#formElementoEdit').modal('show');
+        })
+        window.addEventListener('hide-formElementoEdit', event =>{
+            $('#formElementoEdit').modal('hide');
+        })
+    </script>
 @stop

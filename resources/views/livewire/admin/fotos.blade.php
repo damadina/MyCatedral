@@ -1,27 +1,19 @@
 <div>
-    <div class="mb-6">
-        Total fotos= {{$fotos->total()}}
+    <div class="">
+
         @livewire("admin.fotos-crea")
     </div>
     <div class="card">
         <div class="card-header flex align-items-end">
-            {{-- <div class="flex-1 mr-2">
-                <input wire:keydown='limpiar_page'   wire:model="search" class="form-control" placeholder="¿que buscas?">
-            </div> --}}
-            <div>
-                <x-label value="Categoría" class="text-primary"></x-label>
-                <x-select class="w-100" wire:model.live="elementoSelected">
-                    <option value="">
-                        Seleccione un elemento
-                    </option>
+            <div class="mt-2">
+                <label class="text-primary">Categoría</label>
+                <select wire:model.live="elementoSelected" class="form-control form-control" aria-label=".form-select-lg example">
+                    <option value="">Todo</option>
                     @foreach ($elementos as $item )
                         <option value="{{$item->id}}">{{$item->title}}</option>
                     @endforeach
-                </x-select>
-
+                </select>
             </div>
-
-
 
         </div>
 
@@ -67,8 +59,107 @@
         @endif
     </div>
 
+    <div wire:ignore.self class="modal fade" id="formEditFoto" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <form autocomplete="off" wire:submit.prevent="update">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Nueva Fotografía</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="image-section">
+                            <img class="img-fluid img-thumbnail" src="{{asset('storage/originales/'. $fotoEdit->url)}}" alt="">
+                        </div>
+                        <hr class="mt-4">
+                        <div>
+                            <div>
+                                <div class="mt-2 d-flex">
+                                    <div class="flex-grow-1">
 
-    <form wire:submit='update'>
+                                        <label class="text-primary">Pertenece a:</label>
+                                        <select wire:model="fotoEdit.element_id" class="w-100 form-control form-control" aria-label=".form-select-lg example">
+                                            <option value="" disabled>Selecciona un elemento</option>
+                                            @foreach ($elementos as $item )
+                                                <option value="{{$item->id}}">{{$item->title}}</option>
+                                            @endforeach
+                                        </select>
+                                        @error("fotoEdit.element_id")
+                                        <small class="text-danger">
+                                            <small>{{$message}}</small>
+                                        </small>
+                                        @enderror
+                                    </div>
+                                    <div class="ml-2">
+                                        <label class="text-primary">Orden</label>
+                                        <input type="text"  wire:model='fotoEdit.order'  class="form-control @error('fotoEdit.order') is-invalid @enderror">
+                                        @error("fotoEdit.order")
+                                            <small class="text-danger">
+                                                <small>{{$message}}</small>
+                                            </small>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="mt-2">
+                                    <label class="text-primary">Descripción de la foto (piedefoto)</label>
+                                    <input type="text"  wire:model='fotoEdit.piedefoto'  class="w-100 form-control @error('fotoEdit.piedefoto') is-invalid @enderror">
+                                    @error("fotoEdit.piedefoto")
+                                        <small class="text-danger">
+                                            <small>{{$message}}</small>
+                                        </small>
+                                    @enderror
+                                </div>
+                                <div class="mt-2">
+                                    <label class="text-primary">Palabras de búsqueda</label>
+                                    <textarea   wire:model='fotoEdit.keywords'  rows="2" class="w-100 form-control @error('fotoEdit.keywords') is-invalid @enderror"></textarea>
+                                    @error("fotoEdit.keywords")
+                                        <small class="text-danger">
+                                            <small>{{$message}}</small>
+                                        </small>
+                                    @enderror
+                                </div>
+
+                                <div class="mt-2">
+                                    <label class="text-primary">SEO: Alt</label>
+                                    <input type="text"  wire:model='fotoEdit.alt'  class="w-100 form-control @error('fotoEdit.alt') is-invalid @enderror">
+                                    @error("fotoEdit.alt")
+                                        <small class="text-danger">
+                                            <small>{{$message}}</small>
+                                        </small>
+                                    @enderror
+                                </div>
+                                <div class="mt-2">
+                                    <label class="text-primary">SEO: Title</label>
+                                    <input type="text"  wire:model='fotoEdit.title'  class="w-100 form-control @error('fotoEdit.title') is-invalid @enderror">
+                                    @error("fotoEdit.title")
+                                        <small class="text-danger">
+                                            <small>{{$message}}</small>
+                                        </small>
+                                    @enderror
+                                </div>
+
+                            </div>
+                        </div>
+
+
+
+
+
+                    </div>
+                    <div class="modal-footer">
+                    <button type="button" wire:click="close" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Guardar fotografía</button>
+                    </div>
+                </div>
+            <form>
+
+        </div>
+    </div>
+
+
+    {{-- <form wire:submit='update'>
         <x-dialog-modal wire:model='fotoEdit.openModal'>
             <x-slot name="title">
                 Acualizar datos fotografía {{$fotoEdit->url}}
@@ -156,80 +247,10 @@
 
             </x-slot>
         </x-dialog-modal>
-    </form>
-
-
-   {{--  <x-dialog-modal wire:model='openModal'>
-        <x-slot name="title">
-            Nueva fotografía xxx
-        </x-slot>
-        <x-slot name="content">
+    </form> --}}
 
 
 
-
-            <div class="image-section">
-                <div wire:loading wire:target='url' class="alert alert-danger w-100" role="alert">
-                    Subiendo fotografía
-                </div>
-                @if($url)
-                    <img src="{{$url->temporaryUrl()}}" class="w-100">
-                @else
-                    <img src="{{asset('storage/images/noPhoto.png')}}" class="w-100">
-                @endif
-            </div>
-            <div class="mt-4">
-                <x-input type="file" wire:model='url'  id="{{$identificador}}"></x-input>
-                <x-input-error for="url" class="text-danger" ></x-input-error>
-                <br>
-                <div class="text-primary font-bold mt-1" wire:loading wire:target="url">
-                    Cargando ...
-                </div>
-                <span wire:model.lazy="messageExist" class="h6 text-danger">{{$messageExist}}</span>
-            </div>
-
-
-            <hr class="mt-4">
-            <div>
-                <div>
-                    <div class="mt-2">
-                        <x-label value="Descripción de la foto (piedefoto)" class="text-primary"></x-label>
-                        <x-input type="text" class="w-100 form-control" wire:model='piedefoto'></x-input>
-                        <x-input-error for="piedefoto" class="text-danger"></x-input-error>
-                    </div>
-                    <div class="mt-2">
-                        <x-label value="Palabras de búsqueda" class="text-primary"></x-label>
-                        <textarea wire:model.defer="keywords" class="w-100 form-control" rows="2"></textarea>
-                        <x-input-error for="keywords" class="text-danger"></x-input-error>
-                    </div>
-
-                    <div class="mt-2">
-                        <x-label value="SEO: Alt" class="text-primary"></x-label>
-                        <x-input type="text" class="w-100 form-control" wire:model='alt'></x-input>
-                        <x-input-error for="alt" class="text-danger"></x-input-error>
-                    </div>
-
-                    <div class="mt-2">
-                        <x-label value="SEO: Title" class="text-primary"></x-label>
-                        <x-input type="text" class="w-100 form-control" wire:model='title'></x-input>
-                        <x-input-error for="title" class="text-danger"></x-input-error>
-                    </div>
-
-
-
-
-                </div>
-            </div>
-
-
-
-
-        </x-slot>
-        <x-slot name="footer">
-            <button class="btn btn-danger " wire:click='closeOpenModal'>Cancelar</button>
-            <button class="btn btn-primary ml-2" wire:click='save'>Guardar Fotografía</button>
-        </x-slot>
-    </x-dialog-modal> --}}
 
 
 </div>

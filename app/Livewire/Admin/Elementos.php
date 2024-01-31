@@ -46,6 +46,7 @@ class Elementos extends Component
         return view('livewire.admin.elementos', compact('elementos','categorias'));
     }
 
+
     public function updated($property)
     {
         if ($property === 'categoriaSelected') {
@@ -55,9 +56,19 @@ class Elementos extends Component
     public function edit($elementoId) {
         $this->resetValidation();
         $this->elementoEdit->edit($elementoId);
+        $this->dispatch('show-formElementoEdit');
     }
+
+    public function close() {
+        $this->resetValidation();
+        $this->elementoEdit->reset();
+        $this->dispatch('hide-formElementoEdit');
+    }
+
     public function update() {
         $this->elementoEdit->update();
+        $this->dispatch('hide-formElementoEdit');
+        $this->render();
     }
     public function limpiar_page() {
         $this->resetPage();

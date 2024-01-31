@@ -14,9 +14,6 @@ class InformacionList extends Component
     public $eyeModal = false;
     public $info;
 
-
-
-
     #[On('informacion-creada')]
     public function render()
     {
@@ -27,6 +24,7 @@ class InformacionList extends Component
     public function edit($informacionId) {
         $this->resetValidation();
         $this->informacionEdit->edit($informacionId);
+        $this->dispatch('show-infoEdit');
     }
     public function update() {
         $this->informacionEdit->update();
@@ -35,5 +33,21 @@ class InformacionList extends Component
         $informacion = informacion::find($informacionId);
         $this->info = $informacion->informacion;
         $this->eyeModal = true;
+    }
+    public function close() {
+        $this->resetValidation();
+        $this->informacionEdit->reset();
+    }
+
+    public function delete($informacionId) {
+        $this->dispatch('borrarInfo',$informacionId);
+    }
+    #[On('start-delete')]
+    public function startDelete($informacionId) {
+        $informacion = informacion::findOrFail($informacionId);
+        $informacion->delete();
+        session()->flash('status','La información se eliminó');
+
+
     }
 }

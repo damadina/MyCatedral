@@ -39,8 +39,8 @@ class RoleController extends Controller
             'permissions' => 'required'
         ],
         [
-            'name' => 'Debes introducir un nmobre',
-            'permissions' => 'Debes asiganar al menos un permiso'
+            'name' => 'Debes introducir un nombre',
+            'permissions' => 'Debes asignar al menos un permiso'
         ]);
 
         $role = Role::create([
@@ -54,12 +54,12 @@ class RoleController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Role $role)
+    /* public function show(Role $role)
     {
 
         return view('admin.roles.show', compact('role'));
     }
-
+ */
     /**
      * Show the form for editing the specified resource.
      */

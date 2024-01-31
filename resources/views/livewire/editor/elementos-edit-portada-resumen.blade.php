@@ -3,6 +3,7 @@
         {{$elemento->id}}
     </x-slot>
 
+
         <div class="my-4 mx-4">
             <div>
 

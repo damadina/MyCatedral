@@ -42,16 +42,6 @@ class Fotos extends Component
         }
     }
 
-
-    public function clickOpenModal() {
-        $this->openModal = true;
-    }
-    public function closeOpenModal() {
-        $this->openModal = false;
-        $this->resetValidation();
-    }
-
-
     #[On('foto-creada')]
     public function render()
     {
@@ -85,13 +75,16 @@ class Fotos extends Component
     public function edit($fotoId) {
         $this->resetValidation();
         $this->fotoEdit->edit($fotoId);
+        $this->dispatch('show-formEditFoto');
     }
     public function update() {
         $this->fotoEdit->update();
+        $this->dispatch('hide-formEditFoto');
     }
 
-
-
+    public function close() {
+        $this->resetValidation();
+    }
 
     public function limpiar_page() {
         $this->resetPage();

@@ -16,53 +16,62 @@
         <form action="{{route('admin.autores.update',$autor)}}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('put')
-            <div class="flex items-center">
+            <div class="d-flex  align-items-center ">
 
                 <div class="">
-                    <x-label value="Foto" class="text-blue-600 font-semibold text-left"></x-label>
                     <img id="picture" src="
                     @if($autor->fotoUrl)
                         {{asset('storage/autores/'.$autor->fotoUrl)}}
                     @else
                         {{asset('storage/images/noUser.jpg')}}
                     @endif
-                    " width="100"   alt="">
+                    " width="100"  class="rounded-circle"  alt="">
                 </div>
-                <div class="ml-6">
-
+                <div class="ml-4">
                     <x-input id="file" type="file" value="{{$autor->fotoUrl}}" name="fotoUrl" class="form-control"></x-input>
                 </div>
             </div>
-            <div class="flex mt-6">
+            <hr class="mt-2 mb-3"/>
+            <div class="d-flex mt-2">
 
-                <div class="flex-1">
-                    <x-label value="Nombre" class="text-blue-600 font-semibold text-left"></x-label>
-                    <x-input type="text" value="{{$autor->name}}" name="name" class="form-control"></x-input>
-                    <x-input-error for="name" class="text-danger"></x-input-error>
+                <div class="flex-grow-1">
+                    <label class="text-primary">Nombre</label>
+                    <input type="text" name="name" value="{{$autor->name}}" class="form-control">
+                    @error("name")
+                        <small class="text-danger">
+                            <strong>{{$message}}</strong>
+                        </small>
+                    @enderror
                 </div>
 
 
                 <div class="ml-2">
-                    <x-label value="Departamento" class="text-blue-600 font-semibold text-left"></x-label>
-                    <x-input type="text" value="{{$autor->departamento}}" name="departamento" class="form-control"></x-input>
+                    <label class="text-primary">Departamento</label>
+                    <input type="text" name="departamento" value="{{$autor->departamento}}" class="form-control">
+                    @error("departamento")
+                        <small class="text-danger">
+                            <strong>{{$message}}</strong>
+                        </small>
+                    @enderror
                 </div>
                 <div class="ml-2">
-                    <x-label value="Web" class="text-blue-600 font-semibold text-left"></x-label>
-                    <x-input type="text" value="{{$autor->web}}" name="web" class="form-control"></x-input>
+                    <label class="text-primary">Web</label>
+                    <input type="text" name="web" value="{{$autor->web}}" class="form-control">
+                    @error("web")
+                        <small class="text-danger">
+                            <strong>{{$message}}</strong>
+                        </small>
+                    @enderror
                 </div>
 
             </div>
-            <x-label value="Curriculum" class="text-blue-600 font-semibold text-left pt-4"></x-label>
+
+            <label class="text-primary">Curriculum</label>
             <textarea type="text" name="bio" id="editor" class="form-control" rows="50" >{{$autor->bio}}</textarea>
 
             <div class="mt-4 flex">
                 <a class="btn btn-secondary mr-4" href="{{route('admin.autores.index')}}">Cancelar</a>
-
-
-                <x-danger-button type="submit">
-                    Actualizar autor
-
-                </x-danger-button>
+                <button class="btn btn-danger" type="submit">Actualizar Autor</button>
             </div>
 
         </form>
@@ -87,7 +96,7 @@
 @stop
 
 @section('js')
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+
     <script src="https://cdn.ckeditor.com/ckeditor5/32.0.0/classic/ckeditor.js"></script>
     <script>
         ClassicEditor

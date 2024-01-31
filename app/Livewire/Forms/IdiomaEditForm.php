@@ -35,9 +35,9 @@ class IdiomaEditForm extends Form
     }
 
     public function edit($idiomaId) {
-        $this->openModal = true;
         $this->idiomaId = $idiomaId;
         $idioma = idioma::find($idiomaId);
+
         $this->orden = $idioma->orden;
         $this->title = $idioma->title;
         $this->isPublic = $idioma->isPublic;

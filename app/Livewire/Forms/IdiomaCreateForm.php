@@ -8,10 +8,11 @@ use App\Models\idioma;
 
 class IdiomaCreateForm extends Form
 {
-    public $orden;
-    public $title;
-    public $locale;
-    public $isPublic;
+    public $idiomaId;
+    public $orden ="";
+    public $title ="";
+    public $locale ="";
+    public $isPublic="";
 
     public $elementsTraduccion;
 
@@ -31,21 +32,41 @@ class IdiomaCreateForm extends Form
 
     public function rules()
     {
-        return [
-            'orden' =>'integer|required',
-            'title' => 'required|unique:idiomas,title',
-            'isPublic' => 'required',
-            'locale' => 'required',
-        ];
+         return [
+        'orden' =>'integer|required',
+        'title' => 'required|unique:idiomas,title',
+        'isPublic' => 'required',
+        'locale' => 'required',
+    ];
+
     }
     public function save() {
         $this->validate();
-
-
         idioma::create(
             $this->only('orden','title','isPublic','locale','traducciones_Start')
         );
-
         $this->reset();
     }
+
+    public function edit($idiomaId) {
+        $this->idiomaId = $idiomaId;
+        $idioma = idioma::find($idiomaId);
+        $this->orden = $idioma->orden;
+        $this->title = $idioma->title;
+        $this->isPublic = $idioma->isPublic;
+        $this->locale = $idioma->locale;
+        $this->elementsTraduccion = $idioma->elementsTraduccion;
+        $this->textosTraduccion = $idioma->textosTraduccion;
+        $this->fotosTraduccion = $idioma->fotosTraduccion;
+        $this->idiomasTraduccion = $idioma->idiomasTraduccion;
+        $this->documentsTraduccion = $idioma->documentsTraduccion;
+        $this->autorsTraduccion = $idioma->autorsTraduccion;
+        $this->informacionsTraduccion = $idioma->informacionsTraduccion;
+        $this->traducciones_Start = $idioma->traducciones_Start;
+    }
+    public function close() {
+        $this->reset();
+    }
+
+
 }

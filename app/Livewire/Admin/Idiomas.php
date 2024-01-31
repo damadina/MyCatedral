@@ -20,6 +20,9 @@ class Idiomas extends Component
     public IdiomaEditForm $idiomaEdit;
     public $elementsTraduccion;
 
+
+
+
     public $isRed = false;
 
     public $tablas = array(
@@ -33,9 +36,12 @@ class Idiomas extends Component
     );
 
 
+
+
     #[On('idioma-creado')]
     public function render()
     {
+
         $idiomas = idioma::orderBy('orden')->get();
         return view('livewire.admin.idiomas',compact('idiomas'));
     }
@@ -43,9 +49,17 @@ class Idiomas extends Component
     public function edit($idiomaId) {
         $this->resetValidation();
         $this->idiomaEdit->edit($idiomaId);
+        $this->dispatch('show-formEdit');
     }
+    public function close() {
+        $this->resetValidation();
+        $this->idiomaEdit->reset();
+    }
+
     public function update() {
         $this->idiomaEdit->update();
+        session()->flash('status','El idioma se ha actualizado');
+        $this->dispatch('hide-formEdit');
     }
     public function traducir($idiomaID) {
         $this->dispatch('traducir',$idiomaID);
@@ -55,6 +69,10 @@ class Idiomas extends Component
         $idioma = idioma::find($idiomaId);
         $this->traduceA($idioma);
     }
+
+   /*  public function newIdioma() {
+        $this->dispatch('show-form');
+    } */
 
     public function limpiar($idiomaID) {
         $this->dispatch('limpiar',$idiomaID);
@@ -69,11 +87,12 @@ class Idiomas extends Component
             ])->delete();
 
             $this->updateDate($tabla,$idioma,"");
-
         }
+        $idioma->delete();
 
 
     }
+
 
 
     public function GeneraHrflangs() {

@@ -286,4 +286,21 @@
             });
         });
     </script>
+    <script>
+        window.addEventListener('show-formCreate', event =>{
+            $('#formCreate').modal('show');
+        })
+        window.addEventListener('hide-formCreate', event =>{
+            $('#formCreate').modal('hide');
+        })
+        window.addEventListener('show-formEdit', event =>{
+            $('#formEdit').modal('show');
+        })
+        window.addEventListener('hide-formEdit', event =>{
+            $('#formEdit').modal('hide');
+        })
+
+
+
+    </script>
 @stop

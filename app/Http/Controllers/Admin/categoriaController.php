@@ -31,6 +31,7 @@ class categoriaController extends Controller
      */
     public function store(Request $request)
     {
+
         if($request->has('isPublic')) {
             $val = true;
         } else {
@@ -41,7 +42,7 @@ class categoriaController extends Controller
 
         $request->validate([
             'title' => 'required',
-            'orden' => 'required',
+            'orden' => 'integer|required',
 
         ],
         [
@@ -71,6 +72,7 @@ class categoriaController extends Controller
      */
     public function edit(categoria $categoria)
     {
+
         return view('admin.categorias.edit', compact('categoria'));
     }
 
@@ -79,6 +81,7 @@ class categoriaController extends Controller
      */
     public function update(Request $request, categoria $categoria)
     {
+
         if($request->has('isPublic')) {
             $val = true;
         } else {
@@ -103,6 +106,7 @@ class categoriaController extends Controller
             'isPublic' => $val
         ]);
 
+
         return redirect()->route('admin.categorias.edit',$categoria);
     }
 
@@ -111,6 +115,12 @@ class categoriaController extends Controller
      */
     public function destroy(categoria $categoria)
     {
-        //
+        if(count($categoria->elementos)>0) {
+            return redirect()->back()->with('error', 'No se ha podido borrar esta categoría. (tiene posts)');
+        } else {
+            $categoria->delete();
+            return redirect()->back()->with('status', 'La categoria se elimino');
+        }
+
     }
 }

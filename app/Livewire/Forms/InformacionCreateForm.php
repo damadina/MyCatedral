@@ -17,12 +17,13 @@ class InformacionCreateForm extends Form
     {
         return [
             'titulo' =>'required',
-            'order' => 'required',
+            'order' => 'integer|required',
             'informacion' => 'required',
             'isPublic' => 'required'
         ];
     }
     public function save() {
+
         $this->validate();
         informacion::create(
             $this->only('titulo','order','informacion','isPublic')

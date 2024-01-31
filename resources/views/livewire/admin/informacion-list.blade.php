@@ -8,6 +8,17 @@
 
         @if($informaciones->count())
             <div class="card-body">
+                @if (session()->has('status'))
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <strong>enhorabuena!</strong> {{session('status')}}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                @endif
+
+
+
                 <table class="table table-striped">
                     <thead>
                         <td>Titulo</td>
@@ -26,15 +37,22 @@
                                 <td>
                                     {{$item->order}}
                                 </td>
-                                <td>{{$item->isPublic}}</td>
+                                <td>{{$item->estadoname}}</td>
 
                                 <td width="10px">
-                                    <button class="btn btn-primary" wire:click="edit({{$item->id}})">Editar</button>
+                                    <button wire:click.prevent="edit({{$item->id}})"
+                                        type="button" class="btn btn-primary mr-2" data-toggle="modal" data-target=".bd-example-modal-lg">
+                                       Editar
+                                   </button>
+
+                                    {{-- <button class="btn btn-primary" wire:click="edit({{$item->id}})">Editar</button> --}}
                                 </td>
                                 <td width="10px">
-                                    <button class="btn btn-primary" wire:click="openEyeModal({{$item->id}})">
+                                    <button   class="btn btn-danger mr-2" wire:click="delete('{{$item->id}}')"><i class="fas fa-eraser"></i></button>
+
+                                    {{-- <button class="btn btn-primary" wire:click="openEyeModal({{$item->id}})">
                                         <i class="fas fa-eye"></i>
-                                    </button>
+                                    </button> --}}
                                 </td>
                             </tr>
                         @endforeach
@@ -44,85 +62,65 @@
 
         @else
             <div class="card-body">
-                <strong>No hay Fotos ...</strong>
+                <strong>No hay Informaciones ...</strong>
             </div>
         @endif
     </div>
 
-    <form wire:submit='update'>
-        <x-dialog-modal wire:model='informacionEdit.openModal'>
-            <x-slot name="title">
-                Acualizar información
-            </x-slot>
-            <x-slot name="content">
 
-                <div class="d-flex">
-                    <div class="mt-2 col-sm-8">
-                        <x-label value="Titulo" class="text-primary"></x-label>
-                        <x-input id="title" type="text" class="w-100 form-control" wire:model='informacionEdit.titulo'></x-input>
-                        <x-input-error for="informacionEdit.titulo" class="text-danger"></x-input-error>
+    <div  class="modal fade" id="infoEdit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <form autocomplete="off" wire:submit.prevent="update">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Editar Idioma</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                     </div>
-                    <div class="mt-2 col-sm-1">
-                        <x-label value="Orden" class="text-primary"></x-label>
-                        <x-input  type="text" class="w-100 form-control" wire:model='informacionEdit.order'></x-input>
-                        <x-input-error for="informacionEdit.order" class="text-danger"></x-input-error>
-                    </div>
-                    <div class="mt-2 col-sm-3">
-                        <x-label value="Estado" class="text-primary"></x-label>
-                        <x-select class="w-100" wire:model="informacionEdit.isPublic">
-                            <option value="" disabled>Seleccione un estado</option>
-                            <option value="0">Borrador</option>
-                            <option value="1">Publicado</option>
-                        </x-select>
+                    <div class="modal-body">
+                        <div class="d-flex">
 
-                        <x-input-error for="informacionEdit.isPublic" class="text-danger"></x-input-error>
+                            <div class="w-50">
+                                <label class="text-primary">Título</label>
+                                <input  type="text" name="name" wire:model='informacionEdit.titulo'  class="form-control @error('informacionEdit.titulo') is-invalid @enderror">
+                                @error("informacionEdit.titulo")
+                                    <small class="text-danger">
+                                        <small>{{$message}}</small>
+                                    </small>
+                                @enderror
+                            </div>
+                            <div class="ml-2">
+                                <label class="text-primary">Estado</label>
+                                <select wire:model="informacionEdit.isPublic" class="form-control form-control" aria-label=".form-select-lg example">
+                                    <option value="" disabled>Seleccione un estado</option>
+                                    <option value="0">Borrador</option>
+                                    <option value="1">Publicado</option>
+                                </select>
+                            </div>
+                            <div class="ml-2">
+                                <label class="text-primary">Orden</label>
+                                <input  type="text" name="name" wire:model='informacionEdit.order'  class="form-control @error('informacionEdit.order') is-invalid @enderror">
+                                @error("informacionEdit.order")
+                                    <small class="text-danger">
+                                        <small>{{$message}}</small>
+                                    </small>
+                                @enderror
+                            </div>
+                        </div>
+                        <div>
+                            <label class="text-primary">Información</label>
+                            <textarea class="w-100 form-control" wire:model='informacionEdit.informacion'  rows="20"></textarea>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                    <button type="button" wire:click="close" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Actualizar</button>
                     </div>
                 </div>
+            <form>
 
-                <div class="mt-2">
-                    <x-label value="Informacion" class="text-primary"></x-label>
-                    <textarea class="w-100 form-control" wire:model='informacionEdit.informacion'  rows="20"></textarea>
-                    <x-input-error for="informacionEdit.informacion" class="text-danger"></x-input-error>
-                </div>
-
-
-
-
-            </x-slot>
-            <x-slot name="footer">
-
-
-                <x-button type="button" wire:click="$set('informacionEdit.openModal',false)" class="mr-4">
-                    Cancelar
-                </x-button>
-
-                <x-danger-button type="submit">
-                    Guardar Información
-                </x-danger-button>
-
-
-            </x-slot>
-        </x-dialog-modal>
-    </form>
-
-    <x-dialog-modal wire:model='eyeModal'>
-        <x-slot name="title">
-            XXXXXx
-        </x-slot>
-        <x-slot name="content">
-            {!!$info!!}
-
-        </x-slot>
-        <x-slot name="footer">
-
-
-            <x-button type="button" wire:click="$set('eyeModal',false)" class="mr-4">
-                Cancelar
-            </x-button>
-        </x-slot>
-    </x-dialog-modal>
-
-
-
-
+        </div>
+    </div>
 </div>

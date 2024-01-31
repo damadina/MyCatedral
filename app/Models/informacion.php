@@ -16,4 +16,12 @@ class informacion extends Model
         'informacion',
         'isPublic'
     ];
+    public function getEstadonameAttribute() {
+        if($this->isPublic == 0) {
+            return "Borrador";
+        } else {
+            return "Publicado";
+        }
+
+    }
 }

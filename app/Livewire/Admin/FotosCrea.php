@@ -44,8 +44,9 @@ class FotosCrea extends Component
 
     public function save() {
         $this->fotoCreate->save();
-        $this->openModal = false;
+        $this->fotoCreate->reset();
         $this->dispatch('foto-creada');
+        $this->dispatch('hide-formCreateFoto');
     }
 
     public function updated($property)
@@ -53,5 +54,11 @@ class FotosCrea extends Component
         if ($property === 'fotoCreate.image') {
             $this->fotoCreate->url =  $this->fotoCreate->image->getClientOriginalName();
         }
+    }
+    public function newFoto() {
+        $this->dispatch('show-formCreateFoto');
+    }
+    public function close() {
+        $this->resetValidation();
     }
 }

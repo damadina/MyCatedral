@@ -14,7 +14,7 @@
 @endif
 <div class="card">
     <div class="card-header">
-        <a href="{{route('admin.autores.create')}}">Nuevo author</a>
+        <a href="{{route('admin.autores.create')}}">Nuevo autor</a>
     </div>
     <div class="card-body">
 
@@ -31,7 +31,7 @@
                     <tr>
                         <td>{{$autor->id}}</td>
                         <td>
-                            <img class="rounded-circle"  src="
+                            <img class="rounded-circle" width="60px" src="
                             @if($autor->fotoUrl)
                             {{asset('storage/autores/'.$autor->fotoUrl)}}
                             @else

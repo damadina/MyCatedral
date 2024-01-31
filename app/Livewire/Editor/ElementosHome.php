@@ -14,7 +14,7 @@ class ElementosHome extends Component
     public $search, $categoriaSelected ="";
 
 
-    #[Layout('layouts.app')]
+    #[Layout('layouts.editor2')]
     public function render()
     {
 

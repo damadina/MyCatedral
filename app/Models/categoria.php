@@ -18,6 +18,13 @@ class categoria extends Model
         return $this->hasMany(element::class);
     }
 
+    public function getEstadonameAttribute() {
+        if($this->isPublic == 0) {
+            return "Borrador";
+        } else {
+            return "Publicado";
+        }
 
+    }
 
 }

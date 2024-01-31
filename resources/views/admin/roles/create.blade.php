@@ -14,11 +14,11 @@
                 @csrf
                 <div class="form-group">
                     <label for="" class="text-primary">Nombre del Rol:</label>
-                    <input type="text" name="name"  class="form-control" placeholder="Nombre del Rol">
+                    <input type="text" name="name" value="{{ old('name') }}"  class="form-control" placeholder="Nombre del Rol">
                     @error("name")
-                        <span class="invalid-feedback">
+                        <small class="text-danger">
                             <strong>{{$message}}</strong>
-                        </span>
+                        </small>
                     @enderror
                 </div>
                 <strong class="text-primary">Permisos</strong>
@@ -35,6 +35,7 @@
                         <div class="d-flex">
                             <div class="form-check">
                                 <input type="checkbox" class="form-checkbox" value="{{$permission->id}}" name="permissions[]">
+
                             </div>
                             <label for="{{$permission->name}}" class="form-checkbox ml-1">
                                 {{$permission->name}}
@@ -56,9 +57,9 @@
 @stop
 
 @section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
+
 @stop
 
 @section('js')
-    <script> console.log('Hi!'); </script>
+
 @stop

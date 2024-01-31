@@ -7,6 +7,7 @@
     gtag('js', new Date());
     gtag('config', 'G-ZJDWZKPEHZ');
     </script>
-@else
     <meta name="robots" content="index">
+@else
+    <meta name="robots" content="noindex">
 @endif

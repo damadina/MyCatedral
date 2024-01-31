@@ -3,13 +3,16 @@
 namespace App\Livewire\Admin;
 
 use Livewire\Component;
+use Livewire\Attributes\On;
 use App\Livewire\Forms\IdiomaCreateForm;
+use App\Livewire\Forms\IdiomaEditForm;
 
 class IdiomasCrea extends Component
 {
-    public $openModal = false;
+
 
     public IdiomaCreateForm $idiomaCreate;
+
 
     public function mount() {
         $this->idiomaCreate->isPublic = "0";
@@ -19,16 +22,30 @@ class IdiomasCrea extends Component
     {
         return view('livewire.admin.idiomas-crea');
     }
-    public function clickOpenModal() {
-        $this->openModal = true;
-    }
-    public function clickCloseModal() {
-        $this->openModal = false;
-    }
+
+   /*  #[On('crea-idioma')] */
     public function save() {
         $this->resetValidation();
         $this->idiomaCreate->save();
-        $this->openModal = false;
-        $this->dispatch('idioma-creado');
+
+        session()->flash('status','El idioma se ha creado');
+        $this->dispatch('hide-formCreate');
+        /* $this->dispatch('idioma-creado'); */
+        $this->redirect(route('admin.idiomas'));
+    }
+   /*  #[On('crea-idioma-close')] */
+    public function close() {
+        $this->idiomaCreate->close();
+    }
+
+    /*  #[On('idiomas-edit-mode')]
+    public function edit($id) {
+        dd($this->idiomaCreate);
+        $this->editForm = true;
+        $this->formTitle = "Editar idioma";
+        $this->idiomaCreate->edit($id);
+    } */
+    public function newIdioma() {
+        $this->dispatch('show-formCreate');
     }
 }

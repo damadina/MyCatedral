@@ -16,51 +16,70 @@
         <form action="{{route('admin.autores.store')}}" method="POST" enctype="multipart/form-data">
             @csrf
 
-            <div class="flex items-center">
-
-                <div class="">
-                    <x-label value="Foto" class="text-blue-600 font-semibold text-left"></x-label>
-                    <img id="picture" src="{{asset('storage/images/noUser.jpg')}}" width="100"   alt="">
+            <div class="d-flex  align-items-center ">
+                <div>
+                    <img class="rounded-circle" name="picture" id="picture" src="{{asset('storage/images/noUser.jpg')}}" width="100"   alt="">
                 </div>
-                <div class="ml-6">
-                    <x-input id="file" type="file" name="fotoUrl" class="form-control"></x-input>
+                <div class="ml-4">
+                    <input id="file" type="file" name="fotoUrl" class="form-control">
                 </div>
             </div>
-
-
-
-
-            <div class="flex">
-                <div class="flex-1">
-                    <x-label value="Nombre" class="text-blue-600 font-semibold text-left"></x-label>
-                    <x-input type="text" name="name" class="form-control"></x-input>
-                    <x-input-error for="name" class="text-danger"></x-input-error>
+            <hr class="mt-2 mb-3"/>
+            <div class="d-flex mt-2">
+                <div class="flex-grow-1 ">
+                    <label class="text-primary">Nombre</label>
+                    <input type="text" name="name" value="{{ old('name') }}" class="form-control">
+                    @error("name")
+                        <small class="text-danger">
+                            <strong>{{$message}}</strong>
+                        </small>
+                    @enderror
                 </div>
 
 
                 <div class="ml-2">
-                    <x-label value="Departamento" class="text-blue-600 font-semibold text-left"></x-label>
+                    <label class="text-primary">Departamento</label>
+                    <input type="text" name="departamento" value="{{ old('departamento') }}" class="form-control">
+                    @error("departamento")
+                        <small class="text-danger">
+                            <strong>{{$message}}</strong>
+                        </small>
+                    @enderror
+
+                    {{-- <x-label value="Departamento" class="text-blue-600 font-semibold text-left"></x-label>
                     <x-input type="text" name="departamento" class="form-control"></x-input>
-                    <x-input-error for="departamento" class="text-danger"></x-input-error>
+                    <x-input-error for="departamento" class="text-danger"></x-input-error> --}}
                 </div>
                 <div class="ml-2">
-                    <x-label value="Web" class="text-blue-600 font-semibold text-left"></x-label>
-                    <x-input type="text" name="web" class="form-control"></x-input>
-                    <x-input-error for="web" class="text-danger"></x-input-error>
+                    <label class="text-primary">Web</label>
+                    <input type="text" name="web" value="{{ old('web') }}" class="form-control">
+                    @error("web")
+                        <small class="text-danger">
+                            <strong>{{$message}}</strong>
+                        </small>
+                    @enderror
                 </div>
 
             </div>
-            <x-label value="Curriculum" class="text-blue-600 font-semibold text-left pt-4"></x-label>
-            <textarea type="text" name="bio" id="editor" class="form-control" rows="50" ></textarea>
-            <x-input-error for="bio" class="text-danger"></x-input-error>
-            <div class="mt-4 flex">
-                <x-button type="button"  class="mr-4">
-                    Cancelar
-                </x-button>
+            <label class="text-primary">Curriculum</label>
+            {{-- <x-label value="Curriculum" class="text-blue-600 font-semibold text-left pt-4"></x-label> --}}
+            <textarea type="text" name="bio" id="editor" class="form-control" rows="50" >{{ old('bio') }}</textarea>
+            @error("bio")
+                <small class="text-danger">
+                    <strong>{{$message}}</strong>
+                </small>
+            @enderror
 
-                <x-danger-button type="submit">
+            {{-- <x-input-error for="bio" class="text-danger"></x-input-error> --}}
+            <div class="mt-4 flex">
+                {{-- <x-button type="button"  class="mr-4">
+                    Cancelar
+                </x-button> --}}
+                <a class="btn btn btn-primary" href="{{route('admin.autores.index')}}">Cancelar</a>
+                <button class="btn btn-danger" type="submit">Crear autor</button>
+                {{-- <x-danger-button type="submit">
                     Crear autor
-                </x-danger-button>
+                </x-danger-button> --}}
             </div>
 
         </form>
@@ -79,11 +98,11 @@
     .ck-editor__editable {
         min-height: 200px;
     }
+
 </style>
 @stop
 
 @section('js')
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
     <script src="https://cdn.ckeditor.com/ckeditor5/32.0.0/classic/ckeditor.js"></script>
     <script>
         ClassicEditor

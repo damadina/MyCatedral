@@ -7,7 +7,7 @@ use Livewire\Component;
 
 class ElementosCrea extends Component
 {
-    public $openModal = false;
+
     public $categorias;
     public ElementCreateForm $elementoCreate;
 
@@ -22,17 +22,22 @@ class ElementosCrea extends Component
     {
         return view('livewire.admin.elementos-crea');
     }
-    public function clickOpenModal() {
-        $this->openModal = true;
-    }
-    public function clickCloseModal() {
-        $this->openModal = false;
-    }
+
     public function save() {
         $this->resetValidation();
         $this->elementoCreate->save();
-        $this->openModal = false;
+        session()->flash('status','El elemento se ha creado');
+        $this->dispatch('hide-formElementoCreate');
         $this->dispatch('elemento-creado');
+    }
+    public function close() {
+        $this->elementoCreate->close();
+        $this->dispatch('hide-formElementoCreate');
+    }
+
+    public function newElemento() {
+
+        $this->dispatch('show-formElementoCreate');
     }
 
 }

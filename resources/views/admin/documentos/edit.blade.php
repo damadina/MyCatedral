@@ -37,12 +37,9 @@
             </textarea>
             <x-input-error for="texto" class="text-danger"></x-input-error>
 
-            <div class="mt-4 flex">
+            <div class="mt-4 d-flex">
                 <a class="btn btn-secondary mr-4" href="{{route('admin.documentos.index')}}">Cancelar</a>
-
-                <x-danger-button type="submit">
-                    Actualizar documento
-                </x-danger-button>
+                <button type="submit" class="btn btn-danger ml-2">Actualizar Documento</button>
             </div>
 
         </form>
@@ -65,7 +62,7 @@
 @stop
 
 @section('js')
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+
     <script src="https://cdn.ckeditor.com/ckeditor5/32.0.0/classic/ckeditor.js"></script>
     <script>
         ClassicEditor
