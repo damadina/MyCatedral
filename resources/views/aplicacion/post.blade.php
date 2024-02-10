@@ -42,7 +42,7 @@
             </div>
 
             <div class="container">
-                {{$locale}}
+
                 <div class="border-l-2 border-b-2 pl-1 md:pl-2  border-catedral text-justify indent-8 text-gray-600 italic text-xs mt-6 md:text-xl tracking-wide">
                     <p class="italic text-catedral text-semibold">Resumen:</p>
                     {!! $elemento->resumen !!}
