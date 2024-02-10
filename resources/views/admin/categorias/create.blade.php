@@ -24,6 +24,17 @@
                         @enderror
                     </div>
                     <div class="ml-2">
+                        <label class="text-primary">Capítulo</label>
+                        <select name="capitulo_id" class="form-control form-control" aria-label=".form-select-lg example">
+                            <option value="" disabled>Seleccione un capitulo</option>
+                            @foreach ($capitulos as $capitulo )
+                                <option value="{{$capitulo->id}}">{{$capitulo->titulo}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+
+                    <div class="ml-2">
                         <label class="text-primary">Orden</label>
                         <input type="text" name="orden" value="{{ old('orden') }}" class="form-control @error('orden') is-invalid @enderror">
                         @error("orden")

@@ -354,6 +354,13 @@ return [
 
         ['header' => 'CONTENIDOS'],
         [
+            'text'        => 'Capítulos',
+            'route'         => 'admin.capitulos.index',
+            'icon'        => 'fas fa-fw fa-book',
+            'active'    => ['admin/capitulos*']
+        ],
+
+        [
             'text'        => 'Categorías',
             'route'         => 'admin.categorias.index',
             'icon'        => 'fas fa-fw fa-list',

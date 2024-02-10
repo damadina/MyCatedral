@@ -35,14 +35,14 @@
                         <span class="px-2">{{$fotoPortada->piedefoto}}</span>
                         </figcaption>
                     </figure>
-                    @if(!$isHome)
+                    {{-- @if(!$isHome)
                         <h1 class="[text-shadow:_0_1px_0_var(--tw-shadow-color)] absolute text-base md:text-6xl tracking-wide text-white  top-6 right-10">{{$elemento->title}}</h1>
-                    @endif
+                    @endif --}}
                 </div>
             </div>
 
             <div class="container">
-
+                {{$locale}}
                 <div class="border-l-2 border-b-2 pl-1 md:pl-2  border-catedral text-justify indent-8 text-gray-600 italic text-xs mt-6 md:text-xl tracking-wide">
                     <p class="italic text-catedral text-semibold">Resumen:</p>
                     {!! $elemento->resumen !!}
@@ -80,11 +80,11 @@
     <div class="mx-auto w-7 h-20 fixed inset-y-1/2  right-4 text-center opacity-70 hover:opacity-100" >
         <div class="bg-catedral py-4 my-4 rounded-md text-lg items-center w-full">
             {{-- <i class="mx-auto fas fa-map-marker-alt text-white"></i> --}}
-            @if($isHome)
+            {{-- @if($isHome)
                 <div class="mx-auto">
                     @livewire('Aplicacion.show-info')
                 </div>
-            @endif
+            @endif --}}
 
             <div class="mt-4 mx-auto">
                 @livewire('Aplicacion.show-situacion',['elemento' => $elemento,'isPlano' => true])
@@ -94,6 +94,5 @@
             </div>
         </div>
     </div>
-
 
 </x-app-layout>

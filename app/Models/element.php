@@ -14,6 +14,7 @@ class element extends Model
     protected $fillable = [
         'title',
         'orden',
+        'resumen',
         'seoTitle',
         'seoMeta',
         'isPublic',

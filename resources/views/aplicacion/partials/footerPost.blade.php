@@ -8,11 +8,11 @@
                         $locale = "";
                     }
                 @endphp
-
-                <a href="{{ route('elementoXX',$locale) }}">
+{{--
+                <a href="{{ route('elementoXX',$locale) }}"> --}}
                     <img class="mx-auto" src="{{ asset('storage/images/logo.png') }}"  loading="lazy"  alt="catedraldesantiago.online home" width="15" height="21">
                     <span class="text-catedral">&copy;</span> <span class="text-catedral font-semibold text-xs">CatedraldeSanatiago.online</span>
-                </a>
+               {{--  </a> --}}
             </div>
         </div>
 

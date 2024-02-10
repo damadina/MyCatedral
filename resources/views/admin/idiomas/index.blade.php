@@ -228,6 +228,7 @@
     {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
     <script>
         document.addEventListener('livewire:initialized', () => {
+
             Livewire.on('traducir', function(idiomaId) {
                 Swal.fire({
                     title: "Traducir. Estás seguro?",
@@ -284,6 +285,26 @@
                     }
                     });
             });
+
+            Livewire.on('chekTraduccion', function([idioma,total]) {
+                Swal.fire({
+                    title: "Traducir. Estás seguro?",
+                    text: total + 'carcteres!',
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Si, hacerlo!"
+                    }).then((result) => {
+                    if (result.isConfirmed) {
+                        Livewire.dispatch('comenzarcheck',[idioma]);
+
+                    }
+                    });
+            });
+
+
+
         });
     </script>
     <script>

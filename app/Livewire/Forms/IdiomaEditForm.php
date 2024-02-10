@@ -22,6 +22,8 @@ class IdiomaEditForm extends Form
     public $documentsTraduccion;
     public $autorsTraduccion;
     public $informacionsTraduccion;
+    public $capitulosTraduccion;
+    public $categoriasTraduccion;
     public $traducciones_Start =[];
 
     public function rules()
@@ -49,6 +51,8 @@ class IdiomaEditForm extends Form
         $this->documentsTraduccion = $idioma->documentsTraduccion;
         $this->autorsTraduccion = $idioma->autorsTraduccion;
         $this->informacionsTraduccion = $idioma->informacionsTraduccion;
+        $this->capitulosTraduccion = $idioma->capitulosTraduccion;
+        $this->categoriasTraduccion = $idioma->categoriasTraduccion;
         $this->traducciones_Start = $idioma->traducciones_Start;
     }
 

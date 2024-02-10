@@ -6,6 +6,7 @@ use App\Models\categoria;
 use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\element;
+use App\Models\capitulo;
 use Livewire\Attributes\On;
 use App\Livewire\Forms\ElementoEditForm;
 
@@ -13,12 +14,14 @@ use App\Livewire\Forms\ElementoEditForm;
 class Elementos extends Component
 {
     use WithPagination;
-
+    public $capitulos;
+    public $selectCapitulo;
     public $search, $categorias, $categoriaSelected ="";
     protected $paginationTheme = "bootstrap";
     public ElementoEditForm $elementoEdit;
 
     public function mount() {
+        $this->capitulos = capitulo::all();
         $this->categorias = categoria::distinct()->get();
     }
 
@@ -52,7 +55,14 @@ class Elementos extends Component
         if ($property === 'categoriaSelected') {
             $this->resetPage();
         }
+        if ($property === 'selectCapitulo') {
+            $capitulo = capitulo::findOrFail($this->selectCapitulo);
+           $this->categorias = $capitulo->categorias;
+        }
     }
+
+
+
     public function edit($elementoId) {
         $this->resetValidation();
         $this->elementoEdit->edit($elementoId);

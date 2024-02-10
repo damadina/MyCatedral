@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Aplicacion\postController;
-use App\Http\Controllers\Aplicacion\homeController;
+/* use App\Http\Controllers\Aplicacion\homeController; */
 use App\Http\Controllers\Aplicacion\documentController;
 use App\Http\Controllers\Aplicacion\autorController;
 use App\Http\Controllers\pruebaController;
@@ -14,18 +14,41 @@ use App\Http\Controllers\Aplicacion\contactanosController;
 use App\Livewire\Aplicacion\Contactanos;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Auth;
+use App\Models\idioma;
+use App\Http\Controllers\Aplicacion\newPostController;
+use App\Http\Controllers\Aplicacion\IsHomeController;
 
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
+Route::get('/', function () {
+    return redirect('/historia');
+});
+
+Route::group([
+    'middleware' => 'localization'
+], function() {
+    $user = auth::user();
+    if($user && $user->isAdmin) {
+        $idiomas = idioma::pluck('locale')->toArray();;
+    } else {
+        $idiomas = idioma::where('isPublic','1')->pluck('locale')->toArray();;
+    };
+    /* Route::get("/",[IsHomeController::class,'index'])->name("HomePost.es"); */
+    foreach ($idiomas as $locale) {
+        /* Route::get("/$locale",[IsHomeController::class,'index'])->name("HomePost.{$locale}"); */
+        if ($locale == "es") {
+            Route::get('/{slug}', [newPostController::class,'index'])->name("about.es");
+        } else {
+
+            Route::get("{$locale}/".'{slug}', [newPostController::class,'index'])->name("about.{$locale}");
+        }
+    }
+
+
+});
+
+
+
+
 
 
 

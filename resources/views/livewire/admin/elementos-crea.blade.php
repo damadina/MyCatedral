@@ -4,8 +4,8 @@
    {{-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Large modal</button> --}}
    <button type="button" wire:click.prevent="newElemento" class="btn btn-primary"><i class="fa fa-plus-circle mr-2"></i>Nuevo elemento</button>
 
-    <div wire:ignore.self class="modal fade" id="formElementoCreate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+    <div wire:ignore.self  class="modal fade" id="formElementoCreate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl" role="document">
             <form autocomplete="off" wire:submit.prevent="save">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -29,8 +29,19 @@
 
                         <div class="d-flex mt-2">
                             <div class="w-50">
+                                <label class="text-primary">Capitulo</label>
+                                <select wire:model.live="selectCapitulo" class="form-control " aria-label=".form-select-lg example">
+                                    @foreach ($capitulos as $item )
+                                        <option value="{{$item->id}}">{{$item->titulo}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+
+                            <div class="w-50 ml-2">
                                 <label class="text-primary">Categoria</label>
-                                <select wire:model="elementoCreate.categoria_id" class="form-control form-control" aria-label=".form-select-lg example">
+                                <select wire:model="elementoCreate.categoria_id" class="form-control " aria-label="">
+                                    <option value="" disabled>Seleccione una categoría</option>
                                     @foreach ($categorias as $item )
                                         <option value="{{$item->id}}">{{$item->title}}</option>
                                     @endforeach

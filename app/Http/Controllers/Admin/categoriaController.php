@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\categoria;
+use App\Models\capitulo;
 
 class categoriaController extends Controller
 {
@@ -14,7 +15,8 @@ class categoriaController extends Controller
     public function index()
     {
         /** InDEXE PRUEBA GITHUB */
-        $categorias = categoria::all();
+
+        $categorias = categoria::all()->sortBy('NameCapitulo');
         return view('admin.categorias.index', compact('categorias'));
     }
 
@@ -23,7 +25,9 @@ class categoriaController extends Controller
      */
     public function create()
     {
-        return view('admin.categorias.create');
+
+        $capitulos = capitulo::all()->sortBy('orden');
+        return view('admin.categorias.create', compact('capitulos'));
     }
 
     /**
@@ -32,17 +36,11 @@ class categoriaController extends Controller
     public function store(Request $request)
     {
 
-        if($request->has('isPublic')) {
-            $val = true;
-        } else {
-
-            $val= false;
-
-        };
 
         $request->validate([
             'title' => 'required',
             'orden' => 'integer|required',
+            'isPublic' => 'required'
 
         ],
         [
@@ -53,7 +51,8 @@ class categoriaController extends Controller
         categoria::create([
             'title' => $request->title,
             'orden' => $request->orden,
-            'isPublic' => $val
+            'isPublic' => $request->isPublic,
+            'capitulo_id' => $request->capitulo_id
         ]);
 
         return redirect()->route('admin.categorias.index')->with('info','La Categoría se creo correctamente');
@@ -72,8 +71,8 @@ class categoriaController extends Controller
      */
     public function edit(categoria $categoria)
     {
-
-        return view('admin.categorias.edit', compact('categoria'));
+        $capitulos = capitulo::all()->sortBy('orden');
+        return view('admin.categorias.edit', compact('categoria','capitulos'));
     }
 
     /**
@@ -82,17 +81,12 @@ class categoriaController extends Controller
     public function update(Request $request, categoria $categoria)
     {
 
-        if($request->has('isPublic')) {
-            $val = true;
-        } else {
 
-            $val= false;
-
-        };
 
         $request->validate([
             'title' => 'required',
             'orden' => 'required',
+            'isPublic' => 'required'
 
         ],
         [
@@ -103,11 +97,12 @@ class categoriaController extends Controller
         $categoria->update([
             'title' => $request->title,
             'orden' => $request->orden,
-            'isPublic' => $val
+            'isPublic' => $request->isPublic,
+            'capitulo_id' => $request->capitulo_id
         ]);
 
 
-        return redirect()->route('admin.categorias.edit',$categoria);
+        return redirect()->route('admin.categorias.index')->with('status','La Categoría se actualizo correctamente');
     }
 
     /**
@@ -115,6 +110,7 @@ class categoriaController extends Controller
      */
     public function destroy(categoria $categoria)
     {
+
         if(count($categoria->elementos)>0) {
             return redirect()->back()->with('error', 'No se ha podido borrar esta categoría. (tiene posts)');
         } else {

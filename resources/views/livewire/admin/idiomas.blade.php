@@ -146,12 +146,36 @@
                                                 <p @if($isRed) class="text-success" @endIf>informacions</p>
                                                 <p>{{$idioma->informacionsTraduccion}}</p>
                                             </div>
+                                            @php
+                                            if (in_array("capitulos", $idioma->traducciones_Start)) {
+                                                $isRed = true;
+                                            } else {
+                                                $isRed = false;
+                                            }
+                                            @endphp
+                                            <div>
+                                                <p @if($isRed) class="text-success" @endIf>capitulos</p>
+                                                <p>{{$idioma->capitulosTraduccion}}</p>
+                                            </div>
+                                            @php
+                                            if (in_array("categorias", $idioma->traducciones_Start)) {
+                                                $isRed = true;
+                                            } else {
+                                                $isRed = false;
+                                            }
+                                            @endphp
+                                            <div>
+                                                <p @if($isRed) class="text-success" @endIf>categorias</p>
+                                                <p>{{$idioma->categoriasTraduccion}}</p>
+                                            </div>
+
                                         </td>
                                     @endIf
 
 
                                     <td  class="d-flex flex-row-reverse">
                                         @if($idioma->locale != "es")
+                                            <button type="button" class="ml-2 btn btn-danger" wire:click="checkTraducciones({{$idioma->id}})">Check traducciones</button>
                                             <button   class="btn btn-danger " wire:click="traducir('{{$idioma->id}}')">Traducir</button>
                                             <button   class="btn btn-danger mr-2" wire:click="limpiar('{{$idioma->id}}')"><i class="fas fa-eraser"></i></button>
                                         @endif
@@ -265,7 +289,16 @@
                                 <input wire:model="idiomaEdit.traducciones_Start" value="informacions" type="checkbox"/>
                                 informacions
                             </label>
-
+                            <br>
+                            <label>
+                                <input wire:model="idiomaEdit.traducciones_Start" value="capitulos" type="checkbox"/>
+                                capitulos
+                            </label>
+                            <br>
+                            <label>
+                                <input wire:model="idiomaEdit.traducciones_Start" value="categorias" type="checkbox"/>
+                                categorias
+                            </label>
                         </div>
 
                     </div>

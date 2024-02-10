@@ -23,38 +23,6 @@ class localization
     public function handle(Request $request, Closure $next): Response
     {
 
-        if(!session()->exists('lang')) {
-            $lang = substr(request()->server('HTTP_ACCEPT_LANGUAGE'),0,2);
-            session()->put('lang',$lang);
-        } else {
-            $lang = request()->get('lang');
-        }
-
-        if(session()->has('lang')) {
-            app()->setLocale(session('lang'));
-        } else {
-            app()->setLocale(config('app.locale'));
-        }
-
-
-        return $next($request);
-        $languajes = $this->getLocales();
-
-        if(count($request->segments())==2) {
-            $lang = $request->segment(1);
-
-            if(strlen($lang) === 2 && in_array($lang, $languajes)){
-                app()->setLocale($lang);
-            }
-        } else {
-            app()->setLocale("es");
-        }
-
-        return $next($request);
-
-
-
-
 
         session()->put('currentSlug',request()->segment(1));
 

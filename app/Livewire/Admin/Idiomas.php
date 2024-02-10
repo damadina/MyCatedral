@@ -11,7 +11,7 @@ use App\Models\element;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use App\Traits\generaHref;
-
+use Illuminate\Support\Facades\Storage;
 
 
 class Idiomas extends Component
@@ -33,9 +33,9 @@ class Idiomas extends Component
         "documents"=>array('id','titulo','html'),
         "autors" =>array('id','departamento','bio'),
         "informacions" =>array('id','titulo','informacion'),
+        "capitulos" =>array('id','titulo','literal'),
+        'categorias' =>array('id','title')
     );
-
-
 
 
     #[On('idioma-creado')]
@@ -100,6 +100,7 @@ class Idiomas extends Component
 
 
     }
+
     #[On('borrarAllLocale')]
     public function borraAllLocale() {
         dd("jjjjj");
@@ -117,8 +118,8 @@ class Idiomas extends Component
             ])->delete();
 
             $campos = $this->tablas[$tabla];
-            $records = DB::table($tabla)->select($campos)->get();
 
+            $records = DB::table($tabla)->select($campos)->get();
 
             foreach($records as $record) {
                 foreach ($record as $fieldKey => $value) {
@@ -163,6 +164,12 @@ class Idiomas extends Component
                 break;
             case 'informacions':
                 $idioma->informacionsTraduccion = $currentDate;
+                break;
+            case 'capitulos':
+                $idioma->informacionsCapitulos = $currentDate;
+                break;
+            case 'categorias':
+                $idioma->informacionsCapitulos = $currentDate;
                 break;
         }
         $idioma->save();
@@ -211,9 +218,7 @@ class Idiomas extends Component
         if($column == "title" and $tabla=="elements") {
 
             $slug = Str::slug($traduccion);
-            if($id == 45) {
-                $slug ="";
-            }
+
 
             translation::create([
                 'table' => $tabla,
@@ -232,7 +237,108 @@ class Idiomas extends Component
     }
 
 
+    public function checkTraducciones($idiomaId) {
+        $idioma = idioma::find($idiomaId);
+        $total=0;
+        foreach($this->tablas as $keytabla => $tabla) {
+            $columnas = $this->tablas[$keytabla];
+            $records = DB::table($keytabla)->select($columnas)->get();
 
+            foreach($records as $record)
+            {
+
+                $id="";
+                foreach($record as $columna => $value) {
+
+                    switch($columna) {
+                        case "id":
+                            $id = $value;
+                            break;
+                        default:
+
+                            $check = $this->checkIfExist($keytabla,$id,$columna,$idioma->locale);
+                            if(!$check) {
+                                $partial = strlen($value);
+
+                                $line = $keytabla .'=> '.$id.'   '.$columna.' '.$idioma->locale.' '.$partial.PHP_EOL;
+                                Storage::append('file.txt', $line);
+                                $total = $total + $partial;
+
+                            }
+
+                    }
+
+                }
+
+
+
+            }
+
+        }
+
+
+
+        $this->dispatch('chekTraduccion',$idiomaId,$total);
+
+
+
+    }
+
+
+    public function checkIfExist($tabla,$id,$columna,$locale) {
+        $translation = DB::table('translations')
+        ->where('table',$tabla)
+        ->where('column',$columna)
+        ->where('row_id',$id)
+        ->where('locale',$locale)->first();
+
+        if($translation) {
+            return true;
+        } else {
+            return false;
+        }
+
+
+    }
+    #[On('comenzarcheck')]
+    public function ejectCheck($idiomaId) {
+        $idioma = idioma::find($idiomaId);
+        $total=0;
+        foreach($this->tablas as $keytabla => $tabla) {
+            $columnas = $this->tablas[$keytabla];
+            $records = DB::table($keytabla)->select($columnas)->get();
+
+            foreach($records as $record)
+            {
+
+                $id="";
+                foreach($record as $columna => $value) {
+
+                    switch($columna) {
+                        case "id":
+                            $id = $value;
+                            break;
+                        default:
+
+                            $check = $this->checkIfExist($keytabla,$id,$columna,$idioma->locale);
+                            if(!$check) {
+
+                                $this->translate($keytabla,$id,$value, $columna, $idioma->locale);
+                            }
+
+                    }
+
+                }
+
+
+
+            }
+
+        }
+
+
+
+    }
 
 
 }

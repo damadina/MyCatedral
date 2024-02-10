@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 class pruebaController extends Controller
 {
     public function index() {
-
+        dd("hola");
         /* $authKey = env('DEEPL_KEY');
         $options = ['timeout' => 20.0 ];
 

@@ -34,33 +34,38 @@ class postController extends Controller
         // Si esta en español no viene el idioma www.catedraldesantiago.online/slug
         //      En este ultimo caso como locale es null viene con el slug por lo que lo intercambiamos.
         //
-
         if(!$slug) {
             $slug = $locale;
             $locale = "es";
-
         }
+        /* if(strlen($locale)>5) {
+            $slug = $locale;
+            $locale = "es";
 
-
+        } */
         session()->put('idiomas',true);
-
-        switch($locale) {
-            case "es":
-                $elemento = element::where('slug',$slug)->first();
-                break;
-            default:
-                $translation = translation::where('table','elements')
-                ->where('column','slug')
-                ->where('locale',$locale)
-                ->where('translation',$slug)
-                ->first();
-                if($translation) {
-                    $elemento = element::find($translation->row_id);
-                } else {
+        session()->put('isHome',false);
+        if(!$slug) {
+            $elemento = element::where('categoria_id',1)->first();
+            session()->put('isHome',true);
+        } else {
+            switch($locale) {
+                case "es":
                     $elemento = element::where('slug',$slug)->first();
-                }
+                    break;
+                default:
+                    $translation = translation::where('table','elements')
+                    ->where('column','slug')
+                    ->where('locale',$locale)
+                    ->where('translation',$slug)
+                    ->first();
+                    if($translation) {
+                        $elemento = element::find($translation->row_id);
+                    } else {
+                        $elemento = element::where('slug',$slug)->first();
+                    }
+            }
         }
-
 
         return $this->showElemento($elemento);
     }
@@ -70,9 +75,9 @@ class postController extends Controller
     public function showElemento(element $elemento) {
 
 
-       /*  $isHome = Session::get('isHome'); */
+        $isHome = Session::get('isHome');
         $locale = Session::get('lang');
-        /* $exte = categoria::where('title',"exterior")->first();
+        $exte = categoria::where('title',"exterior")->first();
         $exterior = $exte->elementos()->orderBy('orden')->get();
 
         $inter = categoria::where('title',"interior")->first();
@@ -82,7 +87,7 @@ class postController extends Controller
         $capillas = $capi->elementos()->orderBy('orden')->get();
 
         $muse = categoria::where('title',"museo")->first();
-        $museo = $muse->elementos()->orderBy('orden')->get(); */
+        $museo = $muse->elementos()->orderBy('orden')->get();
 
         if($elemento->urlPortada) {
             $fotoPortada = foto::where('url',$elemento->urlPortada)->first();
@@ -135,7 +140,7 @@ class postController extends Controller
 
 
 
-        return view('aplicacion.post',compact('metas','slugES','locale','elemento','fotoPortada','textos','legal','idiomas'));
+        return view('aplicacion.post',compact('metas','slugES','locale','isHome','exterior','interior','capillas','museo','elemento','fotoPortada','textos','legal','idiomas'));
 
     }
 

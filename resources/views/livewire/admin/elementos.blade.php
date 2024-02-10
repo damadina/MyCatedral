@@ -59,7 +59,7 @@
     </div>
 
     <div wire:ignore.self class="modal fade" id="formElementoEdit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-dialog modal-xl" role="document">
             <form autocomplete="off" wire:submit.prevent="update">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -81,8 +81,18 @@
                             </div>
                         </div>
 
+
                         <div class="d-flex mt-2">
                             <div class="w-50">
+                                <label class="text-primary">Capitulo</label>
+                                <select wire:model.live="selectCapitulo" class="form-control form-control" aria-label=".form-select-lg example">
+                                    @foreach ($capitulos as $item )
+                                        <option value="{{$item->id}}">{{$item->titulo}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="w-50 ml-2">
                                 <label class="text-primary">Categoria</label>
                                 <select wire:model="elementoEdit.categoria_id" class="form-control form-control" aria-label=".form-select-lg example">
                                     @foreach ($categorias as $item )

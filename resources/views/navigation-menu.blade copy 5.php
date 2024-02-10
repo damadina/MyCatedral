@@ -1,7 +1,6 @@
 <nav x-data="{ open: false }" class="bg-white border-b border-gray-100 shadow">
     @php
         session()->put('urlCurrent',url()->current());
-
     @endphp
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -9,9 +8,9 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-
+                    <a href="{{ route('elementoXX',['locale' => $locale]) }}">
                         <x-application-mark class="block h-9 w-auto" />
-
+                    </a>
                 </div>
 
 
@@ -158,9 +157,8 @@
             @php
                 $countItem = 0;
                 $isHistoria = false;
-
             @endphp
-            {{-- <a href='{{route("about.$locale")}}'>IR </a> --}}
+
             @foreach ($capituloSelected->categorias as $categoria )
                 <div class="flex">
 
@@ -171,12 +169,12 @@
                         @case(1)
 
                                 @if($locale=="es")
-                                    <x-dropdown-link  itemprop="item" href='{{route("about.$locale",["slug" => $categoria->elementos[0]->slug])}}'   class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition ease-in-out duration-150">
+                                    <x-dropdown-link  itemprop="item" href="{{route('elementoXX',['slug' => $categoria->elementos[0]->slug])}}"   class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition ease-in-out duration-150">
                                         <span class="{{ session()->get('currentSlug') == $categoria->elementos[0]->slug ? 'border-b-4 border-catedral' : '' }}" itemprop="name" >{{__($categoria->title)}}</span>
                                     </x-dropdown-link>
                                 @else
 
-                                    <x-dropdown-link  itemprop="item" href='{{route("about.$locale",["locale" => $locale,"slug" => $categoria->elementos[0]->slug])}}'   class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition ease-in-out duration-150">
+                                    <x-dropdown-link  itemprop="item" href="{{route('elementoXX',['locale' => $locale,'slug' => $categoria->elementos[0]->slug])}}"   class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition ease-in-out duration-150">
                                         <span class="{{ session()->get('currentSlug') == $categoria->elementos[0]->slug ? 'border-b-4 border-catedral' : '' }}" itemprop="name" >{{__($categoria->title)}}</span>
                                     </x-dropdown-link>
                                 @endif
@@ -188,6 +186,7 @@
                             @break
 
                     @endswitch
+
 
 
                     <x-dropdown  align="left" >
@@ -206,20 +205,17 @@
                         </x-slot>
 
                         <x-slot name="content">
-
                             <ol class="overflow-auto " >
-
 
                                 @foreach ($categoria->elementos as $each )
 
                                     <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-
                                         @if($locale=="es")
-                                            <x-dropdown-link  itemprop="item" href='{{route("about.$locale",["slug" => $each->slug])}}'   class="hover:font-semibold hover:text-catedral">
+                                            <x-dropdown-link  itemprop="item" href="{{route('elementoXX',['slug' => $each->slug])}}"   class="hover:font-semibold hover:text-catedral">
                                                 <span itemprop="name" >{{$each->title}}</span>
                                             </x-dropdown-link>
                                         @else
-                                            <x-dropdown-link  itemprop="item" href='{{route("about.$locale",["locale" => $locale,"slug" => $each->slug])}}'   class="hover:font-semibold hover:text-catedral">
+                                            <x-dropdown-link  itemprop="item" href="{{route('elementoXX',['locale' => $locale,'slug' => $each->slug])}}"   class="hover:font-semibold hover:text-catedral">
                                                 <span itemprop="name" >{{$each->title}}</span>
                                             </x-dropdown-link>
                                         @endif
@@ -275,11 +271,11 @@
 
             @if($categoria->elementos->count()==1)
                 @if($locale=="es")
-                    <x-dropdown-link  itemprop="item" href='{{route("about.$locale",["slug" => $categoria->elementos[0]->slug])}}'   class="hover:font-semibold hover:text-catedral">
+                    <x-dropdown-link  itemprop="item" href="{{route('elementoXX',['slug' => $categoria->elementos[0]->slug])}}"   class="hover:font-semibold hover:text-catedral">
                         <span itemprop="name" >{{$categoria->title}}</span>
                     </x-dropdown-link>
                 @else
-                    <x-dropdown-link  itemprop="item" href='{{route("about.$locale",["locale" => $locale,"slug" => $categoria->elementos[0]->slug])}}'   class="hover:font-semibold hover:text-catedral">
+                    <x-dropdown-link  itemprop="item" href="{{route('elementoXX',['locale' => $locale,'slug' => $categoria->elementos[0]->slug])}}"   class="hover:font-semibold hover:text-catedral">
                         <span itemprop="name" >{{$categoria->title}}</span>
                     </x-dropdown-link>
                 @endif
@@ -304,11 +300,11 @@
                             @foreach ($categoria->elementos as $each )
                                 <li>
                                     @if($locale=="es")
-                                        <x-dropdown-link  itemprop="item" href='{{route("about.$locale",["slug" => $each->slug])}}'   class="hover:font-semibold hover:text-catedral">
+                                        <x-dropdown-link  itemprop="item" href="{{route('elementoXX',['slug' => $each->slug])}}"   class="hover:font-semibold hover:text-catedral">
                                             <span itemprop="name" >{{$each->title}}</span>
                                         </x-dropdown-link>
                                     @else
-                                        <x-dropdown-link  itemprop="item" href='{{route("about.$locale",["locale" => $locale,"slug" => $each->slug])}}'   class="hover:font-semibold hover:text-catedral">
+                                        <x-dropdown-link  itemprop="item" href="{{route('elementoXX',['locale' => $locale,'slug' => $each->slug])}}"   class="hover:font-semibold hover:text-catedral">
                                             <span itemprop="name" >{{$each->title}}</span>
                                         </x-dropdown-link>
                                     @endif
