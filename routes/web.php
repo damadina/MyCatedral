@@ -17,10 +17,25 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\idioma;
 use App\Http\Controllers\Aplicacion\newPostController;
 use App\Http\Controllers\Aplicacion\IsHomeController;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\DB;
 
 
 Route::get('/', function () {
-    return redirect('/historia');
+    $lang = session()->get('lang');
+    if($lang=="es") {
+        return redirect('/historia');
+    } else {
+        $translation = DB::table('translations')
+        ->where('table','elements')
+        ->where('column','slug')
+        ->where('row_id',45)
+        ->where('locale',$lang)->first();
+        $newSlug = $translation->translation;
+        return redirect("/{$newSlug}");
+    }
+
+
 });
 
 Route::group([
