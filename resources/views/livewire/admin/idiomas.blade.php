@@ -25,7 +25,7 @@
                     @livewire("admin.idiomas-crea")
                 </div>
 
-                <button type="button" class="btn btn-danger" wire:click="GeneraHrflangs">Generar Hrflangs</button>
+                <button type="button" class="ml-4 btn btn-danger" wire:click="GeneraHrflangs">Generar Hrflangs</button>
 
             </div>
 

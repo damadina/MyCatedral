@@ -26,7 +26,6 @@ trait Traslations {
 
         if($translation) {
             $textoFinal = $this->convierte($translation->translation);
-
             return $textoFinal;
         } else {
             return $default;

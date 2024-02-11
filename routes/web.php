@@ -22,16 +22,28 @@ use Illuminate\Support\Facades\DB;
 
 
 Route::get('/', function () {
-    $lang = session()->get('lang');
+
+    if(!session()->exists('lang')) {
+        $lang = substr(request()->server('HTTP_ACCEPT_LANGUAGE'),0,2);
+        session()->put('lang',$lang);
+    } else {
+        $lang = session()->get('lang');
+    }
+
     if($lang=="es") {
         return redirect('/historia');
     } else {
+
         $translation = DB::table('translations')
         ->where('table','elements')
         ->where('column','slug')
         ->where('row_id',45)
         ->where('locale',$lang)->first();
+
+
         $newSlug = $translation->translation;
+
+
         return redirect("/{$newSlug}");
     }
 

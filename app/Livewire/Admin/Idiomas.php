@@ -186,25 +186,8 @@ class Idiomas extends Component
         }
 
         $authKey = env('DEEPL_KEY');
-
-        /* dd($authKey); */
-        /* $authKey = "89786711-b707-a136-0673-8cc3b8839123"; */
         $translator = new \DeepL\Translator($authKey);
-
-
-
-        /* if($column=="slug") {
-            $textoDeepl = str_replace("-",' ',$texto);
-        } else {
-            $textoDeepl = $texto;
-        } */
-
         $traduccion = $translator->translateText($texto, 'es', $deepLocale , ['tag_handling' => 'html'], );
-
-        /* if($column=="slug") {
-            $traduccion = str_replace(" ","-",$traduccion);
-        }
- */
 
         translation::create([
             'table' => $tabla,
@@ -230,15 +213,11 @@ class Idiomas extends Component
             ]);
         }
 
-
-
-
-
     }
-
 
     public function checkTraducciones($idiomaId) {
         $idioma = idioma::find($idiomaId);
+
         $total=0;
         foreach($this->tablas as $keytabla => $tabla) {
             $columnas = $this->tablas[$keytabla];
@@ -248,6 +227,7 @@ class Idiomas extends Component
             {
 
                 $id="";
+
                 foreach($record as $columna => $value) {
 
                     switch($columna) {

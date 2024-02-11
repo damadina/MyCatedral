@@ -176,7 +176,7 @@
                                     </x-dropdown-link>
                                 @else
 
-                                    <x-dropdown-link  itemprop="item" href='{{route("about.$locale",["locale" => $locale,"slug" => $categoria->elementos[0]->slug])}}'   class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition ease-in-out duration-150">
+                                    <x-dropdown-link  itemprop="item" href='{{route("about.$locale",["slug" => $categoria->elementos[0]->slug])}}'   class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition ease-in-out duration-150">
                                         <span class="{{ session()->get('currentSlug') == $categoria->elementos[0]->slug ? 'border-b-4 border-catedral' : '' }}" itemprop="name" >{{__($categoria->title)}}</span>
                                     </x-dropdown-link>
                                 @endif
@@ -219,7 +219,7 @@
                                                 <span itemprop="name" >{{$each->title}}</span>
                                             </x-dropdown-link>
                                         @else
-                                            <x-dropdown-link  itemprop="item" href='{{route("about.$locale",["locale" => $locale,"slug" => $each->slug])}}'   class="hover:font-semibold hover:text-catedral">
+                                            <x-dropdown-link  itemprop="item" href='{{route("about.$locale",["slug" => $each->slug])}}'   class="hover:font-semibold hover:text-catedral">
                                                 <span itemprop="name" >{{$each->title}}</span>
                                             </x-dropdown-link>
                                         @endif
