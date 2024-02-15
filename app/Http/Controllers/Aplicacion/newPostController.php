@@ -26,22 +26,40 @@ class newPostController extends Controller
     use HasRoles;
     use generaHref;
 
-    public function index($slug) {
+    public function index($slug = null) {
+        if(session()->exists('lang')) {
+            $lang = session()->get('lang');
+        } else {
+            $lang = substr(request()->server('HTTP_ACCEPT_LANGUAGE'),0,2);
+            session()->put('lang',$lang);
+        }
 
 
 
-        $locale = config('app')['locale'];
 
-        if($locale!="es") {
-            $elemento = $this->getIdiomaElemento($slug,$locale);
-
+        if($lang!="es") {
+            $elemento = $this->getIdiomaElemento($slug,$lang);
         } else {
             $elemento = $this->getEsElemento($slug);
+            if(!$elemento) {
+                $elemento = $this->getIdiomaElemento($slug,$lang);
+            }
         }
+
         if(!$elemento) {
-            abort(404);
+            $a = $this->searchFault($slug);
+            if($a) {
+                session()->put('lang',$a[1]);
+                $lang = session()->get('lang');
+                $elemento = $a[0];
+            }
+
         }
+
+        App::setLocale($lang);
+
         return $this->showElemento($elemento);
+
 
     }
 
@@ -132,6 +150,23 @@ class newPostController extends Controller
             return $elemento;
         } else {
             return null;
+        }
+    }
+
+    public function searchFault($slug) {
+        //busca es
+        if($elemento = element::where('slug',$slug)->first()) {
+            return array($elemento,"es");
+        }
+        $translation = translation::where('table','elements')
+            ->where('column','slug')
+            ->where('translation',$slug)
+            ->first();
+        if($translation) {
+            $elemento = element::find($translation->row_id);
+            return array($elemento,$translation->locale);
+        } else {
+            abort(404);
         }
 
 

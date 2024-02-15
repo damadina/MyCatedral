@@ -32,24 +32,6 @@
             </div>
 
 
-
-            {{-- @php
-            $slug = request()->segment(count(request()->segments()));
-            @endphp
-            <div>
-                <form action="{{route('localization',['slug' => $slug])}}" id="formlocalization">
-                    <select name="lang" onchange="
-                        document.getElementById('formlocalization').submit();
-                        ">
-                        @foreach ($idiomas as $idioma )
-                            <option  value="{{$idioma->locale}}" @selected(session('lang') == $idioma->locale)>{{$idioma->title}}</option>
-                        @endforeach
-                    </select>
-                </form>
-
-
-            </div> --}}
-
         </div>
 
     </div>

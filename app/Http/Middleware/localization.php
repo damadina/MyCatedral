@@ -22,6 +22,7 @@ class localization
 
     public function handle(Request $request, Closure $next): Response
     {
+        dd("este midleware");
 
         if(!session()->exists('lang')) {
             $lang = substr(request()->server('HTTP_ACCEPT_LANGUAGE'),0,2);

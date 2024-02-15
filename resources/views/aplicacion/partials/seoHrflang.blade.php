@@ -3,12 +3,3 @@
     {!!$meta->meta!!}
 @endforeach
 
-
-
-
-
-
-
-@if($locale!='es')
-    <link rel="alternate" hreflang="x-default" href="{{asset($slugES)}}" />
-@endif

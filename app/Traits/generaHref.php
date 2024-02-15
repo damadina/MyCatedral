@@ -19,6 +19,7 @@ trait generaHref {
 
             $lineas = [];
             foreach($idiomas as $idioma) {
+
                 $url = $this->generateURL($key,$idioma,$elemento);
                 array_push($lineas,'<link rel="alternate" href="'.$url.'" hreflang="'.$idioma.'" />');
 
@@ -54,16 +55,27 @@ trait generaHref {
             $url = asset($elemento);
             return $url;
        } else {
-            if($id == 45) {
+            /* if($id == 45) {
                 $url = asset($locale);
                return $url;
-            }
+            } */
             $newSlug = $this->getTranslation($id,$locale);
-            $url = (asset($locale)).'/'.$newSlug;
+           /*  $url = (asset($locale)).'/'.$newSlug; */
+           $url = asset($newSlug);
             return $url;
        }
 
     }
+    /* <link rel="alternate" href="https://catedraldesantiago.online/" hreflang="x-default" />
+
+    <link rel="alternate" href="https://catedraldesantiago.online/en" hreflang="en" />
+
+    <link rel="alternate" href="https://catedraldesantiago.online/it" hreflang="it" />
+
+    <link rel="alternate" href="https://catedraldesantiago.online/de" hreflang="de" /> */
+
+
+
 
     public function getTranslation($id,$locale) {
         $translation = DB::table('translations')

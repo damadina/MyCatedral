@@ -19,75 +19,57 @@ use App\Http\Controllers\Aplicacion\newPostController;
 use App\Http\Controllers\Aplicacion\IsHomeController;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
+use App\Http\Middleware\LocaleMiddleware;
+use App\Http\Middleware\LocaleCookieMiddleware;
+use App\Http\Controllers\Aplicacion\InicionController;
 
 
-Route::get('/', function () {
+function getSlug() {
 
     if(!session()->exists('lang')) {
         $lang = substr(request()->server('HTTP_ACCEPT_LANGUAGE'),0,2);
         session()->put('lang',$lang);
+
     } else {
         $lang = session()->get('lang');
     }
+    App::setLocale($lang);
 
-    if($lang=="es") {
-        return redirect('/historia');
-    } else {
+    switch ($lang) {
+        case "es":
+            return 'historia';
+            break;
+        default:
+            $translation = DB::table('translations')
+            ->where('table','elements')
+            ->where('column','slug')
+            ->where('row_id',45)
+            ->where('locale',$lang)->first();
+            if($translation) {
+                return $translation->translation;
+            } else {
+                abort(404);
+            }
+            break;
 
-        $translation = DB::table('translations')
-        ->where('table','elements')
-        ->where('column','slug')
-        ->where('row_id',45)
-        ->where('locale',$lang)->first();
-
-
-        $newSlug = $translation->translation;
-
-
-        return redirect("/{$newSlug}");
     }
+}
 
 
+
+
+
+Route::get('/', function () {
+    return redirect()->route('swhoPost',['slug' => getSlug()]);
 });
 
-Route::group([
-    'middleware' => 'localization'
-], function() {
-    $user = auth::user();
-    if($user && $user->isAdmin) {
-        $idiomas = idioma::pluck('locale')->toArray();;
-    } else {
-        $idiomas = idioma::where('isPublic','1')->pluck('locale')->toArray();;
-    };
-    /* Route::get("/",[IsHomeController::class,'index'])->name("HomePost.es"); */
-    foreach ($idiomas as $locale) {
-        /* Route::get("/$locale",[IsHomeController::class,'index'])->name("HomePost.{$locale}"); */
-        if ($locale == "es") {
-            Route::get('/{slug}', [newPostController::class,'index'])->name("about.es");
-        } else {
-
-            Route::get("{$locale}/".'{slug}', [newPostController::class,'index'])->name("about.{$locale}");
-        }
-    }
-
-
-});
-
-
-
-
-
-
-
+Route::get('/{slug}', [newPostController::class,'index'])->name('swhoPost');
 Route::get('/localization/{slug?}', localizationController::class)->name('localization');
-Route::get('/{locale?}/{slug?}',[postController::class,'isXX'])->name('elementoXX')->middleware('localization');
-/* Route::get('/{locale}/{slug}',[postController::class,'show'])->name('elementoTrans'); */
-Route::get('/oioio/test/deepl',[pruebaController::class,'index'])->name('prueba');
-
-
 Route::get('/uso/legal/{documento}',[documentController::class,'index'])->name('documento');
 Route::get('/contenidos/autores/{contenido}',[autorController::class,'index'])->name('autores');
 Route::get('/comercial/mail/contactanos',Contactanos::class)->name('contactanos.index')->middleware('auth','verified');
+
+
 
 
 
@@ -103,12 +85,4 @@ Route::middleware([
 
 
 
-/* Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified',
-])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
-}); */
+

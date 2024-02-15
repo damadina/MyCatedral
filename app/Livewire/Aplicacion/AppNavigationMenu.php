@@ -7,12 +7,14 @@ use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 use App\Models\idioma;
 use App\Models\categoria;
+use Illuminate\Support\Facades\App;
 
 class AppNavigationMenu extends \Laravel\Jetstream\Http\Livewire\NavigationMenu
 {
     public $idiomas;
     public $capitulos;
     public $showIdiomas;
+    public $showLogin;
     public $locale;
     public $slug;
     public $exterior;
@@ -29,44 +31,34 @@ class AppNavigationMenu extends \Laravel\Jetstream\Http\Livewire\NavigationMenu
 
 
 
-
         $this->isHome = session()->get('isHome');
-
         $this->getData();
-        /* $user = auth::user();
 
 
-        if($user && $user->isAdmin) {
-            $this->idiomas = idioma::orderBy('orden')->get();
-            $this->capitulos = capitulo::orderBy('orden')->get();
-            $this->capituloSelected = capitulo::findOrFail(1);
-        } else {
-            $this->idiomas = idioma::where('isPublic','1')->orderBy('orden')->get();
-        }; */
-        $this->locale = config('app')['locale'];
 
-        /* if($this->locale=="es") {
-            $this->locale = "";
-        } */
+       /*  $this->locale = config('app')['locale']; */
+        $this->locale = session()->get('lang');
+        App::setLocale($this->locale);
+
         $this->slug = request()->segment(count(request()->segments()));
 
 
-        /* $exte = categoria::where('title',"exterior")->first();
-        $this->exterior = $exte->elementos()->orderBy('orden')->get();
-
-        $inter = categoria::where('title',"interior")->first();
-        $this->interior = $inter->elementos()->orderBy('orden')->get();
-
-        $capi = categoria::where('title',"capillas")->first();
-        $this->capillas = $capi->elementos()->orderBy('orden')->get();
-
-        $muse = categoria::where('title',"museo")->first();
-        $this->museo = $muse->elementos()->orderBy('orden')->get(); */
         if (env('SWOW_IDIOMAS') == true) {
             $this->showIdiomas = true;
         } else {
             $this->showIdiomas = false;
         }
+
+
+        if (env('SWOW_LOGIN') == true) {
+            $this->showLogin = true;
+        } else {
+            $this->showLogin = false;
+        }
+
+
+
+
         $temp = session()->get('noIdiomas');
         if($temp) {
             $this->showIdiomas = false;
@@ -81,13 +73,6 @@ class AppNavigationMenu extends \Laravel\Jetstream\Http\Livewire\NavigationMenu
 
     public function render()
     {
-        /* $this->capitulos = capitulo::orderBy('orden')->get(); */
-        /* $this->getData(); */
-        /* if (session()->has('capitulo')) {
-            $this->clickMenu(session()->get('capitulo'));
-        } else {
-            $this->clickMenu(1);
-        } */
         if(!session()->exists('capituloActive')) {
             session()->put('capituloActive',1);
             $capituloActive = 1;

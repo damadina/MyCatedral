@@ -8,7 +8,7 @@
                 App::setLocale($locale);
                 session()->put('login',"si");
             @endphp
-            <a href="{{ route('elementoXX',['locale' => $locale]) }}">
+            <a href="\">
                 <x-application-mark class="block h-9 w-auto" />
             </a>
         </x-slot>

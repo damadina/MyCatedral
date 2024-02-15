@@ -34,7 +34,7 @@ class postController extends Controller
         // Si esta en español no viene el idioma www.catedraldesantiago.online/slug
         //      En este ultimo caso como locale es null viene con el slug por lo que lo intercambiamos.
         //
-
+        dd("holaxx");
         if(!$slug) {
             $slug = $locale;
             $locale = "es";

@@ -24,17 +24,17 @@ class localizationController extends Controller
         if($currentLocale == "es" and $newLocale != "es") {
             // De español a extranjero
             $newSlug = $this->getNewSlugEN($newLocale);
-            return redirect()->route("about.$newLocale",["slug" => $newSlug]);
+            return redirect()->route("swhoPost",["slug" => $newSlug]);
         }
         if($currentLocale !="es" and $newLocale == "es") {
             // De extranjero a español
             $newSlug = $this->getNewSlugES();
-            return redirect()->route("about.$newLocale",["slug" => $newSlug]);
+            return redirect()->route("swhoPost",["slug" => $newSlug]);
         }
         if($currentLocale != "es" and $newLocale != "es") {
             // De extranjero a extranjero
             $newSlug = $this->getNewSlugEN($newLocale);
-            return redirect()->route("about.$newLocale",["slug" => $newSlug]);
+            return redirect()->route("swhoPost",["slug" => $newSlug]);
         }
         dd("error");
 
